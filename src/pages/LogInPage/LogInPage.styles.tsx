@@ -19,6 +19,10 @@ export const LoginPageContainer = styled.div`
   }
 `;
 
+export const BackImageWrapper = styled.div`
+  flex: 1;
+`;
+
 export const BackImage = styled.img`
   max-width: 100%;
   height: 100%;

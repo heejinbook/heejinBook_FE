@@ -7,7 +7,9 @@ export function LogInPage() {
 
   return (
     <S.LoginPageContainer>
-      <S.BackImage src={'src/assets/backImage.png'} />
+      <S.BackImageWrapper>
+        <S.BackImage src={'src/assets/backImage.png'} />
+      </S.BackImageWrapper>
       <S.LoginPage>
         <h1>Login</h1>
         <Input variant="outline" type="text" placeholder="heejin@heejin.com" topSlot="이메일" />
