@@ -1,9 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { FirstPage } from './FirstPage/FirstPage';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    children: [],
+    children: [
+      {
+        index: true,
+        element: <FirstPage />,
+      },
+    ],
   },
 ]);
 
