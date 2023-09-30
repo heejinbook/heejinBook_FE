@@ -21,10 +21,14 @@ export const LoginPageContainer = styled.div`
 
 export const BackImageWrapper = styled.div`
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const BackImage = styled.img`
   max-width: 100%;
+  min-width: 100%;
   height: 100%;
   object-fit: cover;
 `;
@@ -46,36 +50,42 @@ export const SignUP = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
   p {
     cursor: pointer;
     color: #b9b19c;
+    margin-bottom: 20px;
   }
 `;
 
 export const KakaoLogin = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const OrContainer = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
   font-size: 16px;
-  width: 100%;
   text-align: center;
   color: #b9b19c;
   margin-bottom: 10px;
-  /* &::before,
-  &::after {
+  ::before,
+  ::after {
     content: '';
-    flex-grow: 1;
-    background-color: #b9b19c;
-    height: 1px;
-    font-size: 0;s
-    line-height: 0;
-    margin: 8px 0;
-    width: 50%;
-  } */
+    flex: 1;
+    border-top: 1px solid #b9b19c;
+  }
+  ::before {
+    margin-right: 10px;
+  }
+  ::after {
+    margin-left: 10px;
+  }
+  width: 100%;
+  text-align: center;
 `;
 
 export const Kakao = styled.img`
