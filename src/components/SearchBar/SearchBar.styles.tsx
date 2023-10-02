@@ -6,6 +6,7 @@ export const SearchBarContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10px 0;
 `;
 export const SearchBar = styled.div`
   width: 500px;
@@ -26,6 +27,7 @@ export const Input = styled.input`
   border: none;
   border-bottom: 2px solid #b9b19c;
   &:focus {
+    outline: none;
     border-bottom: 2px solid #503f15;
   }
 `;
@@ -34,14 +36,15 @@ export const FilterContainer = styled.div`
   width: 200px;
   height: auto;
   position: absolute;
-  top: 41%;
+  margin: 10px 0;
+  top: 40.5%;
   right: 0;
 `;
 export const Filter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: #503f15;
   p {
