@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const inputStyle = css`
-  padding: 10px;
   width: 100%;
+  padding: 10px;
   display: inline-flex;
   align-items: center;
   background-color: transparent;
@@ -56,6 +56,14 @@ export const TopSlot = styled.div`
   font-size: 14px;
   color: #503f15;
   padding-bottom: 3px;
+`;
+
+export const InputFrame = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const RightSlot = styled.div`
+  margin-right: 5px;
 `;
 
 export const Input = styled.input`
