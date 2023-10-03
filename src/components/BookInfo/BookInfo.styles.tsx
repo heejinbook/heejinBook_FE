@@ -4,9 +4,9 @@ export const BookInfoContainer = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 30px;
+  align-items: start;
+  justify-content: flex-start;
+  padding: 30px 0 30px 20px;
   border-bottom: 15px solid #fcf2cc82;
 `;
 
@@ -17,7 +17,7 @@ export const BookInfo = styled.div`
 export const BookImage = styled.img`
   border-radius: 1px 8px 8px 1px;
   box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
-  margin-right: 10px;
+  margin-right: 20px;
 `;
 export const BookInfoFrame = styled.div`
   display: flex;

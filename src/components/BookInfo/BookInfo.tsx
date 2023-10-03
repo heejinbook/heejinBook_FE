@@ -5,10 +5,6 @@ export type BookInfoType = {
   title: string;
   author: string;
   reviewer: number;
-  category: string;
-  date: string;
-  publisher: string;
-  isbn: number;
 };
 export function BookInfo() {
   const book: BookInfoType = {
@@ -17,10 +13,6 @@ export function BookInfo() {
     title: '비가 오면 열리는 상점',
     author: '유영광',
     reviewer: 3,
-    category: '소설',
-    date: '2023.06.14',
-    publisher: '클레이하우스',
-    isbn: 9791198173881,
   };
 
   return (
