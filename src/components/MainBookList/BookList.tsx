@@ -1,4 +1,5 @@
 import * as S from './BookList.styles';
+import { useNavigate } from 'react-router-dom';
 
 export type Book = {
   image: string;
@@ -76,9 +77,15 @@ const books: Book[] = [
 ];
 
 export function BookList() {
+  const navigate = useNavigate();
+
   return (
     <S.BookListContainer>
-      <S.BookList>
+      <S.BookList
+        onClick={() => {
+          navigate('/book');
+        }}
+      >
         {books.map((book, idx) => (
           <S.BookListItems key={idx}>
             <S.BookImage src={book.image} />
