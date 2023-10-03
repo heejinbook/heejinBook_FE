@@ -1,12 +1,7 @@
-import * as S from './BookList.styles';
+import { Book } from '../../MainBookList/BookList';
+import * as S from './LibraryList.styles';
 
-export type Book = {
-  image: string;
-  title: string;
-  author: string;
-};
-
-export const books: Book[] = [
+export const library: Book[] = [
   {
     image:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
@@ -75,18 +70,18 @@ export const books: Book[] = [
   },
 ];
 
-export function BookList() {
+export function LibraryList() {
   return (
-    <S.BookListContainer>
-      <S.BookList>
-        {books.map((book, idx) => (
-          <S.BookListItems key={idx}>
-            <S.BookImage src={book.image} />
-            <S.BookTitle>{book.title}</S.BookTitle>
-            <S.BookAuthor>{book.author}</S.BookAuthor>
-          </S.BookListItems>
+    <S.LibraryListContainer>
+      <S.LibraryList>
+        {library.map((book, idx) => (
+          <S.LibraryListItems key={idx}>
+            <S.LibraryImage src={book.image} />
+            <S.LibraryTitle>{book.title}</S.LibraryTitle>
+            <S.LibraryAuthor>{book.author}</S.LibraryAuthor>
+          </S.LibraryListItems>
         ))}
-      </S.BookList>
-    </S.BookListContainer>
+      </S.LibraryList>
+    </S.LibraryListContainer>
   );
 }

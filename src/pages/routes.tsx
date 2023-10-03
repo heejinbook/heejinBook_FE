@@ -3,6 +3,7 @@ import { FirstPage } from './FirstPage/FirstPage';
 import { LogInPage } from './LogInPage/LogInPage';
 import { SignUpPage } from './SignUpPage/SignUpPage';
 import { MainPage } from './MainPage/MainPage';
+import { MyLibraryPage } from './MyLibraryPage/MyLibraryPage';
 
 export const router = createBrowserRouter([
   {
@@ -24,8 +25,12 @@ export const router = createBrowserRouter([
         path: '/home',
         element: <MainPage />,
       },
+      {
+        path: '/myLibrary',
+        element: <MyLibraryPage />,
+      },
     ],
   },
 ]);
 
-export type RoutePath = '/' | '/login' | '/signup' | '/home';
+export type RoutePath = '/' | '/login' | '/signup' | '/home' | '/myLibrary';
