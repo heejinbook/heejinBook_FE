@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const UserInfoContainer = styled.div`
-  border-bottom: 1px solid yellow;
+  border-bottom: 1px solid #b9b19c;
   padding: 10px 10px 80px 0;
 `;
 

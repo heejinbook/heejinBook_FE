@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const LibraryListContainer = styled.div`
   padding: 0 20px;
-
   p {
     color: #b9b19c;
     font-weight: bold;
