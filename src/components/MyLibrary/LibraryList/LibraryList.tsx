@@ -73,6 +73,7 @@ export const library: Book[] = [
 export function LibraryList() {
   return (
     <S.LibraryListContainer>
+      <p>전체 {library.length}</p>
       <S.LibraryList>
         {library.map((book, idx) => (
           <S.LibraryListItems key={idx}>

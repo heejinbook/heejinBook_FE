@@ -2,13 +2,14 @@ import styled from '@emotion/styled';
 
 export const UserInfoContainer = styled.div`
   border-bottom: 1px solid yellow;
-  padding: 10px 10px 30px 0;
+  padding: 10px 10px 80px 0;
 `;
 
 export const EditIcon = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding-bottom: 40px;
   img {
     cursor: pointer;
     width: 24px;
