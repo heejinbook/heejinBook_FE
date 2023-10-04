@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const BookPage = styled.div`
   background-color: #fffdf6;
   display: flex;
+  flex-direction: column;
 `;
 
 export const InfoContainer = styled.div`
@@ -15,6 +16,7 @@ export const InfoContainer = styled.div`
 
 export const BookNaviContainer = styled.div`
   position: fixed;
+  top: 9%;
   right: 0;
   width: 280px;
 `;
