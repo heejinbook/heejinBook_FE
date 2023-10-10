@@ -10,7 +10,7 @@ export const validatePassword = (value: string) => {
 };
 
 export const validateEqualPassword = (password1: string, password2: string) => {
-  return (password1 = password2);
+  return password1 === password2;
 };
 
 export const validateEmpty = (value: string) => {
