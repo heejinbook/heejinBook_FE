@@ -31,30 +31,4 @@ export const SignUpPage = styled.div`
   h1 {
     color: #503f15;
   }
-  label {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  button {
-    cursor: pointer;
-    width: 100%;
-    height: 50px;
-    padding: 10px 40px;
-    border: none;
-    border-radius: 5px;
-    background-color: #fcf2cc;
-    color: #503f15;
-    font-size: 16px;
-    font-weight: bold;
-  }
-`;
-
-export const profileContainer = styled.div``;
-
-export const Profile = styled.img`
-  border: 1px solid #b9b19c;
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
-  padding: 15px;
 `;
