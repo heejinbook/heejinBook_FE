@@ -8,6 +8,11 @@ export type SignUpType = {
   file: File | null;
 };
 
+export type LoginType = {
+  email: string;
+  password: string;
+};
+
 const USER_URL = '/api/user';
 
 export async function signUp(payload: FormData) {
@@ -16,5 +21,10 @@ export async function signUp(payload: FormData) {
       'Content-Type': 'multipart/form-data',
     },
   });
+  return response;
+}
+
+export async function logIn(payload: LoginType) {
+  const response = await client.post(`${USER_URL}/login`, payload);
   return response;
 }
