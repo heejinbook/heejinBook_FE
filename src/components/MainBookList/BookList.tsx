@@ -3,32 +3,45 @@ import * as S from './BookList.styles';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
-// import { Pagination } from '../Pagination/Pagination';
+import { SearchBar } from '../SearchBar/SearchBar';
+import { BookFilter } from '../Filter/BookFilter';
 
 export type Book = {
   bookId: number;
   thumbnail: string;
   title: string;
   author: string;
+  reviewCount: number;
 };
+
+export type SortOption = 'title' | 'review' | '';
 
 export function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [sortOption, setSortOption] = useState<SortOption>('');
+  const [searchBook, setSearchBook] = useState<string>('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
     bookPage(currentPage);
-  }, [currentPage]);
+  }, [currentPage, sortOption, searchBook]);
 
   const bookPage = (page: number) => {
+    let url = `http://43.200.172.180:8080/api/books?page=${page}&size=40&category=0`;
+
+    if (sortOption === 'title') {
+      url += '&sort=title';
+    } else if (sortOption === 'review') {
+      url += '&sort=r.id';
+    }
+
     axios
-      .get(`http://43.200.172.180:8080/api/books?page=${page}&size=40&category=0`)
+      .get(url)
       .then((result) => {
-        console.log(totalPage);
         setTotalPage(result.data.data.totalPages);
         setTotalItems(result.data.data.totalElements);
         const bookItems: Book[] = result.data.data.contents.map((book: Book) => ({
@@ -49,16 +62,24 @@ export function BookList() {
 
   return (
     <>
-      <S.BookListContainer
-        onClick={() => {
-          navigate('/book');
-        }}
-      >
+      <S.SearchNFilter>
+        <SearchBar onSearch={setSearchBook} />
+        <S.FilterWrapper>
+          <BookFilter onSortChange={setSortOption} />
+        </S.FilterWrapper>
+      </S.SearchNFilter>
+      <S.BookListContainer>
         {books.map((book) => (
-          <S.BookListItems key={book.bookId}>
+          <S.BookListItems
+            key={book.bookId}
+            onClick={() => {
+              navigate('/book');
+            }}
+          >
             <S.BookImage src={book.thumbnail} />
             <S.BookTitle>{book.title}</S.BookTitle>
             <S.BookAuthor>{book.author}</S.BookAuthor>
+            <S.Reviewer>{book.reviewCount}</S.Reviewer>
           </S.BookListItems>
         ))}
       </S.BookListContainer>
@@ -75,12 +96,6 @@ export function BookList() {
           />
         </div>
       </S.PaginationWrapper>
-
-      {/* <Pagination
-        totalPage={totalPage}
-        currentPage={currentPage}
-        onPageChange={(page: number) => setCurrentPage(page)}
-      /> */}
     </>
   );
 }

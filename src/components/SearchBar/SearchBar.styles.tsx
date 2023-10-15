@@ -26,29 +26,9 @@ export const Input = styled.input`
   height: 24px;
   border: none;
   border-bottom: 2px solid #b9b19c;
+  background-color: transparent;
   &:focus {
     outline: none;
     border-bottom: 2px solid #503f15;
-  }
-`;
-
-export const FilterContainer = styled.div`
-  width: 200px;
-  height: auto;
-  position: absolute;
-  margin: 10px 0;
-  top: 40.5%;
-  right: 0;
-`;
-export const Filter = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: #503f15;
-  p {
-    cursor: pointer;
-    margin-right: 7px;
   }
 `;

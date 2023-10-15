@@ -1,5 +1,12 @@
 import styled from '@emotion/styled';
 
+export const SearchNFilter = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const FilterWrapper = styled.div``;
+
 export const BookListContainer = styled.div`
   display: grid;
   grid-gap: 10px;
@@ -30,6 +37,8 @@ export const BookAuthor = styled.div`
   width: 170px;
   font-size: 14px;
 `;
+
+export const Reviewer = styled.div``;
 
 export const PaginationWrapper = styled.div`
   .pagination {
