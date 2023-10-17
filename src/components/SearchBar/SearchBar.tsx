@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import * as S from './SearchBar.styles';
 import { debounce } from 'lodash';
 
@@ -8,8 +8,9 @@ export type SearchProp = {
 
 export function SearchBar({ onSearch }: SearchProp) {
   const [searchBook, setSearchBook] = useState<string>('');
+  const [inputVisible, setInputVisible] = useState<boolean>(false);
 
-  const debouncedOnSearch = debounce(onSearch, 300);
+  const debouncedOnSearch = useMemo(() => debounce(onSearch, 1500), []);
 
   const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value;
@@ -20,10 +21,14 @@ export function SearchBar({ onSearch }: SearchProp) {
   return (
     <>
       <S.SearchBarContainer>
-        <S.SearchBar>
+        <S.SearchIconContainer onClick={() => setInputVisible(!inputVisible)}>
           <S.SearchIcon src="src/assets/svg/search.svg" />
-          <S.Input type="text" value={searchBook} onChange={searchChangeHandler} />
-        </S.SearchBar>
+        </S.SearchIconContainer>
+        {inputVisible && (
+          <S.InputContainer>
+            <S.Input type="text" value={searchBook} onChange={searchChangeHandler} />
+          </S.InputContainer>
+        )}
       </S.SearchBarContainer>
     </>
   );

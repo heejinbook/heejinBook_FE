@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
 export const FilterContainer = styled.div`
-  width: 200px;
-  height: auto;
+  width: aut0;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 5px;
 `;
 export const Filter = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ export const Filter = styled.div`
   color: #503f15;
   p {
     cursor: pointer;
+    margin: 0;
     margin-right: 7px;
   }
 `;

@@ -1,17 +1,25 @@
 import styled from '@emotion/styled';
 
+export const Search = styled.div`
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+`;
+
 export const SearchNFilter = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 `;
-export const FilterWrapper = styled.div``;
 
 export const BookListContainer = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   justify-items: center;
+  padding: 0 20px;
 `;
 export const BookListItems = styled.div`
   width: 170px;
@@ -26,6 +34,7 @@ export const BookImage = styled.img`
   width: 170px;
   height: 220px;
   border-radius: 1px 8px 8px 1px;
+  border: none;
   box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
 `;
 export const BookTitle = styled.div`
@@ -38,7 +47,21 @@ export const BookAuthor = styled.div`
   font-size: 14px;
 `;
 
-export const Reviewer = styled.div``;
+export const ReviewerContainer = styled.div`
+  width: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const ReviewerIcon = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
+export const Reviewer = styled.div`
+  width: 170px;
+  font-size: 14px;
+`;
 
 export const PaginationWrapper = styled.div`
   .pagination {
