@@ -1,54 +1,35 @@
 import styled from '@emotion/styled';
 
 export const SearchBarContainer = styled.div`
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px 0;
 `;
-export const SearchBar = styled.div`
-  width: 500px;
-  display: flex;
-  justify-items: flex-end;
-  align-items: center;
-  margin-top: 12px;
-`;
+
+export const SearchIconContainer = styled.div``;
+
 export const SearchIcon = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 5px;
+  cursor: pointer;
+`;
+
+export const InputContainer = styled.div`
+  width: 250px;
 `;
 
 export const Input = styled.input`
-  width: calc(100% - 24px);
+  width: 100%;
   height: 24px;
   border: none;
   border-bottom: 2px solid #b9b19c;
+  background-color: transparent;
   &:focus {
     outline: none;
     border-bottom: 2px solid #503f15;
-  }
-`;
-
-export const FilterContainer = styled.div`
-  width: 200px;
-  height: auto;
-  position: absolute;
-  margin: 10px 0;
-  top: 40.5%;
-  right: 0;
-`;
-export const Filter = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: #503f15;
-  p {
-    cursor: pointer;
-    margin-right: 7px;
   }
 `;
