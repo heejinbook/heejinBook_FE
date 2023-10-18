@@ -33,7 +33,7 @@ export const BackImage = styled.img`
   object-fit: cover;
 `;
 
-export const LoginPage = styled.div`
+export const LoginPage = styled.form`
   width: 520px;
   display: flex;
   flex-direction: column;

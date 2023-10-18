@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 export function Header() {
   const navigate = useNavigate();
-
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    navigate('/');
+  };
   return (
     <S.HeaderContainer>
       <S.Header>
@@ -23,7 +26,7 @@ export function Header() {
         </S.GoToLibrary>
       </S.Header>
       <S.BtnContainer>
-        <button>logout</button>
+        <button onClick={logout}>logout</button>
       </S.BtnContainer>
     </S.HeaderContainer>
   );

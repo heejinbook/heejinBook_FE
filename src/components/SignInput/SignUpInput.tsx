@@ -134,25 +134,23 @@ export function SignUpInput() {
 
   return (
     <S.SignUpInputContainer>
-      <form>
-        <label htmlFor="file">
-          <S.Profile src="src/assets/svg/plusProfile.svg" />
-          <input id="file" type="file" accept="image/*" style={{ display: 'none' }} />
-        </label>
-        {Inputs.map((input) => (
-          <Input
-            name={input.name}
-            type={input.type}
-            placeholder={input.placeholder}
-            topSlot={input.topSlot}
-            value={input.value}
-            onChange={changeHandler}
-          />
-        ))}
-        <button disabled={!validateInput} onClick={() => submitHandler}>
-          signup
-        </button>
-      </form>
+      <label htmlFor="file">
+        <S.Profile src="src/assets/svg/plusProfile.svg" />
+        <input id="file" type="file" accept="image/*" style={{ display: 'none' }} />
+      </label>
+      {Inputs.map((input) => (
+        <Input
+          name={input.name}
+          type={input.type}
+          placeholder={input.placeholder}
+          topSlot={input.topSlot}
+          value={input.value}
+          onChange={changeHandler}
+        />
+      ))}
+      <button disabled={!validateInput} onClick={() => submitHandler}>
+        signup
+      </button>
     </S.SignUpInputContainer>
   );
 }
