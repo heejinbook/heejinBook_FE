@@ -2,17 +2,17 @@ import * as S from './BookNavi.styles';
 import IconLibrary from '../../assets/svg/inLibrary.svg';
 import IconWrite from '../../assets/svg/pencil.svg';
 import IconShare from '../../assets/svg/share.svg';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
+import { postBookToLibrary } from '../../apis/library';
 
 export function BookNavi() {
   const { bookId } = useParams();
+
   const postBook = () => {
-    axios
-      .post(`http://43.200.172.180:8080/api/library/${bookId}`)
+    postBookToLibrary(Number(bookId))
       .then((result) => {
-        if (result.status === 200) {
+        if (result.status === 201) {
           Toast.success('책장에 담았습니다');
         }
       })
