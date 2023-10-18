@@ -5,16 +5,16 @@ export const BookInfoContainer = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-
   align-items: start;
   justify-content: flex-start;
-  padding: 30px 0 30px 20px;
-  border-bottom: 15px solid #fcf2cc82;
 `;
 
 export const BookInfo = styled.div`
+  width: 100%;
   display: flex;
   align-items: start;
+  padding: 30px 0 30px 20px;
+  border-bottom: 15px solid #fcf2cc82;
 `;
 export const BookImage = styled.img`
   border-radius: 1px 8px 8px 1px;

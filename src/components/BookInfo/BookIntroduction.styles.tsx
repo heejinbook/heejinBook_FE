@@ -23,7 +23,7 @@ export const BookBox = styled.div`
 `;
 export const BookCategory = styled.div`
   width: auto;
-  height: 100px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +32,7 @@ export const BookCategory = styled.div`
   font-weight: bold;
   background-color: #e4dcc4aa;
   text-align: center;
-  padding: 10px 30px;
+  padding: 10px 20px;
   p {
     font-size: 12px;
   }

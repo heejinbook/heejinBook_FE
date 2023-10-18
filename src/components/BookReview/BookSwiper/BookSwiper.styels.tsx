@@ -5,16 +5,20 @@ export const BookSwiperContainer = styled.div`
   width: 800px;
   height: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: #fcf2cc82;
   padding: 50px;
   border-radius: 50px;
 `;
 
-export const LeftBtn = styled.img``;
+export const LeftBtn = styled.img`
+  cursor: pointer;
+`;
 
-export const RigthBtn = styled.img``;
+export const RightBtn = styled.img`
+  cursor: pointer;
+`;
 
 export const BookSwiper = styled(Swiper)`
   width: 100%;
@@ -49,6 +53,8 @@ export const PhraseContainer = styled.div`
   justify-content: center;
   margin-bottom: 30px;
   img {
+    width: 24px;
+    height: 24px;
     margin: 0 10px;
   }
 `;
