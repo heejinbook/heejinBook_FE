@@ -43,7 +43,6 @@ export const ReviewerIcon = styled.img`
   width: 24px;
   height: 24px;
   cursor: pointer;
-  content: url('src/assets/svg/person.svg');
 `;
 export const Reviewer = styled.div`
   cursor: pointer;
