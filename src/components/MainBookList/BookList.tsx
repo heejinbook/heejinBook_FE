@@ -63,6 +63,7 @@ export function BookList() {
       .then((result) => {
         setTotalItems(result.data.data.totalElements);
         const bookItems: Book[] = result.data.data.contents.map((book: Book) => ({
+          bookId: book.bookId,
           thumbnail: book.thumbnail,
           title: book.title,
           author: book.author,
@@ -93,7 +94,7 @@ export function BookList() {
           <S.BookListItems
             key={book.bookId}
             onClick={() => {
-              navigate('/book');
+              navigate(`/books/${book.bookId}`);
             }}
           >
             <S.BookImage src={book.thumbnail} />

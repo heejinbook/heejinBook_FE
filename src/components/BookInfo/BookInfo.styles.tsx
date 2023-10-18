@@ -4,6 +4,8 @@ export const BookInfoContainer = styled.div`
   width: 100%;
   height: auto;
   display: flex;
+  flex-direction: column;
+
   align-items: start;
   justify-content: flex-start;
   padding: 30px 0 30px 20px;
@@ -41,6 +43,7 @@ export const ReviewerIcon = styled.img`
   width: 24px;
   height: 24px;
   cursor: pointer;
+  content: url('src/assets/svg/person.svg');
 `;
 export const Reviewer = styled.div`
   cursor: pointer;

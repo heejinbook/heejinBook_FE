@@ -30,13 +30,12 @@ export const router = createBrowserRouter([
         path: '/myLibrary',
         element: <MyLibraryPage />,
       },
-      ///:bookId
       {
-        path: '/book',
+        path: '/books/:bookId',
         element: <BookPage />,
       },
     ],
   },
 ]);
 
-export type RoutePath = '/' | '/login' | '/signup' | '/home' | '/book' | '/myLibrary';
+export type RoutePath = '/' | '/login' | '/signup' | '/home' | '/books/:bookId' | '/myLibrary';
