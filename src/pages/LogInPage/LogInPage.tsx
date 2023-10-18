@@ -3,10 +3,8 @@ import { LoginType, logIn } from '../../apis/user';
 import { Input } from '../../components/common/Input/Input';
 import * as S from './LogInPage.styles';
 import { useNavigate } from 'react-router-dom';
-// import { getItem, setItem } from '../../utils/localstorage';
-// import { localStorageKey } from '../../constants';
 import { Toast } from '../../components/common/Toastify/Toastify';
-// import { validateEmpty } from '../../utils/validate';s
+import { validateEmail } from '../../utils/validate';
 
 export function LogInPage() {
   const [data, setData] = useState<LoginType>({
@@ -15,28 +13,21 @@ export function LogInPage() {
   });
   const navigate = useNavigate();
 
-  // const validateLogin = () => {
-  //   return validateEmpty(login.email) && validateEmpty(login.password);
-  // };
-
-  // const accessToken = getItem<string>(localStorageKey.accessToken);
-  // if (accessToken) {
-  //   setItem(localStorageKey.accessToken, result.data.accessToken);
-  // }
-
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const postLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log('Form Data:', data);
+
     logIn(data)
       .then((result) => {
         if (result.status === 200) {
-          const token = result.data.accessToken;
-          localStorage.setItem('accessToken', token);
           navigate('/home');
+          const token = result.data.data.accessToken;
+          localStorage.setItem('accessToken', token);
         }
       })
       .catch((error) => {
-        if (error.response && error.response.status === 404) {
+        if (!validateEmail(data.email)) {
+          Toast.error('이메일 형식이 옳지 않습니다.');
+        } else if (error.response.status === 404) {
           Toast.error('이메일이나 비밀번호가 잘못 입력됐습니다');
         }
       });
@@ -56,7 +47,7 @@ export function LogInPage() {
       <S.BackImageWrapper>
         <S.BackImage src={'src/assets/backImage.png'} />
       </S.BackImageWrapper>
-      <S.LoginPage onSubmit={submitHandler}>
+      <S.LoginPage>
         <h1>Login</h1>
         <Input
           name="email"
@@ -76,7 +67,7 @@ export function LogInPage() {
           value={data.password}
           onChange={changeHandler}
         />
-        <button>login</button>
+        <button onClick={postLogin}>login</button>
         <S.SignUP>
           <p
             onClick={() => {
