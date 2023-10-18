@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const SignUpInputContainer = styled.div`
+export const SignUpInputContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -20,12 +20,6 @@ export const SignUpInputContainer = styled.div`
     color: #503f15;
     font-size: 16px;
     font-weight: bold;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
   }
 `;
 
