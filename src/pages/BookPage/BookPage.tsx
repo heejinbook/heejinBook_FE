@@ -6,6 +6,8 @@ import { Header } from '../../components/common/Header/Header';
 import * as S from './BookPage.styles';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { postBookToLibrary } from '../../apis/library';
+import { Toast } from '../../components/common/Toastify/Toastify';
 
 export type detailBook = {
   bookId: number;

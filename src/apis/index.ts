@@ -15,7 +15,7 @@ client.interceptors.request.use(
 
     if (accessToken) {
       config.headers = config.headers || {};
-      config.headers.ACCESS_TOKEN = `Bearer ${accessToken}`;
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
     if (refreshToken) {

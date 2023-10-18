@@ -5,6 +5,8 @@ import * as S from './LogInPage.styles';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from '../../components/common/Toastify/Toastify';
 import { validateEmail } from '../../utils/validate';
+import { setItem } from '../../utils/localstorage';
+import { localStorageKey } from '../../constants';
 
 export function LogInPage() {
   const [data, setData] = useState<LoginType>({
@@ -21,7 +23,7 @@ export function LogInPage() {
         if (result.status === 200) {
           navigate('/home');
           const token = result.data.data.accessToken;
-          localStorage.setItem('accessToken', token);
+          setItem(localStorageKey.accessToken, token);
         }
       })
       .catch((error) => {
