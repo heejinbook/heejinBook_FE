@@ -4,10 +4,8 @@ import { BookNavi } from '../../components/BookNavi/BookNavi';
 import { Review } from '../../components/BookReview/Review';
 import { Header } from '../../components/common/Header/Header';
 import * as S from './BookPage.styles';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { postBookToLibrary } from '../../apis/library';
-import { Toast } from '../../components/common/Toastify/Toastify';
+import { getBook } from '../../apis/books';
 
 export type detailBook = {
   bookId: number;
@@ -20,6 +18,7 @@ export type detailBook = {
   releaseDate: string;
   publisher: string;
   isbn: string;
+  isLibrary: boolean;
 };
 
 export function BookPage() {
@@ -35,18 +34,20 @@ export function BookPage() {
     releaseDate: '',
     publisher: '',
     isbn: '',
+    isLibrary: false,
   });
+  const [addBookLibrary, setAddBookLibrary] = useState<boolean>(false);
 
   useEffect(() => {
     getBookInfo(Number(bookId));
-  }, []);
+  }, [addBookLibrary]);
 
   const getBookInfo = (bookId: number) => {
-    axios
-      .get(`http://43.200.172.180:8080/api/books/${bookId}`)
+    getBook(bookId)
       .then((result) => {
         if (result.status === 200) {
           setBookInfo(result.data.data);
+          setAddBookLibrary(result.data.data.isLibrary);
         }
       })
       .catch((error) => {
@@ -54,6 +55,10 @@ export function BookPage() {
           console.error(error);
         }
       });
+  };
+
+  const toggleLibrary = () => {
+    setAddBookLibrary((prevAddBookLibrary) => !prevAddBookLibrary);
   };
 
   return (
@@ -64,7 +69,7 @@ export function BookPage() {
         <Review />
       </S.InfoContainer>
       <S.BookNaviContainer>
-        <BookNavi />
+        <BookNavi addBookLibrary={addBookLibrary} toggleLibrary={toggleLibrary} />
       </S.BookNaviContainer>
     </S.BookPage>
   );

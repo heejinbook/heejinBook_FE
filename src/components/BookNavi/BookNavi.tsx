@@ -1,19 +1,25 @@
 import * as S from './BookNavi.styles';
-import IconLibrary from '../../assets/svg/inLibrary.svg';
+import IconBookAdd from '../../assets/svg/addBook.svg';
+import IconBookDelete from '../../assets/svg/noAddBook.svg';
 import IconWrite from '../../assets/svg/pencil.svg';
 import IconShare from '../../assets/svg/share.svg';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { postBookToLibrary } from '../../apis/library';
 
-export function BookNavi() {
+type AddBookProps = {
+  addBookLibrary: boolean;
+  toggleLibrary: () => void;
+};
+
+export function BookNavi({ addBookLibrary, toggleLibrary }: AddBookProps) {
   const { bookId } = useParams();
 
   const postBook = () => {
     postBookToLibrary(Number(bookId))
       .then((result) => {
-        if (result.status === 201) {
-          Toast.success('책장에 담았습니다');
+        if (result.data.status === 201) {
+          toggleLibrary();
         }
       })
       .catch((error) => {
@@ -27,7 +33,7 @@ export function BookNavi() {
     <S.BookNaviContainer>
       <S.BookNavi>
         <S.Library onClick={postBook}>
-          <img src={IconLibrary} />
+          {addBookLibrary ? <img src={IconBookAdd} /> : <img src={IconBookDelete} />}
           <p>내 책장에 담기</p>
         </S.Library>
         <S.WriteReview>
