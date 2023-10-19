@@ -34,6 +34,6 @@ export async function logIn(payload: LoginType) {
 }
 
 export async function kakaoLogin(payload: kakaoType) {
-  const response = await client.post('/api/user/kakao/login', payload);
+  const response = await client.post(`${USER_URL}/kakao/login`, payload);
   return response;
 }

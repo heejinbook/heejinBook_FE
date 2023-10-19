@@ -10,6 +10,8 @@ import * as S from './SignUpInput.styles';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { SignUpType, signUp } from '../../apis/user';
+import { setItem } from '../../utils/localstorage';
+import { localStorageKey } from '../../constants';
 
 export type InputType = {
   name: string;
@@ -93,33 +95,38 @@ export function SignUpInput() {
     return true;
   };
 
-  const validateInput = () =>
-    validateNickname() &&
-    validateEmailFormat() &&
-    validatePasswordFormat() &&
-    validatePasswordMatch();
+  const validateInput = () => {
+    return (
+      validateNickname() &&
+      validateEmailFormat() &&
+      validatePasswordFormat() &&
+      validatePasswordMatch()
+    );
+  };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateInput()) {
-      const signUpData = JSON.stringify({
-        email: form.email,
-        nickname: form.nickname,
-        password: form.password,
-        passwordCheck: form.passwordCheck,
-        profileFile: form.file,
-      });
       const formData = new FormData();
-      formData.append('signUpData', signUpData);
+      formData.append('email', form.email);
+      formData.append('nickname', form.nickname);
+      formData.append('password', form.password);
+      formData.append('passwordCheck', form.passwordCheck);
+      form.file && formData.append('profileFile', form.file);
 
-      signUp(formData).then((result) => {
-        if (result.status === 201) {
-          Toast.success('회원가입이 완료되었습니다');
-          navigate('/home');
-        }
-        Toast.error('회원가입 실패');
-        console.log(result);
-      });
+      signUp(formData)
+        .then((result) => {
+          if (result.data.status === 201) {
+            Toast.success('회원가입이 완료되었습니다');
+            const token = result.data.data.accessToken;
+            setItem(localStorageKey.accessToken, token);
+            navigate('/home');
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          Toast.error('회원가입 실패');
+        });
     }
   };
 
@@ -132,11 +139,27 @@ export function SignUpInput() {
     }));
   };
 
+  const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setForm((prevState) => ({
+        ...prevState,
+        file,
+      }));
+    }
+  };
+
   return (
-    <S.SignUpInputContainer>
+    <S.SignUpInputContainer onSubmit={submitHandler}>
       <label htmlFor="file">
         <S.Profile src="src/assets/svg/plusProfile.svg" />
-        <input id="file" type="file" accept="image/*" style={{ display: 'none' }} />
+        <input
+          id="file"
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={fileChangeHandler}
+        />
       </label>
       {Inputs.map((input) => (
         <Input
@@ -148,9 +171,7 @@ export function SignUpInput() {
           onChange={changeHandler}
         />
       ))}
-      <button disabled={!validateInput} onClick={() => submitHandler}>
-        signup
-      </button>
+      <button disabled={!validateInput}>signup</button>
     </S.SignUpInputContainer>
   );
 }

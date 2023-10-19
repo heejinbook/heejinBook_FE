@@ -1,10 +1,11 @@
+import { localStorageKey } from '../../../constants';
 import * as S from './Header.styles';
 import { useNavigate } from 'react-router-dom';
 
 export function Header() {
   const navigate = useNavigate();
   const logout = () => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem(localStorageKey.accessToken);
     navigate('/');
   };
   return (
