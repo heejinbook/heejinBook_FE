@@ -40,7 +40,7 @@ export function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortOption, setSortOption] = useState<SortOption>('');
+  const [sortOption, setSortOption] = useState<SortOption>('title');
   const [searchBook, setSearchBook] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
@@ -58,6 +58,7 @@ export function BookList() {
           sort: sortOption === 'title' ? 'title' : 'r.id,desc',
           searchKeyword: encodeURIComponent(searchBook),
           category: selectedCategory,
+          size: 40,
         },
       })
       .then((result) => {

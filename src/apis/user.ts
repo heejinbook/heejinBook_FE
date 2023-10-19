@@ -13,6 +13,10 @@ export type LoginType = {
   password: string;
 };
 
+export type kakaoType = {
+  code: string;
+};
+
 const USER_URL = '/api/user';
 
 export async function signUp(payload: FormData) {
@@ -26,5 +30,10 @@ export async function signUp(payload: FormData) {
 
 export async function logIn(payload: LoginType) {
   const response = await client.post(`${USER_URL}/login`, payload);
+  return response;
+}
+
+export async function kakaoLogin(payload: kakaoType) {
+  const response = await client.post(`${USER_URL}/kakao/login`, payload);
   return response;
 }

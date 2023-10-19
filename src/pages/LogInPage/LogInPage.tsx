@@ -44,6 +44,11 @@ export function LogInPage() {
     }));
   };
 
+  const REST_API_KEY: string = import.meta.env.VITE_REST_API_KEY;
+  const REDIRECT_URI: string = 'http://localhost:5173/kakao';
+
+  const redirectUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+
   return (
     <S.LoginPageContainer>
       <S.BackImageWrapper>
@@ -82,7 +87,12 @@ export function LogInPage() {
             <S.OrContainer>
               <div>or</div>
             </S.OrContainer>
-            <S.Kakao src="src/assets/svg/kakao.svg" />
+            <S.Kakao
+              src="src/assets/svg/kakao.svg"
+              onClick={() => {
+                window.location.href = redirectUrl;
+              }}
+            />
           </S.KakaoLogin>
         </S.SignUP>
       </S.LoginPage>
