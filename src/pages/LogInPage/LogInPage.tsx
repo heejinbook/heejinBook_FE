@@ -5,6 +5,8 @@ import * as S from './LogInPage.styles';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from '../../components/common/Toastify/Toastify';
 import { validateEmail } from '../../utils/validate';
+import { setItem } from '../../utils/localstorage';
+import { localStorageKey } from '../../constants';
 
 export function LogInPage() {
   const [data, setData] = useState<LoginType>({
@@ -21,7 +23,7 @@ export function LogInPage() {
         if (result.status === 200) {
           navigate('/home');
           const token = result.data.data.accessToken;
-          localStorage.setItem('accessToken', token);
+          setItem(localStorageKey.accessToken, token);
         }
       })
       .catch((error) => {
@@ -41,6 +43,11 @@ export function LogInPage() {
       [name]: value,
     }));
   };
+
+  const REST_API_KEY: string = import.meta.env.VITE_REST_API_KEY;
+  const REDIRECT_URI: string = 'http://localhost:5173/kakao';
+
+  const redirectUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
 
   return (
     <S.LoginPageContainer>
@@ -80,7 +87,12 @@ export function LogInPage() {
             <S.OrContainer>
               <div>or</div>
             </S.OrContainer>
-            <S.Kakao src="src/assets/svg/kakao.svg" />
+            <S.Kakao
+              src="src/assets/svg/kakao.svg"
+              onClick={() => {
+                window.location.href = redirectUrl;
+              }}
+            />
           </S.KakaoLogin>
         </S.SignUP>
       </S.LoginPage>
