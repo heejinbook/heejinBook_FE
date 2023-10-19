@@ -5,6 +5,7 @@ import { SignUpPage } from './SignUpPage/SignUpPage';
 import { MainPage } from './MainPage/MainPage';
 import { MyLibraryPage } from './MyLibraryPage/MyLibraryPage';
 import { BookPage } from './BookPage/BookPage';
+import { Kakao } from '../components/Kakao/Kakao';
 
 export const router = createBrowserRouter([
   {
@@ -30,13 +31,16 @@ export const router = createBrowserRouter([
         path: '/myLibrary',
         element: <MyLibraryPage />,
       },
-      ///:bookId
       {
         path: '/book',
         element: <BookPage />,
+      },
+      {
+        path: '/kakao',
+        element: <Kakao />,
       },
     ],
   },
 ]);
 
-export type RoutePath = '/' | '/login' | '/signup' | '/home' | '/book' | '/myLibrary';
+export type RoutePath = '/' | '/login' | '/signup' | '/home' | '/book' | '/myLibrary' | '/kakao';
