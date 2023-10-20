@@ -22,9 +22,8 @@ export const BookBox = styled.div`
   justify-content: center;
 `;
 export const BookCategory = styled.div`
-  width: 140px;
-  height: 100px;
-  position: relative;
+  width: auto;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,9 +31,10 @@ export const BookCategory = styled.div`
   font-size: 14px;
   font-weight: bold;
   background-color: #e4dcc4aa;
+  text-align: center;
+  padding: 10px 20px;
   p {
     font-size: 12px;
-    margin-bottom: 14px;
   }
 `;
 export const BookDate = styled(BookCategory)``;

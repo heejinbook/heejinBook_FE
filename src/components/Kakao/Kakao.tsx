@@ -23,4 +23,6 @@ export function Kakao() {
         console.error(error);
       });
   }
+
+  return <></>;
 }

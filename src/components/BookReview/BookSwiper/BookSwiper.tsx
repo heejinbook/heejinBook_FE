@@ -4,15 +4,19 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 import * as S from './BookSwiper.styels';
 import { ReviewType } from '../Review';
+import IconLeftBtn from '../../../assets/svg/leftBtn.svg';
+import IconRightBtn from '../../../assets/svg/rightBtn.svg';
+import IconLeftQuote from '../../../assets/svg/LeftQuote.svg';
+import IconRightQuote from '../../../assets/svg/RightQuote.svg';
 
 type reviewProps = {
-  review: ReviewType[];
+  reviews: ReviewType[];
 };
 
-export function BookSwiper({ review }: reviewProps) {
+export function BookSwiper({ reviews }: reviewProps) {
   return (
     <S.BookSwiperContainer>
-      <S.LeftBtn className="swiper-button-prev" src="src/assets/svg/leftBtn.svg" />
+      <S.LeftBtn src={IconLeftBtn} className="swiper-button-prev" />
       <S.BookSwiper
         modules={[Navigation, Pagination]}
         slidesPerView={1}
@@ -21,20 +25,20 @@ export function BookSwiper({ review }: reviewProps) {
           prevEl: '.swiper-button-prev',
         }}
       >
-        {review.map((book, idx) => (
+        {reviews.map((r, idx) => (
           <S.ReviewSlide key={idx}>
-            <S.UserImage src={book.user} />
-            <S.ReviewTitle>{book.title}</S.ReviewTitle>
+            <S.UserImage src={r.reviewAuthorProfileUrl} />
+            <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
             <S.PhraseContainer>
-              <img src="src/assets/svg/LeftQuote.svg" />
-              <S.ReviewPhrase>{book.phrase}</S.ReviewPhrase>
-              <img src="src/assets/svg/RightQuote.svg" />
+              <img src={IconLeftQuote} />
+              <S.ReviewPhrase>{r.reviewPhrase}</S.ReviewPhrase>
+              <img src={IconRightQuote} />
             </S.PhraseContainer>
-            <S.ReviewContent>{book.content}</S.ReviewContent>
+            <S.ReviewContent>{r.reviewContents}</S.ReviewContent>
           </S.ReviewSlide>
         ))}
       </S.BookSwiper>
-      <S.RigthBtn className="swiper-button-next" src="src/assets/svg/rightBtn.svg" />
+      <S.RightBtn src={IconRightBtn} className="swiper-button-next" />
     </S.BookSwiperContainer>
   );
 }

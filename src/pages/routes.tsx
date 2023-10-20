@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
         element: <MyLibraryPage />,
       },
       {
-        path: '/book',
+        path: '/books/:bookId',
         element: <BookPage />,
       },
       {
@@ -43,4 +43,11 @@ export const router = createBrowserRouter([
   },
 ]);
 
-export type RoutePath = '/' | '/login' | '/signup' | '/home' | '/book' | '/myLibrary' | '/kakao';
+export type RoutePath =
+  | '/'
+  | '/login'
+  | '/signup'
+  | '/home'
+  | '/books/:bookId'
+  | '/myLibrary'
+  | '/kakao';

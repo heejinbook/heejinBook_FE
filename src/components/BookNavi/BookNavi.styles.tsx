@@ -13,6 +13,7 @@ export const BookNavi = styled.div`
 `;
 export const Library = styled.div`
   display: flex;
+  align-items: center;
   font-size: 16px;
   border-bottom: 1px solid #b9b19c9a;
   img {
