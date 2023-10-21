@@ -1,108 +1,44 @@
-import { Book } from '../../MainBookList/BookList';
 import * as S from './LibraryList.styles';
 import { useNavigate } from 'react-router-dom';
 import IconX from '../../../assets/svg/circleX.svg';
+import { useEffect, useState } from 'react';
+import { getLibraryBookList } from '../../../apis/library';
 
-export const library: Book[] = [
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    bookId: 1,
-    thumbnail:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-];
+export type LibraryBookType = {
+  bookId: number;
+  bookTitle: string;
+  bookAuthor: string;
+  bookThumbnail: string;
+};
 
 export function LibraryList() {
+  const [libraryBook, setLibraryBook] = useState<LibraryBookType[]>([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getLibraryBookList().then((result) => {
+      setLibraryBook(result.data.data);
+    });
+  }, []);
 
   return (
     <S.LibraryListContainer>
-      <p>전체 {library.length}</p>
+      <p>전체 {libraryBook.length}</p>
       <S.LibraryList>
-        {library.map((book, idx) => (
+        {libraryBook.map((book) => (
           <S.LibraryListItems
-            key={idx}
+            key={book.bookId}
             onClick={() => {
               navigate('/book/:bookId');
             }}
           >
             <div style={{ position: 'relative' }}>
               <S.LibraryDelete src={IconX} />
-              <S.LibraryImage src={book.thumbnail} />
+              <S.LibraryImage src={book.bookThumbnail} />
             </div>
-            <S.LibraryTitle>{book.title}</S.LibraryTitle>
-            <S.LibraryAuthor>{book.author}</S.LibraryAuthor>
+            <S.LibraryTitle>{book.bookTitle}</S.LibraryTitle>
+            <S.LibraryAuthor>{book.bookAuthor}</S.LibraryAuthor>
           </S.LibraryListItems>
         ))}
       </S.LibraryList>
