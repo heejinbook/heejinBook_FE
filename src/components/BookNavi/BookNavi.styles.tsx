@@ -9,13 +9,13 @@ export const BookNaviContainer = styled.div`
 export const BookNavi = styled.div`
   display: flex;
   flex-direction: column;
-  cursor: pointer;
 `;
 export const Library = styled.div`
   display: flex;
   align-items: center;
   font-size: 16px;
   border-bottom: 1px solid #b9b19c9a;
+  cursor: pointer;
   img {
     margin: 0 5px 0 10px;
   }

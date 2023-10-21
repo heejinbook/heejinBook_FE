@@ -6,6 +6,7 @@ import { Header } from '../../components/common/Header/Header';
 import * as S from './BookPage.styles';
 import { useParams } from 'react-router-dom';
 import { getBook } from '../../apis/books';
+import { CreateReview } from '../../components/CreateReview/CreateReview';
 
 export type detailBook = {
   bookId: number;
@@ -23,6 +24,7 @@ export type detailBook = {
 
 export function BookPage() {
   const { bookId } = useParams();
+  
   const [bookInfo, setBookInfo] = useState<detailBook>({
     bookId: 0,
     thumbnail: '',
@@ -37,6 +39,7 @@ export function BookPage() {
     isLibrary: false,
   });
   const [addBookLibrary, setAddBookLibrary] = useState<boolean>(false);
+  const [reviewModal, setReviewModal] = useState<boolean>(false);
 
   useEffect(() => {
     getBookInfo(Number(bookId));
@@ -68,8 +71,14 @@ export function BookPage() {
         <BookInfo books={bookInfo} />
         <Review />
       </S.InfoContainer>
+      <CreateReview reviewModal={reviewModal} setReviewModal={setReviewModal} />
       <S.BookNaviContainer>
-        <BookNavi addBookLibrary={addBookLibrary} toggleLibrary={toggleLibrary} />
+        <BookNavi
+          addBookLibrary={addBookLibrary}
+          toggleLibrary={toggleLibrary}
+          reviewModal={reviewModal}
+          setReviewModal={setReviewModal}
+        />
       </S.BookNaviContainer>
     </S.BookPage>
   );
