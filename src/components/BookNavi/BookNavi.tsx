@@ -10,9 +10,16 @@ import { postBookToLibrary } from '../../apis/library';
 type AddBookProps = {
   addBookLibrary: boolean;
   toggleLibrary: () => void;
+  reviewModal: boolean;
+  setReviewModal: (value: boolean) => void;
 };
 
-export function BookNavi({ addBookLibrary, toggleLibrary }: AddBookProps) {
+export function BookNavi({
+  addBookLibrary,
+  toggleLibrary,
+  reviewModal,
+  setReviewModal,
+}: AddBookProps) {
   const { bookId } = useParams();
 
   const postBook = () => {
@@ -36,7 +43,7 @@ export function BookNavi({ addBookLibrary, toggleLibrary }: AddBookProps) {
           {addBookLibrary ? <img src={IconBookAdd} /> : <img src={IconBookDelete} />}
           <p>내 책장에 담기</p>
         </S.Library>
-        <S.WriteReview>
+        <S.WriteReview onClick={() => setReviewModal(true)}>
           <img src={IconWrite} />
           <p>리뷰쓰기</p>
         </S.WriteReview>
