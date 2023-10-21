@@ -2,7 +2,7 @@ import * as S from './LibraryList.styles';
 import { useNavigate } from 'react-router-dom';
 import IconX from '../../../assets/svg/circleX.svg';
 import { useEffect, useState } from 'react';
-import { getLibraryBookList } from '../../../apis/library';
+import { deleteLibraryBook, getLibraryBookList } from '../../../apis/library';
 
 export type LibraryBookType = {
   bookId: number;
@@ -22,23 +22,40 @@ export function LibraryList() {
     });
   }, []);
 
+  const deleteBookHandler = (bookId: number) => {
+    deleteLibraryBook(bookId);
+    setLibraryBook((prev) => prev.filter((book) => book.bookId !== bookId));
+  };
+
   return (
     <S.LibraryListContainer>
       <p>전체 {libraryBook.length}</p>
       <S.LibraryList>
         {libraryBook.map((book) => (
-          <S.LibraryListItems
-            key={book.bookId}
-            onClick={() => {
-              navigate('/book/:bookId');
-            }}
-          >
+          <S.LibraryListItems key={book.bookId}>
             <div style={{ position: 'relative' }}>
-              <S.LibraryDelete src={IconX} />
-              <S.LibraryImage src={book.bookThumbnail} />
+              <S.LibraryDelete src={IconX} onClick={() => deleteBookHandler(book.bookId)} />
+              <S.LibraryImage
+                src={book.bookThumbnail}
+                onClick={() => {
+                  navigate(`/books/${book.bookId}`);
+                }}
+              />
             </div>
-            <S.LibraryTitle>{book.bookTitle}</S.LibraryTitle>
-            <S.LibraryAuthor>{book.bookAuthor}</S.LibraryAuthor>
+            <S.LibraryTitle
+              onClick={() => {
+                navigate(`/books/${book.bookId}`);
+              }}
+            >
+              {book.bookTitle}
+            </S.LibraryTitle>
+            <S.LibraryAuthor
+              onClick={() => {
+                navigate(`/books/${book.bookId}`);
+              }}
+            >
+              {book.bookAuthor}
+            </S.LibraryAuthor>
           </S.LibraryListItems>
         ))}
       </S.LibraryList>

@@ -11,3 +11,8 @@ export async function getLibraryBookList() {
   const response = await client.get(`${LIBRARY_URL}`);
   return response;
 }
+
+export async function deleteLibraryBook(bookId: number) {
+  const response = await client.delete(`${LIBRARY_URL}/${bookId}`);
+  return response;
+}
