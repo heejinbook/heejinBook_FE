@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from 'react';
+import { CSSProperties, ComponentProps, ReactNode } from 'react';
 import * as S from './Input.styles';
 
 interface InputType extends Omit<ComponentProps<'input'>, 'size' | 'style'> {
@@ -7,7 +7,7 @@ interface InputType extends Omit<ComponentProps<'input'>, 'size' | 'style'> {
   topSlot?: ReactNode;
   rightSlot?: ReactNode;
   variant?: 'outline' | 'underline';
-  // style? CSSProperties;
+  style?: CSSProperties;
 }
 
 export function Input({
@@ -16,16 +16,17 @@ export function Input({
   errorMessage,
   topSlot,
   rightSlot,
+  style,
   ...rest
 }: InputType) {
   return (
     <>
-      <S.InputWrapper>
+      <S.InputWrapper variant={variant} error={error}>
         <S.InputContainer>
           <S.TopSlot>{topSlot}</S.TopSlot>
           <S.InputFrame>
             <S.RightSlot>{rightSlot}</S.RightSlot>
-            <S.Input {...rest} />
+            <S.Input style={style} {...rest} />
           </S.InputFrame>
           {error && errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         </S.InputContainer>
