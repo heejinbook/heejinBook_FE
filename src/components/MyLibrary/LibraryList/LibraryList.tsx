@@ -1,70 +1,82 @@
 import { Book } from '../../MainBookList/BookList';
 import * as S from './LibraryList.styles';
 import { useNavigate } from 'react-router-dom';
+import IconX from '../../../assets/svg/circleX.svg';
 
 export const library: Book[] = [
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
   },
   {
-    image:
+    bookId: 1,
+    thumbnail:
       'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
     title: '비가 오면 열리는 상점',
     author: '유영광',
@@ -82,10 +94,13 @@ export function LibraryList() {
           <S.LibraryListItems
             key={idx}
             onClick={() => {
-              navigate('/book');
+              navigate('/book/:bookId');
             }}
           >
-            <S.LibraryImage src={book.image} />
+            <div style={{ position: 'relative' }}>
+              <S.LibraryDelete src={IconX} />
+              <S.LibraryImage src={book.thumbnail} />
+            </div>
             <S.LibraryTitle>{book.title}</S.LibraryTitle>
             <S.LibraryAuthor>{book.author}</S.LibraryAuthor>
           </S.LibraryListItems>

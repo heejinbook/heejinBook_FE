@@ -12,7 +12,7 @@ export type Book = {
   thumbnail: string;
   title: string;
   author: string;
-  reviewCount: number;
+  reviewCount?: number;
 };
 
 export type CategoryType = {

@@ -23,6 +23,15 @@ export const LibraryListItems = styled.div`
   margin-top: 12px;
   cursor: pointer;
 `;
+
+export const LibraryDelete = styled.img`
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
 export const LibraryImage = styled.img`
   width: 170px;
   height: 220px;

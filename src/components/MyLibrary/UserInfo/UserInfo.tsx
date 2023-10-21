@@ -20,7 +20,7 @@ export function UserInfo() {
         setMyInfo(result.data.data);
       })
       .catch((error) => console.error(error));
-  });
+  }, []);
 
   return (
     <S.UserInfoContainer>
