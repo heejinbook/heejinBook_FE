@@ -3,13 +3,17 @@ import { BookSwiper } from './BookSwiper/BookSwiper';
 import * as S from './Review.styles';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BookListReview } from './BookListReview/BookListReview';
 
 export type ReviewType = {
-  // reviewAuthor: string;
+  reviewId: number;
   reviewAuthorProfileUrl: string;
   reviewTitle: string;
   reviewPhrase: string;
   reviewContents: string;
+};
+type ReviewProps = {
+  reviewCount: number;
 };
 
 export function Review() {
@@ -38,10 +42,13 @@ export function Review() {
     <S.ReviewContainer>
       <S.Review>
         <p>책 리뷰</p>
-        {reviews ? (
-          <S.BookSwiperContainer>
-            <BookSwiper reviews={reviews} />
-          </S.BookSwiperContainer>
+        {reviews.length > 0 ? (
+          <>
+            <S.BookSwiperContainer>
+              <BookSwiper reviews={reviews} />
+            </S.BookSwiperContainer>
+            <BookListReview reviews={reviews} />
+          </>
         ) : (
           <S.NoReview>
             <p>리뷰가 없어요</p>

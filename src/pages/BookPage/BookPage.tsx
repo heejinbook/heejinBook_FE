@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BookInfo } from '../../components/BookInfo/BookInfo';
-import { BookNavi } from '../../components/BookNavi/BookNavi';
+import { BookNav } from '../../components/BookNav/BookNav';
 import { Review } from '../../components/BookReview/Review';
 import { Header } from '../../components/common/Header/Header';
 import * as S from './BookPage.styles';
@@ -24,7 +24,7 @@ export type detailBook = {
 
 export function BookPage() {
   const { bookId } = useParams();
-  
+
   const [bookInfo, setBookInfo] = useState<detailBook>({
     bookId: 0,
     thumbnail: '',
@@ -72,14 +72,13 @@ export function BookPage() {
         <Review />
       </S.InfoContainer>
       <CreateReview reviewModal={reviewModal} setReviewModal={setReviewModal} />
-      <S.BookNaviContainer>
-        <BookNavi
+      <S.BookNavContainer>
+        <BookNav
           addBookLibrary={addBookLibrary}
           toggleLibrary={toggleLibrary}
-          reviewModal={reviewModal}
           setReviewModal={setReviewModal}
         />
-      </S.BookNaviContainer>
+      </S.BookNavContainer>
     </S.BookPage>
   );
 }

@@ -25,8 +25,8 @@ export function BookSwiper({ reviews }: reviewProps) {
           prevEl: '.swiper-button-prev',
         }}
       >
-        {reviews.map((r, idx) => (
-          <S.ReviewSlide key={idx}>
+        {reviews.map((r) => (
+          <S.ReviewSlide key={r.reviewId}>
             <S.UserImage src={r.reviewAuthorProfileUrl} />
             <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
             <S.PhraseContainer>
