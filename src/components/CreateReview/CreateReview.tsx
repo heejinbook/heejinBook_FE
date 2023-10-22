@@ -80,8 +80,9 @@ export function CreateReview({ reviewModal, setReviewModal }: ReviewProps) {
         }
       })
       .catch((error) => {
-        console.error(error);
-        Toast.error('다시 작성해주세요');
+        if (error.response.status === 409) {
+          Toast.error('이미 리뷰를 작성했습니다');
+        }
       });
   };
 
