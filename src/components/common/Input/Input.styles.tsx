@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 
 const inputStyle = css`
   width: 100%;
-  height: 100%;
   padding: 10px;
   display: inline-flex;
   align-items: center;
