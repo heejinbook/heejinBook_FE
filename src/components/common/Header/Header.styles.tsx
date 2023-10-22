@@ -40,5 +40,5 @@ export const Logo = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: #503f15;
-  margin-right: 10px;
+  padding-right: 10px;
 `;

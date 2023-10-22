@@ -24,7 +24,7 @@ export type detailBook = {
 
 export function BookPage() {
   const { bookId } = useParams();
-  
+
   const [bookInfo, setBookInfo] = useState<detailBook>({
     bookId: 0,
     thumbnail: '',
@@ -76,7 +76,6 @@ export function BookPage() {
         <BookNavi
           addBookLibrary={addBookLibrary}
           toggleLibrary={toggleLibrary}
-          reviewModal={reviewModal}
           setReviewModal={setReviewModal}
         />
       </S.BookNaviContainer>

@@ -10,16 +10,10 @@ import { postBookToLibrary } from '../../apis/library';
 type AddBookProps = {
   addBookLibrary: boolean;
   toggleLibrary: () => void;
-  reviewModal: boolean;
   setReviewModal: (value: boolean) => void;
 };
 
-export function BookNavi({
-  addBookLibrary,
-  toggleLibrary,
-  reviewModal,
-  setReviewModal,
-}: AddBookProps) {
+export function BookNavi({ addBookLibrary, toggleLibrary, setReviewModal }: AddBookProps) {
   const { bookId } = useParams();
 
   const postBook = () => {

@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 
 export const LibraryListContainer = styled.div`
-  padding: 0 20px;
+  width: 100%;
   p {
+    padding-left: 20px;
     color: #b9b19c;
     font-weight: bold;
   }
@@ -13,6 +14,7 @@ export const LibraryList = styled.div`
   grid-gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   justify-items: center;
+  padding: 0 20px;
 `;
 export const LibraryListItems = styled.div`
   width: 170px;
@@ -20,7 +22,6 @@ export const LibraryListItems = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 12px;
   cursor: pointer;
 `;
 
