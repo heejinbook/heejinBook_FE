@@ -61,17 +61,19 @@ export const ReviewPhraseContainer = styled.div`
   height: auto;
   display: flex;
   align-items: start;
+  justify-content: center;
+  text-align: center;
   p {
     display: flex;
     align-items: start;
-    margin: 0;
+    padding: 0;
+    margin: 0 20px;
     font-size: 24px;
     color: #503f15;
   }
 `;
 
 export const ReviewPhrase = styled.div`
-  width: 300px;
   height: auto;
   overflow: hidden;
   text-overflow: ellipsis;
