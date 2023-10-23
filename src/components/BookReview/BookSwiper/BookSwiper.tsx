@@ -2,7 +2,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
-import * as S from './BookSwiper.styels';
+import * as S from './BookSwiper.styles';
 import { ReviewType } from '../Review';
 import IconLeftBtn from '../../../assets/svg/leftBtn.svg';
 import IconRightBtn from '../../../assets/svg/rightBtn.svg';
@@ -25,8 +25,8 @@ export function BookSwiper({ reviews }: reviewProps) {
           prevEl: '.swiper-button-prev',
         }}
       >
-        {reviews.map((r, idx) => (
-          <S.ReviewSlide key={idx}>
+        {reviews.map((r) => (
+          <S.ReviewSlide key={r.reviewId}>
             <S.UserImage src={r.reviewAuthorProfileUrl} />
             <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
             <S.PhraseContainer>

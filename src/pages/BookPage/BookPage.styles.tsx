@@ -14,7 +14,7 @@ export const InfoContainer = styled.div`
   margin-left: 30px;
 `;
 
-export const BookNaviContainer = styled.div`
+export const BookNavContainer = styled.div`
   position: fixed;
   top: 9%;
   right: 0;
