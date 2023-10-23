@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const LibraryReviewContainer = styled.div`
   p {
-    padding-left: 20px;
+    padding: 0 0 0 20px;
     color: #b9b19c;
     font-weight: bold;
   }
@@ -35,6 +35,7 @@ export const BookImage = styled.img`
   height: 180px;
   border-radius: 1px 8px 8px 1px;
   box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 `;
 export const BookTitle = styled.div`
   width: 300px;
@@ -83,14 +84,15 @@ export const ReviewPhrase = styled.div`
   text-align: center;
   font-size: 14px;
   padding-top: 3px;
-  padding-bottom: 36px;
 `;
 
 export const ReviewDelete = styled.div`
   cursor: pointer;
   width: 100%;
+  height: 30px;
   display: flex;
   justify-content: center;
+  margin-top: 10px;
   padding: 12px 0;
   border-top: 1px solid #b9b19c9a;
 `;

@@ -21,3 +21,8 @@ export async function getMyReview() {
   const response = await client.get('/api/user/my-info/reviews');
   return response;
 }
+
+export async function deleteLibraryReview(reviewId: number) {
+  const response = await client.delete(`/api/reviews/${reviewId}`);
+  return response;
+}
