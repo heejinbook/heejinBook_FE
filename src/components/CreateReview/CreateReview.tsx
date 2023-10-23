@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
 
-export type ReviewProps = {
+type ReviewProps = {
   reviewModal: boolean;
   setReviewModal: (value: boolean) => void;
 };

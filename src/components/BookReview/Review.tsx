@@ -12,9 +12,6 @@ export type ReviewType = {
   reviewPhrase: string;
   reviewContents: string;
 };
-type ReviewProps = {
-  reviewCount: number;
-};
 
 export function Review() {
   const { bookId } = useParams();
@@ -47,7 +44,7 @@ export function Review() {
             <S.BookSwiperContainer>
               <BookSwiper reviews={reviews} />
             </S.BookSwiperContainer>
-            <BookListReview reviews={reviews} />
+            <BookListReview />
           </>
         ) : (
           <S.NoReview>

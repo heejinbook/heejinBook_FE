@@ -1,7 +1,14 @@
 import styled from '@emotion/styled';
 
-export const LibraryReviewContainer = styled.div`
+export const LibraryReviewContainer = styled.div``;
+
+export const ReviewFilterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
   p {
+    margin: 20px 0 0 0;
     color: #b9b19c;
     font-weight: bold;
   }
@@ -28,30 +35,21 @@ export const LibraryReview = styled.div`
   padding-top: 36px;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.06) 2px 2px 20px, rgba(0, 0, 0, 0.04) 2px 2px 10px;
+  cursor: pointer;
 `;
-export const BookImage = styled.img`
+export const ReviewImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 100%;
 `;
-export const BookTitle = styled.div`
+export const ReviewTitle = styled.div`
   width: 300px;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  font-weight: bold;
   margin: 16px 0 2px 0;
-`;
-export const BookAuthor = styled.div`
-  width: 300px;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  margin-bottom: 9px;
 `;
 
 export const ReviewPhraseContainer = styled.div`
@@ -77,6 +75,7 @@ export const ReviewPhrase = styled.div`
   justify-content: center;
   text-align: center;
   font-size: 14px;
+  font-weight: bold;
   padding-top: 3px;
   padding-bottom: 36px;
 `;

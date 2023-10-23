@@ -2,7 +2,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
-import * as S from './BookSwiper.styels';
+import * as S from './BookSwiper.styles';
 import { ReviewType } from '../Review';
 import IconLeftBtn from '../../../assets/svg/leftBtn.svg';
 import IconRightBtn from '../../../assets/svg/rightBtn.svg';

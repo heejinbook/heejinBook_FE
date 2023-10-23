@@ -34,7 +34,7 @@ const category: CategoryType[] = [
   { categoryId: 10, categoryName: '공포' },
 ];
 
-export type SortOption = 'title' | 'review' | '';
+type SortOption = 'title' | 'review' | '';
 
 export function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
