@@ -1,4 +1,4 @@
-import * as S from './BookNavi.styles';
+import * as S from './BookNav.styles';
 import IconBookAdd from '../../assets/svg/addBook.svg';
 import IconBookDelete from '../../assets/svg/noAddBook.svg';
 import IconWrite from '../../assets/svg/pencil.svg';
@@ -10,16 +10,10 @@ import { postBookToLibrary } from '../../apis/library';
 type AddBookProps = {
   addBookLibrary: boolean;
   toggleLibrary: () => void;
-  reviewModal: boolean;
   setReviewModal: (value: boolean) => void;
 };
 
-export function BookNavi({
-  addBookLibrary,
-  toggleLibrary,
-  reviewModal,
-  setReviewModal,
-}: AddBookProps) {
+export function BookNav({ addBookLibrary, toggleLibrary, setReviewModal }: AddBookProps) {
   const { bookId } = useParams();
 
   const postBook = () => {
@@ -37,8 +31,8 @@ export function BookNavi({
   };
 
   return (
-    <S.BookNaviContainer>
-      <S.BookNavi>
+    <S.BookNavContainer>
+      <S.BookNav>
         <S.Library onClick={postBook}>
           {addBookLibrary ? <img src={IconBookAdd} /> : <img src={IconBookDelete} />}
           <p>내 책장에 담기</p>
@@ -51,7 +45,7 @@ export function BookNavi({
           <img src={IconShare} />
           <p>공유하기</p>
         </S.Share>
-      </S.BookNavi>
-    </S.BookNaviContainer>
+      </S.BookNav>
+    </S.BookNavContainer>
   );
 }

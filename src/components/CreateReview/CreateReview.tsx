@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
 
-export type ReviewProps = {
+type ReviewProps = {
   reviewModal: boolean;
   setReviewModal: (value: boolean) => void;
 };
@@ -80,8 +80,9 @@ export function CreateReview({ reviewModal, setReviewModal }: ReviewProps) {
         }
       })
       .catch((error) => {
-        console.error(error);
-        Toast.error('다시 작성해주세요');
+        if (error.response.status === 409) {
+          Toast.error('이미 리뷰를 작성했습니다');
+        }
       });
   };
 

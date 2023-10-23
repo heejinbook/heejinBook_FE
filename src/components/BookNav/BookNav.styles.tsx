@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
-export const BookNaviContainer = styled.div`
+export const BookNavContainer = styled.div`
   width: 280px;
   height: 100vh;
   background-color: #fffdf6;
   border-left: 1px solid #b9b19c9a;
 `;
-export const BookNavi = styled.div`
+export const BookNav = styled.div`
   display: flex;
   flex-direction: column;
 `;

@@ -65,6 +65,7 @@ export const ReviewTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
   text-align: center;
   margin-bottom: 30px;
 `;
@@ -73,6 +74,8 @@ export const ReviewPhrase = styled.div`
   height: auto;
   display: flex;
   align-items: center;
+  font-size: 14px;
+  font-weight: bold;
   justify-content: center;
   text-align: center;
 `;
@@ -82,6 +85,7 @@ export const ReviewContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
   text-align: center;
   margin-bottom: 30px;
 `;

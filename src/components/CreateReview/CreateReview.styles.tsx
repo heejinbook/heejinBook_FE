@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-type CreateRContainer = {
+export type CreateRContainer = {
   reviewModal: boolean;
 };
 
