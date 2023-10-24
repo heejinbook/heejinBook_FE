@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import * as S from './LibraryReview.styles';
-import { deleteLibraryReview, getMyReview } from '../../../apis/library';
+import { getMyReview } from '../../../apis/library';
 import { useNavigate } from 'react-router-dom';
+import { deleteLibraryReview } from '../../../apis/review';
+import { CreateReview } from '../../CreateReview/CreateReview';
 
 export type MyReview = {
   reviewId: number;
@@ -10,10 +12,26 @@ export type MyReview = {
   bookTitle: string;
   bookAuthor: string;
   reviewPhrase: string;
+  reviewContents: string;
+  reviewTitle: string;
+  reviewRating: number;
 };
 
 export function LibraryReview() {
   const [myReview, setMyReview] = useState<MyReview[]>([]);
+  const [reviewModal, setReviewModal] = useState<boolean>(false);
+  const [selectedReviewId, setSelectedReviewId] = useState<number>(0);
+  const [writtenReview, setWrittenReview] = useState<MyReview>({
+    reviewId: 0,
+    bookId: 0,
+    bookThumbnail: '',
+    bookTitle: '',
+    bookAuthor: '',
+    reviewPhrase: '',
+    reviewContents: '',
+    reviewTitle: '',
+    reviewRating: 0,
+  });
 
   const navigate = useNavigate();
 
@@ -48,6 +66,13 @@ export function LibraryReview() {
 
   return (
     <S.LibraryReviewContainer>
+      <CreateReview
+        reviewModal={reviewModal}
+        setReviewModal={setReviewModal}
+        reviewId={selectedReviewId}
+        writtenReview={writtenReview}
+        // setWrittenReview={setWrittenReview}
+      />
       <p>리뷰 {myReview.length}</p>
       {myReview.length > 0 ? (
         <S.LibraryReviewGrid>
@@ -66,9 +91,25 @@ export function LibraryReview() {
                 <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
                 <p>"</p>
               </S.ReviewPhraseContainer>
-              <S.ReviewDelete onClick={() => deleteMyReview(review.reviewId)}>
-                리뷰 삭제
-              </S.ReviewDelete>
+              <S.ReviewDeleteNEdit>
+                <p
+                  onClick={() => {
+                    setSelectedReviewId(review.reviewId);
+                    deleteMyReview(review.reviewId);
+                  }}
+                >
+                  리뷰 삭제
+                </p>
+                <p
+                  onClick={() => {
+                    setSelectedReviewId(review.reviewId);
+                    setWrittenReview(review);
+                    setReviewModal(true);
+                  }}
+                >
+                  리뷰 수정
+                </p>
+              </S.ReviewDeleteNEdit>
             </S.LibraryReview>
           ))}
         </S.LibraryReviewGrid>

@@ -1,24 +1,54 @@
-import { CSSProperties, HTMLInputTypeAttribute, useState } from 'react';
+import { CSSProperties, HTMLInputTypeAttribute, useEffect, useState } from 'react';
 import { Input } from '../common/Input/Input';
 import * as S from './CreateReview.styles';
 import IconX from '../../assets/svg/X.svg';
-import { ReviewType, postReview } from '../../apis/review';
+import { ReviewType, postReview, putLibraryReview } from '../../apis/review';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
+import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
 
 type ReviewProps = {
   reviewModal: boolean;
   setReviewModal: (value: boolean) => void;
+  reviewId: number;
+  writtenReview: MyReview;
+  // setWrittenReview: (value: MyReview) => void;
 };
 
-export function CreateReview({ reviewModal, setReviewModal }: ReviewProps) {
+export function CreateReview({
+  reviewModal,
+  setReviewModal,
+  reviewId,
+  writtenReview,
+}: // setWrittenReview,
+ReviewProps) {
   const { bookId } = useParams();
+  console.log(reviewId);
+
+  useEffect(() => {
+    if (writtenReview) {
+      setReview({
+        title: writtenReview.reviewTitle,
+        contents: writtenReview.reviewContents,
+        phrase: writtenReview.reviewPhrase,
+        rating: 1,
+      });
+    } else {
+      setReview({
+        title: '',
+        phrase: '',
+        contents: '',
+        rating: 0,
+      });
+    }
+  }, [writtenReview]);
 
   const [review, setReview] = useState<ReviewType>({
     title: '',
     phrase: '',
     contents: '',
+    rating: 0,
   });
 
   type ReviewInputType = {
@@ -64,26 +94,43 @@ export function CreateReview({ reviewModal, setReviewModal }: ReviewProps) {
   };
 
   const postWriteReview = (review: ReviewType) => {
-    if (!validateReview()) {
-      return;
-    }
-    postReview(Number(bookId), review)
-      .then((result) => {
-        if (result.data.status === 201) {
-          setReviewModal(false);
-          Toast.success('리뷰 작성 성공!');
-          setReview({
-            title: '',
-            phrase: '',
-            contents: '',
-          });
-        }
+    if (!writtenReview) {
+      if (!validateReview()) {
+        return;
+      }
+      postReview(Number(bookId), review)
+        .then((result) => {
+          if (result.data.status === 201) {
+            setReviewModal(false);
+            Toast.success('리뷰 작성 성공!');
+            setReview({
+              title: '',
+              phrase: '',
+              contents: '',
+              rating: 0,
+            });
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 409) {
+            Toast.error('이미 리뷰를 작성했습니다');
+          }
+        });
+    } else {
+      putLibraryReview(reviewId, {
+        title: review.title,
+        contents: review.contents,
+        phrase: review.phrase,
+        rating: 1,
       })
-      .catch((error) => {
-        if (error.response.status === 409) {
-          Toast.error('이미 리뷰를 작성했습니다');
-        }
-      });
+        .then((result) => {
+          if (result.data.status === 200) {
+            Toast.success('리뷰가 수정되었습니다');
+            setReviewModal(false);
+          }
+        })
+        .catch((error) => console.error(error));
+    }
   };
 
   const validateReview = () => {
@@ -120,9 +167,15 @@ export function CreateReview({ reviewModal, setReviewModal }: ReviewProps) {
             onChange={inputChangeHandler}
           />
         ))}
-        <S.WriteBtn>
-          <button onClick={() => postWriteReview(review)}>작성하기</button>
-        </S.WriteBtn>
+        {!writtenReview ? (
+          <S.WriteBtn>
+            <button onClick={() => postWriteReview(review)}>작성하기</button>
+          </S.WriteBtn>
+        ) : (
+          <S.WriteBtn>
+            <button onClick={() => postWriteReview(review)}>수정하기</button>
+          </S.WriteBtn>
+        )}
       </S.CreateRModal>
     </S.CreateRContainer>
   );

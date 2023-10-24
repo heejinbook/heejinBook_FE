@@ -4,6 +4,7 @@ export type ReviewType = {
   title: string;
   contents: string;
   phrase: string;
+  rating: number;
 };
 
 export type getReviewListParams = {
@@ -24,5 +25,15 @@ export async function getReviewList(bookId: number, params: getReviewListParams)
   const response = await client.get(`${REVIEW_URL}/list/${bookId}`, {
     params: { page, size, sort },
   });
+  return response;
+}
+
+export async function deleteLibraryReview(reviewId: number) {
+  const response = await client.delete(`${REVIEW_URL}/${reviewId}`);
+  return response;
+}
+
+export async function putLibraryReview(reviewId: number, payload: ReviewType) {
+  const response = await client.put(`${REVIEW_URL}/${reviewId}`, payload);
   return response;
 }

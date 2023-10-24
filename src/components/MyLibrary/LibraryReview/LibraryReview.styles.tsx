@@ -86,15 +86,23 @@ export const ReviewPhrase = styled.div`
   padding-top: 3px;
 `;
 
-export const ReviewDelete = styled.div`
-  cursor: pointer;
+export const ReviewDeleteNEdit = styled.div`
   width: 100%;
   height: 30px;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
+  margin-top: 15px;
   padding: 12px 0;
   border-top: 1px solid #b9b19c9a;
+  p {
+    margin: 0 40px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const NoReview = styled.div`
