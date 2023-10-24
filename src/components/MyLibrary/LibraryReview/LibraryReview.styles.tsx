@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const LibraryReviewContainer = styled.div`
   p {
+    padding: 0 0 0 20px;
     color: #b9b19c;
     font-weight: bold;
   }
@@ -12,7 +13,7 @@ export const LibraryReviewGrid = styled.div`
   grid-gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   justify-items: center;
-  padding: 20px 20px 0 20px;
+  padding: 0 20px;
   p {
     color: #b9b19c;
     font-weight: bold;
@@ -34,6 +35,7 @@ export const BookImage = styled.img`
   height: 180px;
   border-radius: 1px 8px 8px 1px;
   box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 `;
 export const BookTitle = styled.div`
   width: 300px;
@@ -60,17 +62,19 @@ export const ReviewPhraseContainer = styled.div`
   height: auto;
   display: flex;
   align-items: start;
+  justify-content: center;
+  text-align: center;
   p {
     display: flex;
     align-items: start;
-    margin: 0;
+    padding: 0;
+    margin: 0 20px;
     font-size: 24px;
     color: #503f15;
   }
 `;
 
 export const ReviewPhrase = styled.div`
-  width: 300px;
   height: auto;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -80,14 +84,34 @@ export const ReviewPhrase = styled.div`
   text-align: center;
   font-size: 14px;
   padding-top: 3px;
-  padding-bottom: 36px;
 `;
 
-export const ReviewDelete = styled.div`
-  cursor: pointer;
+export const ReviewDeleteNEdit = styled.div`
   width: 100%;
+  height: 30px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-top: 15px;
   padding: 12px 0;
   border-top: 1px solid #b9b19c9a;
+  p {
+    margin: 0 40px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const NoReview = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  p {
+    text-align: center;
+  }
 `;

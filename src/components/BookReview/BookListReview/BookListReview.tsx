@@ -6,6 +6,7 @@ import { getReviewList } from '../../../apis/review';
 import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
+import IconNoImage from '../../../assets/svg/noImageUser.svg';
 
 type Text = {
   text: string;
@@ -30,7 +31,7 @@ export function BookListReview() {
   const reviewList = (page: number) => {
     getReviewList(Number(bookId), {
       page: page - 1,
-      sort: sortOption === 'createAt' ? 'id,desc' : 'r.id,desc',
+      sort: sortOption === 'createAt' ? 'CREATED_AT' : 'COUNT_COMMENT',
       size: 9,
     })
       .then((result) => {
@@ -80,7 +81,11 @@ export function BookListReview() {
         <S.LibraryReviewGrid>
           {reviewItems.map((review) => (
             <S.LibraryReview key={review.reviewId} onClick={() => modalOpenHandler(review)}>
-              <S.ReviewImage src={review.reviewAuthorProfileUrl} />
+              {review.reviewAuthorProfileUrl === null ? (
+                <S.ReviewImage src={IconNoImage} />
+              ) : (
+                <S.ReviewImage src={review.reviewAuthorProfileUrl} />
+              )}
               <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
               <S.ReviewPhraseContainer>
                 <p>"</p>

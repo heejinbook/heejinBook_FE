@@ -1,93 +1,61 @@
-import { Book } from '../../MainBookList/BookList';
 import * as S from './LibraryList.styles';
 import { useNavigate } from 'react-router-dom';
+import IconX from '../../../assets/svg/circleX.svg';
+import { useEffect, useState } from 'react';
+import { deleteLibraryBook, getLibraryBookList } from '../../../apis/library';
 
-export const library: Book[] = [
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-  {
-    image:
-      'https://cover.millie.co.kr/service/cover/179612718/522e8fbb3b7949ee9500252e8821c193.jpg?w=220&f=webp&q=80',
-    title: '비가 오면 열리는 상점',
-    author: '유영광',
-  },
-];
+export type LibraryBookType = {
+  bookId: number;
+  bookTitle: string;
+  bookAuthor: string;
+  bookThumbnail: string;
+};
 
 export function LibraryList() {
+  const [libraryBook, setLibraryBook] = useState<LibraryBookType[]>([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getLibraryBookList().then((result) => {
+      setLibraryBook(result.data.data);
+    });
+  }, []);
+
+  const deleteBookHandler = (bookId: number) => {
+    deleteLibraryBook(bookId);
+    setLibraryBook((prev) => prev.filter((book) => book.bookId !== bookId));
+  };
 
   return (
     <S.LibraryListContainer>
-      <p>전체 {library.length}</p>
+      <p>전체 {libraryBook.length}</p>
       <S.LibraryList>
-        {library.map((book, idx) => (
-          <S.LibraryListItems
-            key={idx}
-            onClick={() => {
-              navigate('/book');
-            }}
-          >
-            <S.LibraryImage src={book.image} />
-            <S.LibraryTitle>{book.title}</S.LibraryTitle>
-            <S.LibraryAuthor>{book.author}</S.LibraryAuthor>
+        {libraryBook.map((book) => (
+          <S.LibraryListItems key={book.bookId}>
+            <div style={{ position: 'relative' }}>
+              <S.LibraryDelete src={IconX} onClick={() => deleteBookHandler(book.bookId)} />
+              <S.LibraryImage
+                src={book.bookThumbnail}
+                onClick={() => {
+                  navigate(`/books/${book.bookId}`);
+                }}
+              />
+            </div>
+            <S.LibraryTitle
+              onClick={() => {
+                navigate(`/books/${book.bookId}`);
+              }}
+            >
+              {book.bookTitle}
+            </S.LibraryTitle>
+            <S.LibraryAuthor
+              onClick={() => {
+                navigate(`/books/${book.bookId}`);
+              }}
+            >
+              {book.bookAuthor}
+            </S.LibraryAuthor>
           </S.LibraryListItems>
         ))}
       </S.LibraryList>

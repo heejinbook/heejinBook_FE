@@ -2,8 +2,7 @@ import styled from '@emotion/styled';
 
 export const LibraryBarContainer = styled.div`
   width: 100%;
-  height: auto;
-  padding: 10px 0 10px 20px;
+  margin-top: 10px;
 `;
 export const LibraryBar = styled.div`
   display: flex;
@@ -15,8 +14,7 @@ export const LibraryBar = styled.div`
     font-size: 20px;
     font-weight: bold;
     color: #503f15;
-    padding-bottom: 5px;
-    margin: 0 15px 0 0;
+    margin: 0 0 5px 15px;
     &:active {
       font-weight: bolder;
       border-bottom: 3px solid #503f15;
