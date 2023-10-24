@@ -34,13 +34,13 @@ const category: CategoryType[] = [
   { categoryId: 10, categoryName: '공포' },
 ];
 
-type SortOption = 'title' | 'review' | '';
+type SortOption = 'createAt' | 'review' | '';
 
 export function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortOption, setSortOption] = useState<SortOption>('title');
+  const [sortOption, setSortOption] = useState<SortOption>('createAt');
   const [searchBook, setSearchBook] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
@@ -55,7 +55,7 @@ export function BookList() {
       .get('http://43.200.172.180:8080/api/books', {
         params: {
           page: page - 1,
-          sort: sortOption === 'title' ? 'title' : 'r.id,desc',
+          sort: sortOption === 'createAt' ? 'CREATED_AT' : 'COUNT_REVIEW',
           searchKeyword: encodeURIComponent(searchBook),
           category: selectedCategory,
           size: 40,

@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 
 export const UserInfoContainer = styled.div`
+  width: 100%;
+  height: 300px;
   border-bottom: 1px solid #b9b19c;
-  padding: 10px 10px 80px 0;
+  padding: 10px 10px 0 0;
 `;
 
 export const EditIcon = styled.div`

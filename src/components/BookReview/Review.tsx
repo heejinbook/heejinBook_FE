@@ -7,7 +7,7 @@ import { BookListReview } from './BookListReview/BookListReview';
 
 export type ReviewType = {
   reviewId: number;
-  reviewAuthorProfileUrl: string;
+  reviewAuthorProfileUrl: string | null;
   reviewTitle: string;
   reviewPhrase: string;
   reviewContents: string;

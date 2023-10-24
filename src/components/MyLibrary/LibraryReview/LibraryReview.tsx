@@ -49,28 +49,34 @@ export function LibraryReview() {
   return (
     <S.LibraryReviewContainer>
       <p>리뷰 {myReview.length}</p>
-      <S.LibraryReviewGrid>
-        {myReview.map((review) => (
-          <S.LibraryReview key={review.reviewId}>
-            <S.BookImage
-              src={review.bookThumbnail}
-              onClick={() => {
-                navigate(`/books/${review.bookId}`);
-              }}
-            />
-            <S.BookTitle>{review.bookTitle}</S.BookTitle>
-            <S.BookAuthor>{review.bookAuthor}</S.BookAuthor>
-            <S.ReviewPhraseContainer>
-              <p>"</p>
-              <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
-              <p>"</p>
-            </S.ReviewPhraseContainer>
-            <S.ReviewDelete onClick={() => deleteMyReview(review.reviewId)}>
-              리뷰 삭제
-            </S.ReviewDelete>
-          </S.LibraryReview>
-        ))}
-      </S.LibraryReviewGrid>
+      {myReview.length > 0 ? (
+        <S.LibraryReviewGrid>
+          {myReview.map((review) => (
+            <S.LibraryReview key={review.reviewId}>
+              <S.BookImage
+                src={review.bookThumbnail}
+                onClick={() => {
+                  navigate(`/books/${review.bookId}`);
+                }}
+              />
+              <S.BookTitle>{review.bookTitle}</S.BookTitle>
+              <S.BookAuthor>{review.bookAuthor}</S.BookAuthor>
+              <S.ReviewPhraseContainer>
+                <p>"</p>
+                <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
+                <p>"</p>
+              </S.ReviewPhraseContainer>
+              <S.ReviewDelete onClick={() => deleteMyReview(review.reviewId)}>
+                리뷰 삭제
+              </S.ReviewDelete>
+            </S.LibraryReview>
+          ))}
+        </S.LibraryReviewGrid>
+      ) : (
+        <S.NoReview>
+          <p>리뷰를 작성해주세요</p>
+        </S.NoReview>
+      )}
     </S.LibraryReviewContainer>
   );
 }

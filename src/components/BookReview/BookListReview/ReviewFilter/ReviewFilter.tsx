@@ -13,7 +13,7 @@ export function ReviewFilter({ onSortChange }: ReviewFilterProps) {
     <S.FilterContainer>
       <S.Filter>
         <p onClick={() => sortChangeHandler('createAt')}>등록순</p>
-        <p onClick={() => sortChangeHandler('countDesc')}>리뷰 많은 순</p>
+        <p onClick={() => sortChangeHandler('countDesc')}>댓글 많은 순</p>
       </S.Filter>
     </S.FilterContainer>
   );

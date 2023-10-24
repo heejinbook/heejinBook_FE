@@ -96,3 +96,14 @@ export const ReviewDelete = styled.div`
   padding: 12px 0;
   border-top: 1px solid #b9b19c9a;
 `;
+
+export const NoReview = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  p {
+    text-align: center;
+  }
+`;
