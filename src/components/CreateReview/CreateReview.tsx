@@ -12,8 +12,8 @@ import { Rating } from '../common/Rating/Rating';
 type ReviewProps = {
   reviewModal: boolean;
   setReviewModal: (value: boolean) => void;
-  reviewId: number;
-  writtenReview: MyReview;
+  reviewId?: number;
+  writtenReview?: MyReview;
   // setWrittenReview: (value: MyReview) => void;
 };
 
@@ -126,7 +126,7 @@ ReviewProps) {
           }
         });
     } else {
-      putLibraryReview(reviewId, {
+      putLibraryReview(Number(reviewId), {
         title: review.title,
         contents: review.contents,
         phrase: review.phrase,

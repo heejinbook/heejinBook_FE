@@ -20,6 +20,7 @@ export type detailBook = {
   publisher: string;
   isbn: string;
   isLibrary: boolean;
+  avgRating: number;
 };
 
 export function BookPage() {
@@ -37,6 +38,7 @@ export function BookPage() {
     publisher: '',
     isbn: '',
     isLibrary: false,
+    avgRating: 0,
   });
   const [addBookLibrary, setAddBookLibrary] = useState<boolean>(false);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
