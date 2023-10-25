@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './Rating.styles';
 import IconEmptyStar from '../../../assets/svg/emptyStar.svg';
 import IconFullStar from '../../../assets/svg/fullStar.svg';
@@ -22,6 +22,12 @@ export function Rating({ readonly, onChange, count }: RatingType) {
     setRating(count);
   };
 
+  useEffect(() => {
+    if (count) {
+      setRating(count);
+    }
+  }, [count]);
+
   const mouseOverHandler = (count: number) => {
     if (readonly) return;
     setHover(count);
@@ -37,7 +43,7 @@ export function Rating({ readonly, onChange, count }: RatingType) {
       {RATING.map((count) => (
         <S.Rating
           key={count}
-          src={count <= (hover || rating) ? IconFullStar : IconEmptyStar}
+          src={rating >= count || hover >= count ? IconFullStar : IconEmptyStar}
           onClick={() => ratingClickHandler(count)}
           onMouseOver={() => mouseOverHandler(count)}
           onMouseLeave={mouseLeaveHandler}
