@@ -6,6 +6,7 @@ import Pagination from 'react-js-pagination';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { BookFilter } from '../Filter/BookFilter';
 import { CategoryFilter } from '../CategoryFilter/CategoryFilter';
+import { getBookList } from '../../apis/books';
 
 export type Book = {
   bookId: number;
@@ -34,13 +35,24 @@ const category: CategoryType[] = [
   { categoryId: 10, categoryName: '공포' },
 ];
 
-type SortOption = 'createAt' | 'review' | '';
+export type FilterType = {
+  filterId: number;
+  filterName: string;
+  sortName: string;
+};
+
+const filter: FilterType[] = [
+  { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
+  { filterId: 1, filterName: 'ㄱㄴㄷ', sortName: 'TITLE_ASC' },
+  { filterId: 2, filterName: '별점순', sortName: 'RATING_DESC' },
+  { filterId: 3, filterName: '리뷰 많은 순', sortName: 'COUNT_REVIEW' },
+];
 
 export function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortOption, setSortOption] = useState<SortOption>('createAt');
+  const [sortOption, setSortOption] = useState<number>(0);
   const [searchBook, setSearchBook] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
@@ -51,16 +63,13 @@ export function BookList() {
   }, [currentPage, sortOption, searchBook, selectedCategory]);
 
   const bookPage = (page: number) => {
-    axios
-      .get('http://43.200.172.180:8080/api/books', {
-        params: {
-          page: page - 1,
-          sort: sortOption === 'createAt' ? 'CREATED_AT' : 'COUNT_REVIEW',
-          searchKeyword: encodeURIComponent(searchBook),
-          category: selectedCategory,
-          size: 40,
-        },
-      })
+    getBookList({
+      page: page - 1,
+      sort: filter[sortOption].sortName,
+      searchKeyword: encodeURIComponent(searchBook),
+      category: selectedCategory,
+      size: 40,
+    })
       .then((result) => {
         setTotalItems(result.data.data.totalElements);
         const bookItems: Book[] = result.data.data.contents.map((book: Book) => ({
@@ -87,7 +96,7 @@ export function BookList() {
         <CategoryFilter category={category} onSelect={setSelectedCategory} />
         <S.SearchNFilter>
           <SearchBar onSearch={setSearchBook} />
-          <BookFilter onSortChange={setSortOption} />
+          <BookFilter filter={filter} onSelect={setSortOption} />
         </S.SearchNFilter>
       </S.Search>
       <S.BookListContainer>
