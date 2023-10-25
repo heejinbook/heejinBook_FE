@@ -31,7 +31,7 @@ export const CreateRModal = styled.div<CreateRContainer>`
 export const XContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   img {
     cursor: pointer;
     margin-bottom: 5px;
