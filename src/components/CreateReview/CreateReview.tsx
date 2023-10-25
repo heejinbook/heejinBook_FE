@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
 import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
+import { Rating } from '../common/Rating/Rating';
 
 type ReviewProps = {
   reviewModal: boolean;
@@ -24,7 +25,6 @@ export function CreateReview({
 }: // setWrittenReview,
 ReviewProps) {
   const { bookId } = useParams();
-  console.log(reviewId);
 
   useEffect(() => {
     if (writtenReview) {
@@ -93,6 +93,15 @@ ReviewProps) {
     }));
   };
 
+  const ratingChangeHandler = (count: number) => {
+    setReview({
+      ...review,
+      rating: count,
+    });
+  };
+
+  console.log(review.rating);
+
   const postWriteReview = (review: ReviewType) => {
     if (!writtenReview) {
       if (!validateReview()) {
@@ -153,6 +162,7 @@ ReviewProps) {
     <S.CreateRContainer reviewModal={reviewModal}>
       <S.CreateRModal reviewModal={reviewModal}>
         <S.XContainer>
+          <Rating onChange={ratingChangeHandler} />
           <img src={IconX} onClick={() => setReviewModal(false)} />
         </S.XContainer>
         {Inputs.map((input) => (
