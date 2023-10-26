@@ -52,14 +52,13 @@ export const UserImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 100%;
-  margin-bottom: 30px;
+  padding: 15px 0;
 `;
 
 export const PhraseContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
   img {
     width: 24px;
     height: 24px;
@@ -75,7 +74,7 @@ export const ReviewTitle = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 30px;
+  padding: 15px 0;
 `;
 
 export const ReviewPhrase = styled.div`
@@ -87,6 +86,7 @@ export const ReviewPhrase = styled.div`
   text-align: center;
   font-size: 14px;
   font-weight: bold;
+  padding: 15px 0;
 `;
 
 export const ReviewContent = styled.div`
@@ -97,7 +97,7 @@ export const ReviewContent = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 30px;
+  padding: 15px 0;
 `;
 
 export const HeartContainer = styled.div`
