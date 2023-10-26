@@ -7,17 +7,22 @@ import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
 import IconNoImage from '../../../assets/svg/noImageUser.svg';
+import { FilterType } from '../../MainBookList/BookList';
 
 type Text = {
   text: string;
 };
 
-type SortOption = 'createAt' | 'countDesc' | '';
+const reviewFilter: FilterType[] = [
+  { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
+  { filterId: 1, filterName: '좋아요순', sortName: 'COUNT_LIKE' },
+  { filterId: 2, filterName: '댓글순', sortName: 'COUNT_COMMENT' },
+];
 
 export function BookListReview() {
   const [reviewItems, setReviewItems] = useState<ReviewType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortOption, setSortOption] = useState<SortOption>('createAt');
+  const [sortOption, setSortOption] = useState<number>(0);
   const [totalReviews, setTotalReviews] = useState<number>(0);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReview, setSelectedReview] = useState<ReviewType | null>(null);
@@ -31,7 +36,7 @@ export function BookListReview() {
   const reviewList = (page: number) => {
     getReviewList(Number(bookId), {
       page: page - 1,
-      sort: sortOption === 'createAt' ? 'CREATED_AT' : 'COUNT_COMMENT',
+      sort: reviewFilter[sortOption].sortName,
       size: 9,
     })
       .then((result) => {
@@ -76,7 +81,7 @@ export function BookListReview() {
       <S.LibraryReviewContainer>
         <S.ReviewFilterContainer>
           <p>리뷰 {totalReviews}</p>
-          <ReviewFilter onSortChange={setSortOption} />
+          <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
         </S.ReviewFilterContainer>
         <S.LibraryReviewGrid>
           {reviewItems.map((review) => (
