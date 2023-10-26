@@ -1,6 +1,7 @@
 import * as S from './ReviewModal.styles';
 import IconX from '../../assets/svg/X.svg';
 import { ReviewType } from '../BookReview/Review';
+import IconNoImage from '../../assets/svg/noImageUser.svg';
 
 type ReviewIdModalProps = {
   selectedReview: ReviewType | null;
@@ -18,7 +19,11 @@ export function ReviewModal({ reviewModal, selectedReview, setReviewModal }: Rev
           <img src={IconX} onClick={() => setReviewModal(false)} />
         </S.XContainer>
         <S.ReviewContainer>
-          <S.UserImage src={selectedReview.reviewAuthorProfileUrl} />
+          {selectedReview.reviewAuthorProfileUrl === null ? (
+            <S.UserImage src={IconNoImage} />
+          ) : (
+            <S.UserImage src={selectedReview.reviewAuthorProfileUrl} />
+          )}
           <S.ReviewTitle>{selectedReview.reviewTitle}</S.ReviewTitle>
           <S.PhraseContainer>
             <p>"</p>

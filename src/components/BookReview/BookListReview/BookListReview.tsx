@@ -92,24 +92,28 @@ export function BookListReview() {
         </S.ReviewFilterContainer>
         <S.LibraryReviewGrid>
           {reviewItems.map((review) => (
-            <S.LibraryReview key={review.reviewId} onClick={() => modalOpenHandler(review)}>
-              {review.reviewAuthorProfileUrl === null ? (
-                <S.ReviewImage src={IconNoImage} />
-              ) : (
-                <S.ReviewImage src={review.reviewAuthorProfileUrl} />
-              )}
-              <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
-              <S.ReviewPhraseContainer>
-                <p>"</p>
-                <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
-                <p>"</p>
-              </S.ReviewPhraseContainer>
-              <Heart
-                reviewId={review.reviewId}
-                isLike={review.isLike}
-                likeCount={review.likeCount}
-                onLikeChange={likeChangeHandler}
-              />
+            <S.LibraryReview key={review.reviewId}>
+              <S.ReviewContainer onClick={() => modalOpenHandler(review)}>
+                {review.reviewAuthorProfileUrl === null ? (
+                  <S.ReviewImage src={IconNoImage} />
+                ) : (
+                  <S.ReviewImage src={review.reviewAuthorProfileUrl} />
+                )}
+                <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
+                <S.ReviewPhraseContainer>
+                  <p>"</p>
+                  <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
+                  <p>"</p>
+                </S.ReviewPhraseContainer>
+              </S.ReviewContainer>
+              <S.HeartContainer>
+                <Heart
+                  reviewId={review.reviewId}
+                  isLike={review.isLike}
+                  likeCount={review.likeCount}
+                  onLikeChange={likeChangeHandler}
+                />
+              </S.HeartContainer>
             </S.LibraryReview>
           ))}
         </S.LibraryReviewGrid>

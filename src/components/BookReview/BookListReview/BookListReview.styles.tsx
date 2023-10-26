@@ -35,16 +35,27 @@ export const LibraryReview = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 36px;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.06) 2px 2px 20px, rgba(0, 0, 0, 0.04) 2px 2px 10px;
   cursor: pointer;
 `;
+
+export const ReviewContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+`;
+
 export const ReviewImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 100%;
 `;
+
 export const ReviewTitle = styled.div`
   width: 300px;
   height: auto;
@@ -81,16 +92,15 @@ export const ReviewPhrase = styled.div`
   font-size: 14px;
   font-weight: bold;
   padding-top: 3px;
-  padding-bottom: 36px;
 `;
 
-export const ReviewDelete = styled.div`
-  cursor: pointer;
+export const HeartContainer = styled.div`
   width: 100%;
+  height: 50px;
   display: flex;
-  justify-content: center;
-  padding: 12px 0;
-  border-top: 1px solid #b9b19c9a;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 30px 10px 0;
 `;
 
 export const PaginationWrapper = styled.div`
