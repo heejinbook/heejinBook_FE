@@ -33,6 +33,10 @@ export function Review() {
     });
   };
 
+  const likeChangeHandler = () => {
+    getBookReview(Number(bookId));
+  };
+
   return (
     <S.ReviewContainer>
       <S.Review>
@@ -40,7 +44,7 @@ export function Review() {
         {reviews.length > 0 ? (
           <>
             <S.BookSwiperContainer>
-              <BookSwiper reviews={reviews} />
+              <BookSwiper reviews={reviews} likeChangeHandler={likeChangeHandler} />
             </S.BookSwiperContainer>
             <BookListReview />
           </>
