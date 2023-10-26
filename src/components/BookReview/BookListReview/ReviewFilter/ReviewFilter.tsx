@@ -21,7 +21,7 @@ export function ReviewFilter({ reviewFilter, onSortChange }: ReviewFilterProps) 
             setOpenCategory(!openCategory);
           }}
         >
-          {filterName}```
+          {filterName}
           {openCategory ? <img src={IconArrowU} /> : <img src={IconArrowD} />}
         </p>
         {openCategory && (
