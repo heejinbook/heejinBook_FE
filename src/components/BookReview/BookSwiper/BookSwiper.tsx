@@ -19,7 +19,7 @@ type reviewProps = {
 };
 
 export function BookSwiper({ reviews, likeChangeHandler }: reviewProps) {
-  const [swiper, setSwiper] = useState<Swiper | null>(null);
+  const [swiper] = useState<Swiper | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const onInit = (swiper: Swiper) => {
@@ -44,6 +44,7 @@ export function BookSwiper({ reviews, likeChangeHandler }: reviewProps) {
         onSlideChange={onSlideChange}
         modules={[Navigation, Pagination]}
         slidesPerView={1}
+        spaceBetween={30}
         navigation={{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -63,12 +64,14 @@ export function BookSwiper({ reviews, likeChangeHandler }: reviewProps) {
               <img src={IconRightQuote} />
             </S.PhraseContainer>
             <S.ReviewContent>{r.reviewContents}</S.ReviewContent>
-            <Heart
-              reviewId={r.reviewId}
-              isLike={r.isLike}
-              likeCount={r.likeCount}
-              onLikeChange={likeChangeHandler}
-            />
+            <S.HeartContainer>
+              <Heart
+                reviewId={r.reviewId}
+                isLike={r.isLike}
+                likeCount={r.likeCount}
+                onLikeChange={likeChangeHandler}
+              />
+            </S.HeartContainer>
           </S.ReviewSlide>
         ))}
       </S.BookSwiper>

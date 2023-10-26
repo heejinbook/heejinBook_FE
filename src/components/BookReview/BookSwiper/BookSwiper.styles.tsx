@@ -8,14 +8,21 @@ export const BookSwiperContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 50px;
+  position: relative;
 `;
 
 export const LeftBtn = styled.img`
   cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 50%;
 `;
 
 export const RightBtn = styled.img`
   cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
 `;
 
 export const BookSwiper = styled(Swiper)`
@@ -30,13 +37,12 @@ export const BookSwiper = styled(Swiper)`
 
 export const ReviewSlide = styled(SwiperSlide)`
   background-color: #fcf2cc82;
-  max-width: 870px;
+  max-width: 900px;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 30px;
   padding: 30px 50px;
   border-radius: 50px;
   box-sizing: border-box;
@@ -77,10 +83,10 @@ export const ReviewPhrase = styled.div`
   height: auto;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  font-weight: bold;
   justify-content: center;
   text-align: center;
+  font-size: 14px;
+  font-weight: bold;
 `;
 
 export const ReviewContent = styled.div`
@@ -92,4 +98,13 @@ export const ReviewContent = styled.div`
   font-size: 16px;
   text-align: center;
   margin-bottom: 30px;
+`;
+
+export const HeartContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 30px 10px 0;
 `;
