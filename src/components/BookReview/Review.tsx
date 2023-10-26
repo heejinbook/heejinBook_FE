@@ -11,6 +11,8 @@ export type ReviewType = {
   reviewTitle: string;
   reviewPhrase: string;
   reviewContents: string;
+  isLike: boolean;
+  likeCount: number;
 };
 
 export function Review() {

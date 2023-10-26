@@ -51,3 +51,8 @@ export async function getSwiperReview(bookId: number, params: getSwiperParams) {
   });
   return response;
 }
+
+export async function postHeart(reviewId: number) {
+  const response = await client.post(`api/likes/${reviewId}`);
+  return response;
+}

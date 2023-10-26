@@ -8,6 +8,7 @@ import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
 import IconNoImage from '../../../assets/svg/noImageUser.svg';
 import { FilterType } from '../../MainBookList/BookList';
+import { Heart } from '../../Heart/Heart';
 
 type Text = {
   text: string;
@@ -47,6 +48,8 @@ export function BookListReview() {
           reviewTitle: review.reviewTitle,
           reviewPhrase: review.reviewPhrase,
           reviewContents: review.reviewContents,
+          isLike: review.isLike,
+          likeCount: review.likeCount,
         }));
         setReviewItems(reviews);
       })
@@ -54,7 +57,7 @@ export function BookListReview() {
   };
 
   const EllipsisText = ({ text }: Text) => {
-    const maxLength = 100;
+    const maxLength = 20;
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     } else {
@@ -69,6 +72,10 @@ export function BookListReview() {
   const modalOpenHandler = (reviewItem: ReviewType) => {
     setSelectedReview(reviewItem);
     setReviewModal(true);
+  };
+
+  const likeChangeHandler = () => {
+    reviewList(currentPage);
   };
 
   return (
@@ -97,6 +104,12 @@ export function BookListReview() {
                 <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
                 <p>"</p>
               </S.ReviewPhraseContainer>
+              <Heart
+                reviewId={review.reviewId}
+                isLike={review.isLike}
+                likeCount={review.likeCount}
+                onLikeChange={likeChangeHandler}
+              />
             </S.LibraryReview>
           ))}
         </S.LibraryReviewGrid>

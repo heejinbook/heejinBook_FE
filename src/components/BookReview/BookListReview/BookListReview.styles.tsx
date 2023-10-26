@@ -8,7 +8,10 @@ export const ReviewFilterContainer = styled.div`
   align-items: center;
   padding: 0 30px;
   p {
-    margin: 20px 0 0 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #b9b19c;
     font-weight: bold;
   }
@@ -19,7 +22,7 @@ export const LibraryReviewGrid = styled.div`
   grid-gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   justify-items: center;
-  padding: 20px 20px 0 20px;
+  padding: 15px 20px 0 20px;
   p {
     color: #b9b19c;
     font-weight: bold;
