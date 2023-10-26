@@ -8,6 +8,7 @@ import IconLeftBtn from '../../../assets/svg/leftBtn.svg';
 import IconRightBtn from '../../../assets/svg/rightBtn.svg';
 import IconLeftQuote from '../../../assets/svg/LeftQuote.svg';
 import IconRightQuote from '../../../assets/svg/RightQuote.svg';
+import IconNoImage from '../../../assets/svg/noImageUser.svg';
 
 type reviewProps = {
   reviews: ReviewType[];
@@ -27,7 +28,11 @@ export function BookSwiper({ reviews }: reviewProps) {
       >
         {reviews.map((r) => (
           <S.ReviewSlide key={r.reviewId}>
-            <S.UserImage src={r.reviewAuthorProfileUrl} />
+            {r.reviewAuthorProfileUrl === null ? (
+              <S.UserImage src={IconNoImage} />
+            ) : (
+              <S.UserImage src={r.reviewAuthorProfileUrl} />
+            )}
             <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
             <S.PhraseContainer>
               <img src={IconLeftQuote} />

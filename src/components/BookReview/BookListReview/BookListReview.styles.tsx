@@ -50,6 +50,7 @@ export const ReviewTitle = styled.div`
   justify-content: center;
   font-size: 16px;
   margin: 16px 0 2px 0;
+  text-align: center;
 `;
 
 export const ReviewPhraseContainer = styled.div`

@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 import { BookSwiper } from './BookSwiper/BookSwiper';
 import * as S from './Review.styles';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { BookListReview } from './BookListReview/BookListReview';
+import { getSwiperReview } from '../../apis/review';
 
 export type ReviewType = {
   reviewId: number;
@@ -22,17 +22,13 @@ export function Review() {
   }, []);
 
   const getBookReview = (bookId: number) => {
-    axios
-      .get(`http://43.200.172.180:8080/api/reviews/swiper/${bookId}`, {
-        params: {
-          size: 3,
-        },
-      })
-      .then((result) => {
-        if (result.status === 200) {
-          setReviews(result.data.data);
-        }
-      });
+    getSwiperReview(bookId, {
+      size: 3,
+    }).then((result) => {
+      if (result.status === 200) {
+        setReviews(result.data.data);
+      }
+    });
   };
 
   return (

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FilterType } from '../../../MainBookList/BookList';
 import * as S from './ReviewFilter.styles';
+import IconArrowD from '../../../../assets/svg/arrowDown.svg';
+import IconArrowU from '../../../../assets/svg/arrowUp.svg';
 
 type ReviewFilterProps = {
   reviewFilter: FilterType[];
@@ -19,12 +21,8 @@ export function ReviewFilter({ reviewFilter, onSortChange }: ReviewFilterProps) 
             setOpenCategory(!openCategory);
           }}
         >
-          {filterName}
-          {openCategory ? (
-            <img src="src/assets/svg/arrowUp.svg" />
-          ) : (
-            <img src="src/assets/svg/arrowDown.svg" />
-          )}
+          {filterName}```
+          {openCategory ? <img src={IconArrowU} /> : <img src={IconArrowD} />}
         </p>
         {openCategory && (
           <S.ReviewFilterList>
