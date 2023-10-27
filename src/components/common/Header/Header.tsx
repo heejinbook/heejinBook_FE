@@ -1,8 +1,15 @@
 import { localStorageKey } from '../../../constants';
+import { Alarm } from '../../Alarm/Alarm';
+import { AlarmType } from '../../MainLayout/MainLayout';
 import * as S from './Header.styles';
 import { useNavigate } from 'react-router-dom';
 
-export function Header() {
+type HeaderProps = {
+  alarmData: AlarmType[];
+  setAlarmData: React.Dispatch<React.SetStateAction<AlarmType[]>>;
+};
+
+export function Header({ alarmData, setAlarmData }: HeaderProps) {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem(localStorageKey.accessToken);
@@ -27,6 +34,7 @@ export function Header() {
         </S.GoToLibrary>
       </S.Header>
       <S.BtnContainer>
+        <Alarm alarmData={alarmData} setAlarmData={setAlarmData} />
         <button onClick={logout}>logout</button>
       </S.BtnContainer>
     </S.HeaderContainer>

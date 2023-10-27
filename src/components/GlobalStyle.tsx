@@ -11,8 +11,20 @@ const styles = css`
     box-sizing: border-box;
   }
 
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d5cfbf;
+    border-radius: 80px;
+  }
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+
   /* @font-face {
-    font-family: 'SUIT';
+    font-family: 'SUITE';
     src: url('/fonts/SUIT-Bold.ttf');
   } */
 
