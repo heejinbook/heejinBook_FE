@@ -22,3 +22,8 @@ export async function getBook(book_id: number) {
   const response = await client.get(`${BOOK_URL}/${book_id}`);
   return response;
 }
+
+export async function getBestBook() {
+  const response = await client.get(`${BOOK_URL}/best-books`);
+  return response;
+}

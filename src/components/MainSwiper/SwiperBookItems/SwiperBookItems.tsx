@@ -1,6 +1,5 @@
 import { SwiperItems } from '../MainPageSwiper';
 import * as S from './SwiperBookItems.styles';
-// import { SwiperSlide } from 'swiper/react';
 
 type SwiperItemsProps = {
   item: SwiperItems;
@@ -10,10 +9,10 @@ export function SwiperBookItems({ item }: SwiperItemsProps) {
   return (
     <S.BookItemsContainer>
       <S.BookItems>
-        <S.BookImage src={item.image} />
+        <S.BookImage src={item.thumbnail} />
         <S.BookInfo>
           <S.BookTitle>{item.title}</S.BookTitle>
-          <S.BookContent>{item.content}</S.BookContent>
+          <S.BookAuthor>{item.author}</S.BookAuthor>
         </S.BookInfo>
       </S.BookItems>
     </S.BookItemsContainer>
