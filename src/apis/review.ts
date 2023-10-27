@@ -13,6 +13,10 @@ export type getReviewListParams = {
   sort: string;
 };
 
+type getSwiperParams = {
+  size: number;
+};
+
 const REVIEW_URL = 'api/reviews';
 
 export async function postReview(bookId: number, payload: ReviewType) {
@@ -35,5 +39,20 @@ export async function deleteLibraryReview(reviewId: number) {
 
 export async function putLibraryReview(reviewId: number, payload: ReviewType) {
   const response = await client.put(`${REVIEW_URL}/${reviewId}`, payload);
+  return response;
+}
+
+export async function getSwiperReview(bookId: number, params: getSwiperParams) {
+  const { size } = params;
+  const response = await client.get(`${REVIEW_URL}/swiper/${bookId}`, {
+    params: {
+      size,
+    },
+  });
+  return response;
+}
+
+export async function postHeart(reviewId: number) {
+  const response = await client.post(`api/likes/${reviewId}`);
   return response;
 }

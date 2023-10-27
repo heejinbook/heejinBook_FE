@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 import { BookSwiper } from './BookSwiper/BookSwiper';
 import * as S from './Review.styles';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { BookListReview } from './BookListReview/BookListReview';
+import { getSwiperReview } from '../../apis/review';
 
 export type ReviewType = {
   reviewId: number;
@@ -11,6 +11,8 @@ export type ReviewType = {
   reviewTitle: string;
   reviewPhrase: string;
   reviewContents: string;
+  isLike: boolean;
+  likeCount: number;
 };
 
 export function Review() {
@@ -22,17 +24,17 @@ export function Review() {
   }, []);
 
   const getBookReview = (bookId: number) => {
-    axios
-      .get(`http://43.200.172.180:8080/api/reviews/swiper/${bookId}`, {
-        params: {
-          size: 3,
-        },
-      })
-      .then((result) => {
-        if (result.status === 200) {
-          setReviews(result.data.data);
-        }
-      });
+    getSwiperReview(bookId, {
+      size: 3,
+    }).then((result) => {
+      if (result.status === 200) {
+        setReviews(result.data.data);
+      }
+    });
+  };
+
+  const likeChangeHandler = () => {
+    getBookReview(Number(bookId));
   };
 
   return (
@@ -42,7 +44,7 @@ export function Review() {
         {reviews.length > 0 ? (
           <>
             <S.BookSwiperContainer>
-              <BookSwiper reviews={reviews} />
+              <BookSwiper reviews={reviews} likeChangeHandler={likeChangeHandler} />
             </S.BookSwiperContainer>
             <BookListReview />
           </>

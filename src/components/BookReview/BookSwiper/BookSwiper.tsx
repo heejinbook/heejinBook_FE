@@ -8,18 +8,43 @@ import IconLeftBtn from '../../../assets/svg/leftBtn.svg';
 import IconRightBtn from '../../../assets/svg/rightBtn.svg';
 import IconLeftQuote from '../../../assets/svg/LeftQuote.svg';
 import IconRightQuote from '../../../assets/svg/RightQuote.svg';
+import IconNoImage from '../../../assets/svg/noImageUser.svg';
+import { Heart } from '../../Heart/Heart';
+import { useEffect, useState } from 'react';
+import { Swiper } from 'swiper/types';
 
 type reviewProps = {
   reviews: ReviewType[];
+  likeChangeHandler: () => void;
 };
 
-export function BookSwiper({ reviews }: reviewProps) {
+export function BookSwiper({ reviews, likeChangeHandler }: reviewProps) {
+  const [swiper] = useState<Swiper | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onInit = (swiper: Swiper) => {
+    swiper.slideTo(currentIndex);
+  };
+
+  const onSlideChange = (swiper: Swiper) => {
+    setCurrentIndex(swiper.activeIndex);
+  };
+
+  useEffect(() => {
+    if (swiper) {
+      swiper.slideTo(currentIndex);
+    }
+  }, [swiper]);
+
   return (
     <S.BookSwiperContainer>
       <S.LeftBtn src={IconLeftBtn} className="swiper-button-prev" />
       <S.BookSwiper
+        onInit={onInit}
+        onSlideChange={onSlideChange}
         modules={[Navigation, Pagination]}
         slidesPerView={1}
+        spaceBetween={30}
         navigation={{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -27,7 +52,11 @@ export function BookSwiper({ reviews }: reviewProps) {
       >
         {reviews.map((r) => (
           <S.ReviewSlide key={r.reviewId}>
-            <S.UserImage src={r.reviewAuthorProfileUrl} />
+            {r.reviewAuthorProfileUrl === null ? (
+              <S.UserImage src={IconNoImage} />
+            ) : (
+              <S.UserImage src={r.reviewAuthorProfileUrl} />
+            )}
             <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
             <S.PhraseContainer>
               <img src={IconLeftQuote} />
@@ -35,6 +64,14 @@ export function BookSwiper({ reviews }: reviewProps) {
               <img src={IconRightQuote} />
             </S.PhraseContainer>
             <S.ReviewContent>{r.reviewContents}</S.ReviewContent>
+            <S.HeartContainer>
+              <Heart
+                reviewId={r.reviewId}
+                isLike={r.isLike}
+                likeCount={r.likeCount}
+                onLikeChange={likeChangeHandler}
+              />
+            </S.HeartContainer>
           </S.ReviewSlide>
         ))}
       </S.BookSwiper>
