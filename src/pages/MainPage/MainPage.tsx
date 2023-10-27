@@ -8,7 +8,9 @@ export function MainPage() {
     <S.MainPageContainer>
       <Header />
       <S.MainPage>
-        <MainPageSwiper />
+        <S.MainSwiperContainer>
+          <MainPageSwiper />
+        </S.MainSwiperContainer>
         <BookList />
       </S.MainPage>
     </S.MainPageContainer>

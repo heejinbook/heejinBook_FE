@@ -2,26 +2,26 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import styled from '@emotion/styled';
 
 export const MainSwiper = styled.div`
-  width: 100%;
+  max-width: 900px;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 export const LeftBtn = styled.img`
   position: absolute;
-  top: 24%;
-  transform: translateY(-50%);
+  left: 0;
+  top: 50%;
 `;
-export const RigthBtn = styled.img`
+export const RightBtn = styled.img`
   position: absolute;
-  top: 24%;
-  transform: translateY(-50%);
+  right: 0;
+  top: 50%;
 `;
 
 export const BookSwiper = styled(Swiper)`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,10 +36,11 @@ export const BookSlideContainer = styled.div`
 `;
 
 export const BookSlide = styled(SwiperSlide)`
-  width: 900px;
+  max-width: 900px;
   height: 270px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  cursor: pointer;
 `;
