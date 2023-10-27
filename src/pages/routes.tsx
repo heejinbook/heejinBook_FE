@@ -6,7 +6,7 @@ import { MainPage } from './MainPage/MainPage';
 import { MyLibraryPage } from './MyLibraryPage/MyLibraryPage';
 import { BookPage } from './BookPage/BookPage';
 import { Kakao } from '../components/Kakao/Kakao';
-import { SignLayout } from '../components/SignLayout/SignLayout';
+import { MainLayout } from '../components/MainLayout/MainLayout';
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'main',
-        element: <SignLayout />,
+        element: <MainLayout />,
         children: [
           {
             index: true,

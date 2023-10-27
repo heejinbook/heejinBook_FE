@@ -23,9 +23,10 @@ export function LogInPage() {
       .then((result) => {
         if (result.status === 200) {
           const userId: number = result.data.data.userId;
-          navigate('/main', { state: { id: userId } });
+          navigate('/main');
           const token = result.data.data.accessToken;
           setItem(localStorageKey.accessToken, token);
+          setItem(localStorageKey.userId, userId);
         }
       })
       .catch((error) => {
