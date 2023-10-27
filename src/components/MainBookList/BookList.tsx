@@ -104,7 +104,7 @@ export function BookList() {
           <S.BookListItems
             key={book.bookId}
             onClick={() => {
-              navigate(`/books/${book.bookId}`);
+              navigate(`books/${book.bookId}`);
             }}
           >
             <S.BookImage src={book.thumbnail} />

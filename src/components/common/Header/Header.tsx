@@ -13,14 +13,14 @@ export function Header() {
       <S.Header>
         <S.Logo
           onClick={() => {
-            navigate('/home');
+            navigate('/main');
           }}
         >
           HeeJinBook
         </S.Logo>
         <S.GoToLibrary
           onClick={() => {
-            navigate('/myLibrary');
+            navigate('myLibrary');
           }}
         >
           내서재

@@ -13,6 +13,7 @@ export function LogInPage() {
     email: '',
     password: '',
   });
+
   const navigate = useNavigate();
 
   const postLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,7 +22,8 @@ export function LogInPage() {
     logIn(data)
       .then((result) => {
         if (result.status === 200) {
-          navigate('/home');
+          const userId: number = result.data.data.userId;
+          navigate('/main', { state: { id: userId } });
           const token = result.data.data.accessToken;
           setItem(localStorageKey.accessToken, token);
         }
