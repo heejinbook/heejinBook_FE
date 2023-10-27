@@ -47,7 +47,7 @@ export function MainPageSwiper() {
       >
         {bestBooks.map((item, idx) => (
           <S.BookSlideContainer key={idx}>
-            <S.BookSlide onClick={() => navigate(`/books/${item.bookId}`)}>
+            <S.BookSlide onClick={() => navigate(`books/${item.bookId}`)}>
               {active === idx && <SwiperBookItems item={item} />}
             </S.BookSlide>
           </S.BookSlideContainer>

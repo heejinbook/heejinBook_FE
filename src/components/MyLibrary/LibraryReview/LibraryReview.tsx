@@ -81,7 +81,7 @@ export function LibraryReview() {
               <S.BookImage
                 src={review.bookThumbnail}
                 onClick={() => {
-                  navigate(`/books/${review.bookId}`);
+                  navigate(`books/${review.bookId}`);
                 }}
               />
               <S.BookTitle>{review.bookTitle}</S.BookTitle>

@@ -6,6 +6,7 @@ import { MainPage } from './MainPage/MainPage';
 import { MyLibraryPage } from './MyLibraryPage/MyLibraryPage';
 import { BookPage } from './BookPage/BookPage';
 import { Kakao } from '../components/Kakao/Kakao';
+import { MainLayout } from '../components/MainLayout/MainLayout';
 
 export const router = createBrowserRouter([
   {
@@ -24,20 +25,26 @@ export const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: '/home',
-        element: <MainPage />,
-      },
-      {
-        path: '/myLibrary',
-        element: <MyLibraryPage />,
-      },
-      {
-        path: '/books/:bookId',
-        element: <BookPage />,
-      },
-      {
         path: '/kakao',
         element: <Kakao />,
+      },
+      {
+        path: 'main',
+        element: <MainLayout />,
+        children: [
+          {
+            index: true,
+            element: <MainPage />,
+          },
+          {
+            path: 'myLibrary',
+            element: <MyLibraryPage />,
+          },
+          {
+            path: 'books/:bookId',
+            element: <BookPage />,
+          },
+        ],
       },
     ],
   },

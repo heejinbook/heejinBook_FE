@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { BookInfo } from '../../components/BookInfo/BookInfo';
 import { BookNav } from '../../components/BookNav/BookNav';
 import { Review } from '../../components/BookReview/Review';
-import { Header } from '../../components/common/Header/Header';
 import * as S from './BookPage.styles';
 import { useParams } from 'react-router-dom';
 import { getBook } from '../../apis/books';
@@ -68,7 +67,6 @@ export function BookPage() {
 
   return (
     <S.BookPage>
-      <Header />
       <S.InfoContainer>
         <BookInfo books={bookInfo} />
         <Review />

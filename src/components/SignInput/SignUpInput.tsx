@@ -120,7 +120,7 @@ export function SignUpInput() {
             Toast.success('회원가입이 완료되었습니다');
             const token = result.data.data.accessToken;
             setItem(localStorageKey.accessToken, token);
-            navigate('/home');
+            navigate('/main');
           }
         })
         .catch((error) => {

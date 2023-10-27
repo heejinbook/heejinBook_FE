@@ -38,20 +38,20 @@ export function LibraryList() {
               <S.LibraryImage
                 src={book.bookThumbnail}
                 onClick={() => {
-                  navigate(`/books/${book.bookId}`);
+                  navigate(`/main/books/${book.bookId}`);
                 }}
               />
             </div>
             <S.LibraryTitle
               onClick={() => {
-                navigate(`/books/${book.bookId}`);
+                navigate(`/main/books/${book.bookId}`);
               }}
             >
               {book.bookTitle}
             </S.LibraryTitle>
             <S.LibraryAuthor
               onClick={() => {
-                navigate(`/books/${book.bookId}`);
+                navigate(`/main/books/${book.bookId}`);
               }}
             >
               {book.bookAuthor}
