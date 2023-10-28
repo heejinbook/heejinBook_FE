@@ -26,7 +26,7 @@ export function BookListReview() {
   const [sortOption, setSortOption] = useState<number>(0);
   const [totalReviews, setTotalReviews] = useState<number>(0);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
-  const [selectedReview, setSelectedReview] = useState<ReviewType | null>(null);
+  const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
 
   const { bookId } = useParams();
 
@@ -69,8 +69,8 @@ export function BookListReview() {
     setCurrentPage(currentPage);
   };
 
-  const modalOpenHandler = (reviewItem: ReviewType) => {
-    setSelectedReview(reviewItem);
+  const modalOpenHandler = (reviewId: number) => {
+    setSelectedReviewId(reviewId);
     setReviewModal(true);
   };
 
@@ -81,7 +81,7 @@ export function BookListReview() {
   return (
     <>
       <ReviewModal
-        selectedReview={selectedReview}
+        selectedReviewId={selectedReviewId}
         reviewModal={reviewModal}
         setReviewModal={setReviewModal}
       />
@@ -93,7 +93,7 @@ export function BookListReview() {
         <S.LibraryReviewGrid>
           {reviewItems.map((review) => (
             <S.LibraryReview key={review.reviewId}>
-              <S.ReviewContainer onClick={() => modalOpenHandler(review)}>
+              <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
                 {review.reviewAuthorProfileUrl === null ? (
                   <S.ReviewImage src={IconNoImage} />
                 ) : (

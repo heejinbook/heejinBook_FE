@@ -2,7 +2,7 @@ import { CSSProperties, HTMLInputTypeAttribute, useEffect, useState } from 'reac
 import { Input } from '../common/Input/Input';
 import * as S from './CreateReview.styles';
 import IconX from '../../assets/svg/X.svg';
-import { ReviewType, postReview, putLibraryReview } from '../../apis/review';
+import { CreateReviewType, postReview, putLibraryReview } from '../../apis/review';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
@@ -14,7 +14,6 @@ type ReviewProps = {
   setReviewModal: (value: boolean) => void;
   reviewId?: number;
   writtenReview?: MyReview;
-  // setWrittenReview: (value: MyReview) => void;
 };
 
 export function CreateReview({
@@ -22,8 +21,7 @@ export function CreateReview({
   setReviewModal,
   reviewId,
   writtenReview,
-}: // setWrittenReview,
-ReviewProps) {
+}: ReviewProps) {
   const { bookId } = useParams();
 
   useEffect(() => {
@@ -44,7 +42,7 @@ ReviewProps) {
     }
   }, [writtenReview]);
 
-  const [review, setReview] = useState<ReviewType>({
+  const [review, setReview] = useState<CreateReviewType>({
     title: '',
     phrase: '',
     contents: '',
@@ -100,9 +98,7 @@ ReviewProps) {
     });
   };
 
-  console.log(review.rating);
-
-  const postWriteReview = (review: ReviewType) => {
+  const postWriteReview = (review: CreateReviewType) => {
     if (!writtenReview) {
       if (!validateReview()) {
         return;

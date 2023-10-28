@@ -1,6 +1,6 @@
 import { client } from '.';
 
-export type ReviewType = {
+export type CreateReviewType = {
   title: string;
   contents: string;
   phrase: string;
@@ -19,7 +19,7 @@ type getSwiperParams = {
 
 const REVIEW_URL = 'api/reviews';
 
-export async function postReview(bookId: number, payload: ReviewType) {
+export async function postReview(bookId: number, payload: CreateReviewType) {
   const response = await client.post(`${REVIEW_URL}/${bookId}`, payload);
   return response;
 }
@@ -37,7 +37,7 @@ export async function deleteLibraryReview(reviewId: number) {
   return response;
 }
 
-export async function putLibraryReview(reviewId: number, payload: ReviewType) {
+export async function putLibraryReview(reviewId: number, payload: CreateReviewType) {
   const response = await client.put(`${REVIEW_URL}/${reviewId}`, payload);
   return response;
 }
@@ -54,5 +54,10 @@ export async function getSwiperReview(bookId: number, params: getSwiperParams) {
 
 export async function postHeart(reviewId: number) {
   const response = await client.post(`api/likes/${reviewId}`);
+  return response;
+}
+
+export async function getDetailReview(reviewId: number) {
+  const response = await client.get(`${REVIEW_URL}/${reviewId}`);
   return response;
 }
