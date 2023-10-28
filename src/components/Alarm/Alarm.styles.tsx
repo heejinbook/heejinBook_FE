@@ -13,6 +13,17 @@ export const Bell = styled.img`
   width: 24px;
   height: 24px;
   cursor: pointer;
+  position: relative;
+`;
+
+export const YesAlarm = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: #edacac;
+  border-radius: 100%;
+  position: absolute;
+  right: 10.7%;
+  cursor: pointer;
 `;
 
 export const AlarmList = styled.div`
