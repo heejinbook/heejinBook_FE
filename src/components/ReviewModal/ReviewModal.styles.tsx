@@ -4,6 +4,7 @@ import { CreateRContainer } from '../CreateReview/CreateReview.styles';
 export const ReviewModalContainer = styled.div<CreateRContainer>`
   background-color: ${({ reviewModal }) => (reviewModal ? 'rgba(0, 0, 0, 0.8)' : 'none')};
   z-index: ${({ reviewModal }) => (reviewModal ? '999' : '-1')};
+  display: ${({ reviewModal }) => (reviewModal ? 'block' : 'none')};
   position: fixed;
   top: 0;
   bottom: 0;

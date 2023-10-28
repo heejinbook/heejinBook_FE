@@ -16,7 +16,7 @@ export function Kakao() {
         if (result.status === 200) {
           const token = result.data.data.accessToken;
           setItem(localStorageKey.accessToken, token);
-          navigate('main');
+          navigate('/main');
         }
       })
       .catch((error) => {
