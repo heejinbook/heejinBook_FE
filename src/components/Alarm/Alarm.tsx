@@ -88,6 +88,13 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
             setOpenAlarm(!openAlarm);
           }}
         />
+        {alarmData.length > 0 && (
+          <S.YesAlarm
+            onClick={() => {
+              setOpenAlarm(!openAlarm);
+            }}
+          />
+        )}
         {openAlarm && (
           <S.AlarmList>
             {alarmData.length > 0 ? (
