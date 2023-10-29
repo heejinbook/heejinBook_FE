@@ -26,6 +26,27 @@ export const BookInfoFrame = styled.div`
   flex-direction: column;
   margin-top: 10px;
 `;
+
+export const BestContainer = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 60px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  img {
+    width: 22px;
+    height: 22px;
+  }
+  p {
+    margin: 0 0 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+`;
+
 export const BookTitle = styled.div`
   font-weight: bold;
   font-size: 20px;
