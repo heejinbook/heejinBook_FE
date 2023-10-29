@@ -4,6 +4,7 @@ import { ReviewType } from '../BookReview/Review';
 import IconNoImage from '../../assets/svg/noImageUser.svg';
 import { useEffect, useState } from 'react';
 import { getDetailReview } from '../../apis/review';
+import { Rating } from '../common/Rating/Rating';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -46,6 +47,7 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
           ) : (
             <S.UserImage src={selectedReview.reviewAuthorProfileUrl} />
           )}
+          <Rating count={selectedReview.reviewRating} readonly />
           <S.ReviewTitle>{selectedReview.reviewTitle}</S.ReviewTitle>
           <S.PhraseContainer>
             <p>"</p>
