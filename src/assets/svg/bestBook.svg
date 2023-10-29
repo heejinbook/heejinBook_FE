@@ -1,0 +1,19 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="8.5" y="2.5" width="7" height="6" rx="0.5" fill="#BBB49E" stroke="#503F15"/>
+<line x1="10.5" y1="2" x2="10.5" y2="9.22222" stroke="#503F15"/>
+<line x1="13.5" y1="2" x2="13.5" y2="9.22222" stroke="#503F15"/>
+<circle cx="9.00029" cy="8.11113" r="1.85185" fill="#FFE170"/>
+<circle cx="12.3323" cy="7.18523" r="1.85185" fill="#FFE170"/>
+<circle cx="15.6663" cy="8.11113" r="1.85185" fill="#FFE170"/>
+<circle cx="17.889" cy="10.3334" r="1.85185" fill="#FFE170"/>
+<circle cx="18.8147" cy="13.6667" r="1.85185" fill="#FFE170"/>
+<circle cx="17.889" cy="16.8147" r="1.85185" fill="#FFE170"/>
+<circle cx="15.6663" cy="19.2222" r="1.85185" fill="#FFE170"/>
+<circle cx="12.3323" cy="20.1481" r="1.85185" fill="#FFE170"/>
+<circle cx="9.00029" cy="19.2222" r="1.85185" fill="#FFE170"/>
+<circle cx="6.77763" cy="17" r="1.85185" fill="#FFE170"/>
+<circle cx="5.85185" cy="13.6667" r="1.85185" fill="#FFE170"/>
+<circle cx="6.77763" cy="10.5185" r="1.85185" fill="#FFE170"/>
+<circle cx="12.3328" cy="13.6667" r="7.09259" fill="#FCF2CC" stroke="#FFE170"/>
+<circle cx="12.3329" cy="13.6666" r="5.30556" fill="#FCF2CC" stroke="#FFE170" stroke-width="0.5"/>
+</svg>
