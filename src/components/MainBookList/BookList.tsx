@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import * as S from './BookList.styles';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Pagination from 'react-js-pagination';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { BookFilter } from '../Filter/BookFilter';
 import { CategoryFilter } from '../CategoryFilter/CategoryFilter';
 import { getBookList } from '../../apis/books';
+import IconReviewer from '../../assets/svg/person.svg';
+import IconRating from '../../assets/svg/fullStar.svg';
 
 export type Book = {
   bookId: number;
@@ -14,6 +15,7 @@ export type Book = {
   title: string;
   author: string;
   reviewCount: number;
+  avgRating: number;
 };
 
 export type CategoryType = {
@@ -78,6 +80,7 @@ export function BookList() {
           title: book.title,
           author: book.author,
           reviewCount: book.reviewCount,
+          avgRating: book.avgRating,
         }));
         setBooks(bookItems);
       })
@@ -111,8 +114,10 @@ export function BookList() {
             <S.BookTitle>{book.title}</S.BookTitle>
             <S.BookAuthor>{book.author}</S.BookAuthor>
             <S.ReviewerContainer>
-              <S.ReviewerIcon src="src/assets/svg/person.svg" />
+              <S.ReviewerIcon src={IconReviewer} />
               <S.Reviewer>{book.reviewCount}</S.Reviewer>
+              <S.RatingIcon src={IconRating} />
+              <S.RatingPoint>{book.avgRating}</S.RatingPoint>
             </S.ReviewerContainer>
           </S.BookListItems>
         ))}
