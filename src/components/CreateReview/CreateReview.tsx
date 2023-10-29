@@ -30,7 +30,7 @@ export function CreateReview({
         title: writtenReview.reviewTitle,
         contents: writtenReview.reviewContents,
         phrase: writtenReview.reviewPhrase,
-        rating: 1,
+        rating: writtenReview.reviewRating,
       });
     } else {
       setReview({
@@ -126,7 +126,7 @@ export function CreateReview({
         title: review.title,
         contents: review.contents,
         phrase: review.phrase,
-        rating: 1,
+        rating: review.rating,
       })
         .then((result) => {
           if (result.data.status === 200) {
