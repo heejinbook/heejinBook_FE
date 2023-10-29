@@ -9,6 +9,7 @@ import { ReviewFilter } from './ReviewFilter/ReviewFilter';
 import IconNoImage from '../../../assets/svg/noImageUser.svg';
 import { FilterType } from '../../MainBookList/BookList';
 import { Heart } from '../../Heart/Heart';
+import { Rating } from '../../common/Rating/Rating';
 
 type Text = {
   text: string;
@@ -48,6 +49,7 @@ export function BookListReview() {
           reviewTitle: review.reviewTitle,
           reviewPhrase: review.reviewPhrase,
           reviewContents: review.reviewContents,
+          reviewRating: review.reviewRating,
           isLike: review.isLike,
           likeCount: review.likeCount,
         }));
@@ -99,6 +101,7 @@ export function BookListReview() {
                 ) : (
                   <S.ReviewImage src={review.reviewAuthorProfileUrl} />
                 )}
+                <Rating count={review.reviewRating} readonly />
                 <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
                 <S.ReviewPhraseContainer>
                   <p>"</p>
