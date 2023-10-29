@@ -12,6 +12,7 @@ import IconNoImage from '../../../assets/svg/noImageUser.svg';
 import { Heart } from '../../Heart/Heart';
 import { useEffect, useState } from 'react';
 import { Swiper } from 'swiper/types';
+import { Rating } from '../../common/Rating/Rating';
 
 type reviewProps = {
   reviews: ReviewType[];
@@ -57,6 +58,7 @@ export function BookSwiper({ reviews, likeChangeHandler }: reviewProps) {
             ) : (
               <S.UserImage src={r.reviewAuthorProfileUrl} />
             )}
+            <Rating count={r.reviewRating} readonly />
             <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
             <S.PhraseContainer>
               <img src={IconLeftQuote} />
