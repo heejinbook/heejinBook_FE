@@ -158,7 +158,7 @@ export function CreateReview({
     <S.CreateRContainer reviewModal={reviewModal}>
       <S.CreateRModal reviewModal={reviewModal}>
         <S.XContainer>
-          <Rating onChange={ratingChangeHandler} />
+          <Rating count={writtenReview?.reviewRating} onChange={ratingChangeHandler} />
           <img src={IconX} onClick={() => setReviewModal(false)} />
         </S.XContainer>
         {Inputs.map((input) => (

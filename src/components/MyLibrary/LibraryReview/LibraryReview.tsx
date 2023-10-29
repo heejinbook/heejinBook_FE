@@ -71,7 +71,6 @@ export function LibraryReview() {
         setReviewModal={setReviewModal}
         reviewId={selectedReviewId}
         writtenReview={writtenReview}
-        // setWrittenReview={setWrittenReview}
       />
       <p>리뷰 {myReview.length}</p>
       {myReview.length > 0 ? (
@@ -81,7 +80,7 @@ export function LibraryReview() {
               <S.BookImage
                 src={review.bookThumbnail}
                 onClick={() => {
-                  navigate(`books/${review.bookId}`);
+                  navigate(`/main/books/${review.bookId}`);
                 }}
               />
               <S.BookTitle>{review.bookTitle}</S.BookTitle>
