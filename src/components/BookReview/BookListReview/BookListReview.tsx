@@ -17,8 +17,9 @@ type Text = {
 
 const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
-  { filterId: 1, filterName: '좋아요순', sortName: 'COUNT_LIKE' },
-  { filterId: 2, filterName: '댓글순', sortName: 'COUNT_COMMENT' },
+  { filterId: 1, filterName: '별점순', sortName: 'RATING_DESC' },
+  { filterId: 2, filterName: '좋아요순', sortName: 'COUNT_LIKE' },
+  // { filterId: 2, filterName: '댓글순', sortName: 'COUNT_COMMENT' },
 ];
 
 export function BookListReview() {
