@@ -9,12 +9,13 @@ import { useState } from 'react';
 import { Toast } from '../common/Toastify/Toastify';
 
 type CommentProps = {
+  reviewId: number;
   comments: CommentType[];
   detailReview: (reviewId: number) => void;
   setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
 };
 
-export function Comment({ comments, detailReview, setComments }: CommentProps) {
+export function Comment({ comments, detailReview, setComments, reviewId }: CommentProps) {
   const [invisible, setInvisible] = useState<boolean>(false);
   const [editId, setEditId] = useState<number | null>(null);
   const [myContents, setMyContents] = useState<Contents>({
@@ -53,7 +54,7 @@ export function Comment({ comments, detailReview, setComments }: CommentProps) {
 
   return (
     <S.Comment>
-      <CreateComment detailReview={detailReview} reviewId={comments[0].reviewId} />
+      <CreateComment detailReview={detailReview} reviewId={reviewId} />
       {comments.length > 0 ? (
         comments.map((comment) => (
           <S.CommentsContainer>
@@ -66,9 +67,13 @@ export function Comment({ comments, detailReview, setComments }: CommentProps) {
                 )}
               </S.ProfileContainer>
               <div style={{ width: '100%' }}>
-                <S.CommentUser>{comment.commentAuthor}</S.CommentUser>
-                <S.CommentCreatedAt>{comment.commentCreatedAt}</S.CommentCreatedAt>
-                <S.CommentContent>{comment.contents}</S.CommentContent>
+                {!invisible && (
+                  <>
+                    <S.CommentUser>{comment.commentAuthor}</S.CommentUser>
+                    <S.CommentCreatedAt>{comment.commentCreatedAt}</S.CommentCreatedAt>
+                    <S.CommentContent>{comment.contents}</S.CommentContent>
+                  </>
+                )}
                 {comment.isMine && editId === comment.commentId && (
                   <Input
                     topSlot="comment"
