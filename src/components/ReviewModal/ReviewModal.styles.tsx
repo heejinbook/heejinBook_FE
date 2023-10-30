@@ -13,9 +13,9 @@ export const ReviewModalContainer = styled.div<CreateRContainer>`
 `;
 
 export const Review = styled.div<CreateRContainer>`
-  max-width: 800px;
-  min-width: 400px;
-  height: auto;
+  width: 600px;
+  /* min-width: 400px; */
+  max-height: 600px;
   display: ${({ reviewModal }) => (reviewModal ? 'block' : 'none')};
   justify-content: center;
   align-items: center;
@@ -25,6 +25,8 @@ export const Review = styled.div<CreateRContainer>`
   transform: translate(-50%, -50%);
   background-color: #fffdf6;
   border-radius: 10px;
+  box-sizing: border-box;
+  overflow-y: scroll;
 `;
 
 export const XContainer = styled.div`
@@ -52,7 +54,7 @@ export const UserImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 `;
 export const ReviewTitle = styled.div`
   width: 100%;
@@ -62,7 +64,7 @@ export const ReviewTitle = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 10px 0;
 `;
 export const PhraseContainer = styled.div`
   width: 100%;
@@ -89,7 +91,7 @@ export const ReviewPhrase = styled.div`
   font-size: 14px;
   font-weight: bold;
   padding-top: 3px;
-  padding-bottom: 36px;
+  margin-bottom: 10px;
 `;
 export const ReviewContent = styled.div`
   width: 100%;
@@ -99,5 +101,22 @@ export const ReviewContent = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 30px;
+`;
+
+export const CommentInfo = styled.div`
+  width: 150px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 0 10px 5px;
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+  }
+  p {
+    margin: 0;
+    color: #bbb49e;
+  }
 `;

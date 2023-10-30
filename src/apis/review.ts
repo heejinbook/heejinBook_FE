@@ -61,3 +61,24 @@ export async function getDetailReview(reviewId: number) {
   const response = await client.get(`${REVIEW_URL}/${reviewId}`);
   return response;
 }
+
+export type Contents = {
+  contents: string;
+};
+
+const COMMENT_URL = 'api/comment';
+
+export async function postComment(reviewId: number, payload: Contents) {
+  const response = await client.post(`${COMMENT_URL}/${reviewId}`, payload);
+  return response;
+}
+
+export async function deleteComment(commentId: number) {
+  const response = await client.delete(`${COMMENT_URL}/${commentId}`);
+  return response;
+}
+
+export async function putComment(commentId: number, payload: Contents) {
+  const response = await client.put(`${COMMENT_URL}/${commentId}`, payload);
+  return response;
+}
