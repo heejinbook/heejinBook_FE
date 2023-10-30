@@ -72,3 +72,8 @@ export async function postComment(reviewId: number, payload: Contents) {
   const response = await client.post(`${COMMENT_URL}/${reviewId}`, payload);
   return response;
 }
+
+export async function deleteComment(commentId: number) {
+  const response = await client.delete(`${COMMENT_URL}/${commentId}`);
+  return response;
+}
