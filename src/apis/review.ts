@@ -61,3 +61,14 @@ export async function getDetailReview(reviewId: number) {
   const response = await client.get(`${REVIEW_URL}/${reviewId}`);
   return response;
 }
+
+export type Contents = {
+  contents: string;
+};
+
+const COMMENT_URL = 'api/comment';
+
+export async function postComment(reviewId: number, payload: Contents) {
+  const response = await client.post(`${COMMENT_URL}/${reviewId}`, payload);
+  return response;
+}
