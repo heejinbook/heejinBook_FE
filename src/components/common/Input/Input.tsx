@@ -25,8 +25,8 @@ export function Input({
         <S.InputContainer>
           <S.TopSlot>{topSlot}</S.TopSlot>
           <S.InputFrame>
-            <S.RightSlot>{rightSlot}</S.RightSlot>
             <S.Input style={style} {...rest} />
+            <S.RightSlot>{rightSlot}</S.RightSlot>
           </S.InputFrame>
           {error && errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         </S.InputContainer>
