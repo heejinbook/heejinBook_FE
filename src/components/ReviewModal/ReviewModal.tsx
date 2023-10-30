@@ -83,12 +83,7 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
           </p>
         </S.CommentInfo>
         {commentsOpen && (
-          <Comment
-            reviewId={selectedReview.reviewId}
-            setComments={setComments}
-            detailReview={detailReview}
-            comments={comments}
-          />
+          <Comment setComments={setComments} detailReview={detailReview} comments={comments} />
         )}
       </S.Review>
     </S.ReviewModalContainer>
