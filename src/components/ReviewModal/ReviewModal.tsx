@@ -5,6 +5,8 @@ import IconNoImage from '../../assets/svg/noImageUser.svg';
 import { useEffect, useState } from 'react';
 import { getDetailReview } from '../../apis/review';
 import { Rating } from '../common/Rating/Rating';
+import { Comment } from '../Comment/Comment';
+import IconComment from '../../assets/svg/comment.svg';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -12,8 +14,20 @@ type ReviewIdModalProps = {
   setReviewModal: (value: boolean) => void;
 };
 
+export type CommentType = {
+  commentAuthor: string;
+  commentCreatedAt: string;
+  commentAuthorProfileUrl: string;
+  commentId: number;
+  contents: string;
+  isMine: boolean;
+  reviewId: number;
+};
+
 export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: ReviewIdModalProps) {
   const [selectedReview, setSelectedReview] = useState<ReviewType | null>(null);
+  const [comments, setComments] = useState<CommentType[]>([]);
+  const [commentsOpen, setCommentOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedReviewId) {
@@ -25,6 +39,7 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
     getDetailReview(reviewId)
       .then((result) => {
         if (result.status === 200) setSelectedReview(result.data.data);
+        setComments(result.data.data.comments);
       })
       .catch((error) => console.error(error));
   };
@@ -32,6 +47,11 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
   const modalClose = () => {
     setReviewModal(false);
     setSelectedReview(null);
+    setCommentOpen(false);
+  };
+
+  const commentClose = () => {
+    setCommentOpen(!commentsOpen);
   };
 
   if (!selectedReview) return null;
@@ -56,6 +76,13 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
           </S.PhraseContainer>
           <S.ReviewContent>{selectedReview.reviewContents}</S.ReviewContent>
         </S.ReviewContainer>
+        <S.CommentInfo onClick={commentClose}>
+          <img src={IconComment} />
+          <p>
+            comment <span>{comments.length}</span>
+          </p>
+        </S.CommentInfo>
+        {commentsOpen && <Comment comments={comments} />}
       </S.Review>
     </S.ReviewModalContainer>
   );
