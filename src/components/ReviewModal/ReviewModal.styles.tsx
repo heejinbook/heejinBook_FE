@@ -101,6 +101,13 @@ export const ReviewContent = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
+  margin-bottom: 10px;
+`;
+
+export const HeartContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const CommentInfo = styled.div`
