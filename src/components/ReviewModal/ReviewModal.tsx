@@ -31,10 +31,10 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
   const [commentsOpen, setCommentOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (selectedReviewId) {
+    if (selectedReviewId && reviewModal) {
       detailReview(selectedReviewId);
     }
-  }, [selectedReviewId]);
+  }, [reviewModal]);
 
   const detailReview = (reviewId: number) => {
     getDetailReview(reviewId)
