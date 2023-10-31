@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './Heart.styles';
 import IconFullHeart from '../../assets/svg/fullHeart.svg';
 import IconEmptyHeart from '../../assets/svg/emptyHeart.svg';
@@ -13,13 +13,10 @@ type HeartProps = {
 };
 
 export function Heart({ reviewId, isLike, likeCount, onLikeChange }: HeartProps) {
-  const [heart, setHeart] = useState<boolean>(isLike);
-
   const heartChangeHandler = (reviewId: number) => {
     postHeart(reviewId)
       .then((result) => {
         if (result.data.status === 201) {
-          setHeart((prevHeart) => !prevHeart);
           onLikeChange();
         }
       })
@@ -34,7 +31,7 @@ export function Heart({ reviewId, isLike, likeCount, onLikeChange }: HeartProps)
     <>
       <S.Heart>
         <S.HeartIcon
-          src={heart ? IconFullHeart : IconEmptyHeart}
+          src={isLike ? IconFullHeart : IconEmptyHeart}
           onClick={() => heartChangeHandler(reviewId)}
         />
         <S.HeartCount>{likeCount}</S.HeartCount>

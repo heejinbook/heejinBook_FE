@@ -11,6 +11,7 @@ export const Heart = styled.div`
 `;
 
 export const HeartIcon = styled.img`
+  cursor: pointer;
   width: 20px;
   height: 20px;
   margin-right: 10px;

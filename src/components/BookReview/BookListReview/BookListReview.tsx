@@ -36,6 +36,10 @@ export function BookListReview() {
     reviewList(currentPage);
   }, [currentPage, sortOption]);
 
+  useEffect(() => {
+    !reviewModal && reviewList(currentPage);
+  }, [reviewModal]);
+
   const reviewList = (page: number) => {
     getReviewList(Number(bookId), {
       page: page - 1,

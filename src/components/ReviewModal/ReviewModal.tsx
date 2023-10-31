@@ -7,6 +7,7 @@ import { getDetailReview } from '../../apis/review';
 import { Rating } from '../common/Rating/Rating';
 import { Comment } from '../Comment/Comment';
 import IconComment from '../../assets/svg/comment.svg';
+import { Heart } from '../Heart/Heart';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -75,6 +76,14 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
             <p>"</p>
           </S.PhraseContainer>
           <S.ReviewContent>{selectedReview.reviewContents}</S.ReviewContent>
+          <S.HeartContainer>
+            <Heart
+              reviewId={selectedReview.reviewId}
+              isLike={selectedReview.isLike}
+              likeCount={selectedReview.likeCount}
+              onLikeChange={() => detailReview(selectedReview?.reviewId)}
+            />
+          </S.HeartContainer>
         </S.ReviewContainer>
         <S.CommentInfo onClick={commentClose}>
           <img src={IconComment} />
