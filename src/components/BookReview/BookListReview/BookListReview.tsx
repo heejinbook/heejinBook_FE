@@ -10,6 +10,7 @@ import IconNoImage from '../../../assets/svg/noImageUser.svg';
 import { FilterType } from '../../MainBookList/BookList';
 import { Heart } from '../../Heart/Heart';
 import { Rating } from '../../common/Rating/Rating';
+import { useQuery } from '@tanstack/react-query';
 
 type Text = {
   text: string;
@@ -23,7 +24,7 @@ const reviewFilter: FilterType[] = [
 ];
 
 export function BookListReview() {
-  const [reviewItems, setReviewItems] = useState<ReviewType[]>([]);
+  // const [reviewItems, setReviewItems] = useState<ReviewType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortOption, setSortOption] = useState<number>(0);
   const [totalReviews, setTotalReviews] = useState<number>(0);
@@ -33,35 +34,25 @@ export function BookListReview() {
   const { bookId } = useParams();
 
   useEffect(() => {
-    reviewList(currentPage);
-  }, [currentPage, sortOption]);
-
-  useEffect(() => {
-    !reviewModal && reviewList(currentPage);
+    !reviewModal && reviewList();
   }, [reviewModal]);
 
-  const reviewList = (page: number) => {
-    getReviewList(Number(bookId), {
-      page: page - 1,
-      sort: reviewFilter[sortOption].sortName,
-      size: 9,
-    })
-      .then((result) => {
-        setTotalReviews(result.data.data.totalElements);
-        const reviews: ReviewType[] = result.data.data.contents.map((review: ReviewType) => ({
-          reviewId: review.reviewId,
-          reviewAuthorProfileUrl: review.reviewAuthorProfileUrl,
-          reviewTitle: review.reviewTitle,
-          reviewPhrase: review.reviewPhrase,
-          reviewContents: review.reviewContents,
-          reviewRating: review.reviewRating,
-          isLike: review.isLike,
-          likeCount: review.likeCount,
-        }));
-        setReviewItems(reviews);
+  const reviewList = () => {};
+
+  const { data } = useQuery({
+    queryKey: ['getReviewList', currentPage, sortOption],
+    queryFn: () =>
+      getReviewList(Number(bookId), {
+        page: currentPage - 1,
+        sort: reviewFilter[sortOption].sortName,
+        size: 9,
       })
-      .catch((error) => console.error(error));
-  };
+        .then((result) => {
+          setTotalReviews(result.totalElements);
+          return result.contents;
+        })
+        .catch((error) => console.error(error)),
+  });
 
   const EllipsisText = ({ text }: Text) => {
     const maxLength = 20;
@@ -81,10 +72,6 @@ export function BookListReview() {
     setReviewModal(true);
   };
 
-  const likeChangeHandler = () => {
-    reviewList(currentPage);
-  };
-
   return (
     <>
       <ReviewModal
@@ -98,7 +85,7 @@ export function BookListReview() {
           <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
         </S.ReviewFilterContainer>
         <S.LibraryReviewGrid>
-          {reviewItems.map((review) => (
+          {data?.map((review) => (
             <S.LibraryReview key={review.reviewId}>
               <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
                 {review.reviewAuthorProfileUrl === null ? (
@@ -119,7 +106,7 @@ export function BookListReview() {
                   reviewId={review.reviewId}
                   isLike={review.isLike}
                   likeCount={review.likeCount}
-                  onLikeChange={likeChangeHandler}
+                  onLikeChange={() => reviewList()}
                 />
               </S.HeartContainer>
             </S.LibraryReview>

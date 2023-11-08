@@ -1,4 +1,5 @@
 import { client } from '.';
+import { ReviewType } from '../components/BookReview/Review';
 
 export type CreateReviewType = {
   title: string;
@@ -17,6 +18,11 @@ type getSwiperParams = {
   size: number;
 };
 
+type getReviewPromise = {
+  contents: ReviewType[];
+  totalElements: number;
+};
+
 const REVIEW_URL = 'api/reviews';
 
 export async function postReview(bookId: number, payload: CreateReviewType) {
@@ -24,12 +30,15 @@ export async function postReview(bookId: number, payload: CreateReviewType) {
   return response;
 }
 
-export async function getReviewList(bookId: number, params: getReviewListParams) {
+export async function getReviewList(
+  bookId: number,
+  params: getReviewListParams,
+): Promise<getReviewPromise> {
   const { page, size, sort } = params;
   const response = await client.get(`${REVIEW_URL}/list/${bookId}`, {
     params: { page, size, sort },
   });
-  return response;
+  return response.data.data;
 }
 
 export async function deleteLibraryReview(reviewId: number) {
