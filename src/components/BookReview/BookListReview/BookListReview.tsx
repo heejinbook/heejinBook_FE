@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as S from './BookListReview.styles';
 import { useParams } from 'react-router-dom';
 import { getReviewList, getReviewPromise } from '../../../apis/review';
@@ -10,7 +10,6 @@ import { FilterType } from '../../MainBookList/BookList';
 import { Heart } from '../../Heart/Heart';
 import { Rating } from '../../common/Rating/Rating';
 import { useQuery } from '@tanstack/react-query';
-import { ReviewType } from '../Review';
 
 type Text = {
   text: string;
@@ -20,13 +19,12 @@ const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
   { filterId: 1, filterName: '별점순', sortName: 'RATING_DESC' },
   { filterId: 2, filterName: '좋아요순', sortName: 'COUNT_LIKE' },
-  // { filterId: 2, filterName: '댓글순', sortName: 'COUNT_COMMENT' },
+  { filterId: 3, filterName: '댓글순', sortName: 'COUNT_COMMENT' },
 ];
 
 export function BookListReview() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortOption, setSortOption] = useState<number>(0);
-  const [totalReviews, setTotalReviews] = useState<number>(0);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
 
@@ -73,7 +71,7 @@ export function BookListReview() {
         />
         <S.LibraryReviewContainer>
           <S.ReviewFilterContainer>
-            <p>리뷰 {totalReviews}</p>
+            <p>리뷰 {data?.totalElements}</p>
             <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
           </S.ReviewFilterContainer>
           <S.LibraryReviewGrid>
