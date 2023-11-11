@@ -66,9 +66,9 @@ export async function postHeart(reviewId: number) {
   return response;
 }
 
-export async function getDetailReview(reviewId: number) {
+export async function getDetailReview(reviewId: number): Promise<ReviewType> {
   const response = await client.get(`${REVIEW_URL}/${reviewId}`);
-  return response;
+  return response.data.data;
 }
 
 export type Contents = {

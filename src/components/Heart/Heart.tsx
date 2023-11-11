@@ -1,24 +1,22 @@
-import { useEffect, useState } from 'react';
 import * as S from './Heart.styles';
 import IconFullHeart from '../../assets/svg/fullHeart.svg';
 import IconEmptyHeart from '../../assets/svg/emptyHeart.svg';
 import { postHeart } from '../../apis/review';
 import { Toast } from '../common/Toastify/Toastify';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type HeartProps = {
   reviewId: number;
   isLike: boolean;
   likeCount: number;
-  onLikeChange: () => void;
+  onLikeChange?: () => void;
 };
 
-export function Heart({ reviewId, isLike, likeCount, onLikeChange }: HeartProps) {
-  const heartChangeHandler = (reviewId: number) => {
-    postHeart(reviewId)
+export function Heart({ reviewId, isLike, likeCount }: HeartProps) {
+  const heartChangeHandler = async (reviewId: number) => {
+    await postHeart(reviewId)
       .then((result) => {
-        if (result.data.status === 201) {
-          onLikeChange();
-        }
+        return result;
       })
       .catch((error) => {
         if (error.response.status === 403) {
@@ -27,13 +25,19 @@ export function Heart({ reviewId, isLike, likeCount, onLikeChange }: HeartProps)
       });
   };
 
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: () => heartChangeHandler(reviewId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['reviewList'] });
+    },
+  });
+
   return (
     <>
       <S.Heart>
-        <S.HeartIcon
-          src={isLike ? IconFullHeart : IconEmptyHeart}
-          onClick={() => heartChangeHandler(reviewId)}
-        />
+        <S.HeartIcon src={isLike ? IconFullHeart : IconEmptyHeart} onClick={() => mutateAsync()} />
         <S.HeartCount>{likeCount}</S.HeartCount>
       </S.Heart>
     </>

@@ -5,10 +5,10 @@ import { Contents, postComment } from '../../../apis/review';
 
 type CreateCommentProps = {
   reviewId: number;
-  detailReview: (reviewId: number) => void;
+  // detailReview: (reviewId: number) => void;
 };
 
-export function CreateComment({ reviewId, detailReview }: CreateCommentProps) {
+export function CreateComment({ reviewId }: CreateCommentProps) {
   const [comment, setComment] = useState<Contents>({
     contents: '',
   });
@@ -25,7 +25,7 @@ export function CreateComment({ reviewId, detailReview }: CreateCommentProps) {
           setComment({
             contents: '',
           });
-          detailReview(reviewId);
+          // detailReview(reviewId);
         }
       })
       .catch((error) => console.error(error));

@@ -8,6 +8,7 @@ import { Rating } from '../common/Rating/Rating';
 import { Comment } from '../Comment/Comment';
 import IconComment from '../../assets/svg/comment.svg';
 import { Heart } from '../Heart/Heart';
+import { useQuery } from '@tanstack/react-query';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -26,80 +27,82 @@ export type CommentType = {
 };
 
 export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: ReviewIdModalProps) {
-  const [selectedReview, setSelectedReview] = useState<ReviewType | null>(null);
   const [comments, setComments] = useState<CommentType[]>([]);
   const [commentsOpen, setCommentOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (selectedReviewId && reviewModal) {
-      detailReview(selectedReviewId);
+  const detailReview = async () => {
+    if (selectedReviewId) {
+      return await getDetailReview(selectedReviewId);
+    } else {
+      return {
+        reviewId: 0,
+        reviewAuthorProfileUrl: null,
+        reviewTitle: '',
+        reviewPhrase: '',
+        reviewContents: '',
+        reviewRating: 0,
+        isLike: false,
+        likeCount: 0,
+        comments: [],
+      };
     }
-  }, [reviewModal]);
-
-  const detailReview = (reviewId: number) => {
-    getDetailReview(reviewId)
-      .then((result) => {
-        if (result.status === 200) setSelectedReview(result.data.data);
-        setComments(result.data.data.comments);
-      })
-      .catch((error) => console.error(error));
   };
+
+  const { data: review } = useQuery<ReviewType>({
+    queryKey: ['detailReview', selectedReviewId],
+    queryFn: detailReview,
+    enabled: !!selectedReviewId,
+  });
 
   const modalClose = () => {
     setReviewModal(false);
-    setSelectedReview(null);
     setCommentOpen(false);
   };
-
-  const commentClose = () => {
-    setCommentOpen(!commentsOpen);
-  };
-
-  if (!selectedReview) return null;
-  return (
-    <S.ReviewModalContainer reviewModal={reviewModal}>
-      <S.Review reviewModal={reviewModal}>
-        <S.XContainer>
-          <img src={IconX} onClick={modalClose} />
-        </S.XContainer>
-        <S.ReviewContainer>
-          {selectedReview.reviewAuthorProfileUrl === null ? (
-            <S.UserImage src={IconNoImage} />
-          ) : (
-            <S.UserImage src={selectedReview.reviewAuthorProfileUrl} />
-          )}
-          <Rating count={selectedReview.reviewRating} readonly />
-          <S.ReviewTitle>{selectedReview.reviewTitle}</S.ReviewTitle>
-          <S.PhraseContainer>
-            <p>"</p>
-            <S.ReviewPhrase>{selectedReview.reviewPhrase}</S.ReviewPhrase>
-            <p>"</p>
-          </S.PhraseContainer>
-          <S.ReviewContent>{selectedReview.reviewContents}</S.ReviewContent>
-          <S.HeartContainer>
-            <Heart
-              reviewId={selectedReview.reviewId}
-              isLike={selectedReview.isLike}
-              likeCount={selectedReview.likeCount}
-              onLikeChange={() => detailReview(selectedReview?.reviewId)}
+  if (review) {
+    return (
+      <S.ReviewModalContainer reviewModal={reviewModal}>
+        <S.Review reviewModal={reviewModal}>
+          <S.XContainer>
+            <img src={IconX} onClick={modalClose} />
+          </S.XContainer>
+          <S.ReviewContainer>
+            {review?.reviewAuthorProfileUrl === null ? (
+              <S.UserImage src={IconNoImage} />
+            ) : (
+              <S.UserImage src={review.reviewAuthorProfileUrl} />
+            )}
+            <Rating count={review?.reviewRating} readonly />
+            <S.ReviewTitle>{review?.reviewTitle}</S.ReviewTitle>
+            <S.PhraseContainer>
+              <p>"</p>
+              <S.ReviewPhrase>{review?.reviewPhrase}</S.ReviewPhrase>
+              <p>"</p>
+            </S.PhraseContainer>
+            <S.ReviewContent>{review?.reviewContents}</S.ReviewContent>
+            <S.HeartContainer>
+              <Heart
+                reviewId={review?.reviewId}
+                isLike={review?.isLike}
+                likeCount={review?.likeCount}
+                // onLikeChange={() => detailReview(selectedReview?.reviewId)}
+              />
+            </S.HeartContainer>
+          </S.ReviewContainer>
+          <S.CommentInfo onClick={() => setCommentOpen(!commentsOpen)}>
+            <img src={IconComment} />
+            <p>
+              comment <span>{review?.comments.length}</span>
+            </p>
+          </S.CommentInfo>
+          {commentsOpen && (
+            <Comment
+              reviewId={review?.reviewId}
+              setComments={setComments}
+              comments={review?.comments}
             />
-          </S.HeartContainer>
-        </S.ReviewContainer>
-        <S.CommentInfo onClick={commentClose}>
-          <img src={IconComment} />
-          <p>
-            comment <span>{comments.length}</span>
-          </p>
-        </S.CommentInfo>
-        {commentsOpen && (
-          <Comment
-            reviewId={selectedReview.reviewId}
-            setComments={setComments}
-            detailReview={detailReview}
-            comments={comments}
-          />
-        )}
-      </S.Review>
-    </S.ReviewModalContainer>
-  );
+          )}
+        </S.Review>
+      </S.ReviewModalContainer>
+    );
+  }
 }

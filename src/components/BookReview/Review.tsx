@@ -4,6 +4,7 @@ import * as S from './Review.styles';
 import { useEffect, useState } from 'react';
 import { BookListReview } from './BookListReview/BookListReview';
 import { getSwiperReview } from '../../apis/review';
+import { CommentType } from '../ReviewModal/ReviewModal';
 
 export type ReviewType = {
   reviewId: number;
@@ -14,6 +15,7 @@ export type ReviewType = {
   reviewRating: number;
   isLike: boolean;
   likeCount: number;
+  comments: CommentType[];
 };
 
 export function Review() {

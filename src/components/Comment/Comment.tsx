@@ -11,11 +11,11 @@ import { Toast } from '../common/Toastify/Toastify';
 type CommentProps = {
   reviewId: number;
   comments: CommentType[];
-  detailReview: (reviewId: number) => void;
+  // detailReview: (reviewId: number) => void;
   setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
 };
 
-export function Comment({ comments, detailReview, setComments, reviewId }: CommentProps) {
+export function Comment({ comments, setComments, reviewId }: CommentProps) {
   const [invisible, setInvisible] = useState<boolean>(false);
   const [editId, setEditId] = useState<number | null>(null);
   const [myContents, setMyContents] = useState<Contents>({
@@ -43,7 +43,6 @@ export function Comment({ comments, detailReview, setComments, reviewId }: Comme
         Toast.success('댓글이 수정되었습니다');
         setInvisible(false);
         setEditId(null);
-        detailReview(reviewId);
       }
     });
   };
@@ -54,7 +53,7 @@ export function Comment({ comments, detailReview, setComments, reviewId }: Comme
 
   return (
     <S.Comment>
-      <CreateComment detailReview={detailReview} reviewId={reviewId} />
+      <CreateComment reviewId={reviewId} />
       {comments.length > 0 ? (
         comments.map((comment) => (
           <S.CommentsContainer>
