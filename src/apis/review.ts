@@ -18,7 +18,7 @@ type getSwiperParams = {
   size: number;
 };
 
-type getReviewPromise = {
+export type getReviewPromise = {
   contents: ReviewType[];
   totalElements: number;
 };

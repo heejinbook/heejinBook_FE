@@ -31,6 +31,7 @@ export function Heart({ reviewId, isLike, likeCount }: HeartProps) {
     mutationFn: () => heartChangeHandler(reviewId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reviewList'] });
+      queryClient.invalidateQueries({ queryKey: ['detailReview'] });
     },
   });
 

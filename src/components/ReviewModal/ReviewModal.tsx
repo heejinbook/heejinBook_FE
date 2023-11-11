@@ -1,14 +1,12 @@
 import * as S from './ReviewModal.styles';
 import IconX from '../../assets/svg/X.svg';
-import { ReviewType } from '../BookReview/Review';
 import IconNoImage from '../../assets/svg/noImageUser.svg';
-import { useEffect, useState } from 'react';
-import { getDetailReview } from '../../apis/review';
+import { useState } from 'react';
 import { Rating } from '../common/Rating/Rating';
 import { Comment } from '../Comment/Comment';
 import IconComment from '../../assets/svg/comment.svg';
 import { Heart } from '../Heart/Heart';
-import { useQuery } from '@tanstack/react-query';
+import { useGetDetailReview } from '../../querys/reviewQuery';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -30,34 +28,13 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
   const [comments, setComments] = useState<CommentType[]>([]);
   const [commentsOpen, setCommentOpen] = useState<boolean>(false);
 
-  const detailReview = async () => {
-    if (selectedReviewId) {
-      return await getDetailReview(selectedReviewId);
-    } else {
-      return {
-        reviewId: 0,
-        reviewAuthorProfileUrl: null,
-        reviewTitle: '',
-        reviewPhrase: '',
-        reviewContents: '',
-        reviewRating: 0,
-        isLike: false,
-        likeCount: 0,
-        comments: [],
-      };
-    }
-  };
-
-  const { data: review } = useQuery<ReviewType>({
-    queryKey: ['detailReview', selectedReviewId],
-    queryFn: detailReview,
-    enabled: !!selectedReviewId,
-  });
+  const { data: review } = useGetDetailReview(selectedReviewId);
 
   const modalClose = () => {
     setReviewModal(false);
     setCommentOpen(false);
   };
+
   if (review) {
     return (
       <S.ReviewModalContainer reviewModal={reviewModal}>
@@ -66,39 +43,38 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
             <img src={IconX} onClick={modalClose} />
           </S.XContainer>
           <S.ReviewContainer>
-            {review?.reviewAuthorProfileUrl === null ? (
+            {review.reviewAuthorProfileUrl === null ? (
               <S.UserImage src={IconNoImage} />
             ) : (
               <S.UserImage src={review.reviewAuthorProfileUrl} />
             )}
-            <Rating count={review?.reviewRating} readonly />
-            <S.ReviewTitle>{review?.reviewTitle}</S.ReviewTitle>
+            <Rating count={review.reviewRating} readonly />
+            <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
             <S.PhraseContainer>
               <p>"</p>
-              <S.ReviewPhrase>{review?.reviewPhrase}</S.ReviewPhrase>
+              <S.ReviewPhrase>{review.reviewPhrase}</S.ReviewPhrase>
               <p>"</p>
             </S.PhraseContainer>
-            <S.ReviewContent>{review?.reviewContents}</S.ReviewContent>
+            <S.ReviewContent>{review.reviewContents}</S.ReviewContent>
             <S.HeartContainer>
               <Heart
-                reviewId={review?.reviewId}
-                isLike={review?.isLike}
-                likeCount={review?.likeCount}
-                // onLikeChange={() => detailReview(selectedReview?.reviewId)}
+                reviewId={review.reviewId}
+                isLike={review.isLike}
+                likeCount={review.likeCount}
               />
             </S.HeartContainer>
           </S.ReviewContainer>
           <S.CommentInfo onClick={() => setCommentOpen(!commentsOpen)}>
             <img src={IconComment} />
             <p>
-              comment <span>{review?.comments.length}</span>
+              comment <span>{review.comments.length}</span>
             </p>
           </S.CommentInfo>
           {commentsOpen && (
             <Comment
-              reviewId={review?.reviewId}
+              reviewId={review.reviewId}
               setComments={setComments}
-              comments={review?.comments}
+              comments={review.comments}
             />
           )}
         </S.Review>
