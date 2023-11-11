@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ReviewType } from '../Review';
 import * as S from './BookListReview.styles';
 import { useParams } from 'react-router-dom';
-import { getReviewList } from '../../../apis/review';
+import { getReviewList, getReviewPromise } from '../../../apis/review';
 import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
@@ -11,6 +10,7 @@ import { FilterType } from '../../MainBookList/BookList';
 import { Heart } from '../../Heart/Heart';
 import { Rating } from '../../common/Rating/Rating';
 import { useQuery } from '@tanstack/react-query';
+import { ReviewType } from '../Review';
 
 type Text = {
   text: string;
@@ -24,7 +24,6 @@ const reviewFilter: FilterType[] = [
 ];
 
 export function BookListReview() {
-  // const [reviewItems, setReviewItems] = useState<ReviewType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortOption, setSortOption] = useState<number>(0);
   const [totalReviews, setTotalReviews] = useState<number>(0);
@@ -33,25 +32,17 @@ export function BookListReview() {
 
   const { bookId } = useParams();
 
-  useEffect(() => {
-    !reviewModal && reviewList();
-  }, [reviewModal]);
+  const bookReviewList = async () => {
+    return await getReviewList(Number(bookId), {
+      page: currentPage - 1,
+      sort: reviewFilter[sortOption].sortName,
+      size: 9,
+    });
+  };
 
-  const reviewList = () => {};
-
-  const { data } = useQuery({
-    queryKey: ['getReviewList', currentPage, sortOption],
-    queryFn: () =>
-      getReviewList(Number(bookId), {
-        page: currentPage - 1,
-        sort: reviewFilter[sortOption].sortName,
-        size: 9,
-      })
-        .then((result) => {
-          setTotalReviews(result.totalElements);
-          return result.contents;
-        })
-        .catch((error) => console.error(error)),
+  const { data } = useQuery<getReviewPromise>({
+    queryKey: ['reviewList', currentPage, sortOption],
+    queryFn: bookReviewList,
   });
 
   const EllipsisText = ({ text }: Text) => {
@@ -72,60 +63,61 @@ export function BookListReview() {
     setReviewModal(true);
   };
 
-  return (
-    <>
-      <ReviewModal
-        selectedReviewId={selectedReviewId}
-        reviewModal={reviewModal}
-        setReviewModal={setReviewModal}
-      />
-      <S.LibraryReviewContainer>
-        <S.ReviewFilterContainer>
-          <p>리뷰 {totalReviews}</p>
-          <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
-        </S.ReviewFilterContainer>
-        <S.LibraryReviewGrid>
-          {data?.map((review) => (
-            <S.LibraryReview key={review.reviewId}>
-              <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
-                {review.reviewAuthorProfileUrl === null ? (
-                  <S.ReviewImage src={IconNoImage} />
-                ) : (
-                  <S.ReviewImage src={review.reviewAuthorProfileUrl} />
-                )}
-                <Rating count={review.reviewRating} readonly />
-                <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
-                <S.ReviewPhraseContainer>
-                  <p>"</p>
-                  <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
-                  <p>"</p>
-                </S.ReviewPhraseContainer>
-              </S.ReviewContainer>
-              <S.HeartContainer>
-                <Heart
-                  reviewId={review.reviewId}
-                  isLike={review.isLike}
-                  likeCount={review.likeCount}
-                  onLikeChange={() => reviewList()}
-                />
-              </S.HeartContainer>
-            </S.LibraryReview>
-          ))}
-        </S.LibraryReviewGrid>
-      </S.LibraryReviewContainer>
-      <S.PaginationWrapper>
-        <div className="pagination">
-          <Pagination
-            activePage={currentPage}
-            itemsCountPerPage={9}
-            totalItemsCount={totalReviews}
-            pageRangeDisplayed={5}
-            onChange={pageChangeHandler}
-            prevPageText={'‹'}
-            nextPageText={'›'}
-          />
-        </div>
-      </S.PaginationWrapper>
-    </>
-  );
+  if (data) {
+    return (
+      <>
+        <ReviewModal
+          selectedReviewId={selectedReviewId}
+          reviewModal={reviewModal}
+          setReviewModal={setReviewModal}
+        />
+        <S.LibraryReviewContainer>
+          <S.ReviewFilterContainer>
+            <p>리뷰 {totalReviews}</p>
+            <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
+          </S.ReviewFilterContainer>
+          <S.LibraryReviewGrid>
+            {data?.contents.map((review) => (
+              <S.LibraryReview key={review.reviewId}>
+                <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
+                  {review.reviewAuthorProfileUrl === null ? (
+                    <S.ReviewImage src={IconNoImage} />
+                  ) : (
+                    <S.ReviewImage src={review.reviewAuthorProfileUrl} />
+                  )}
+                  <Rating count={review.reviewRating} readonly />
+                  <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
+                  <S.ReviewPhraseContainer>
+                    <p>"</p>
+                    <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
+                    <p>"</p>
+                  </S.ReviewPhraseContainer>
+                </S.ReviewContainer>
+                <S.HeartContainer>
+                  <Heart
+                    reviewId={review.reviewId}
+                    isLike={review.isLike}
+                    likeCount={review.likeCount}
+                  />
+                </S.HeartContainer>
+              </S.LibraryReview>
+            ))}
+          </S.LibraryReviewGrid>
+        </S.LibraryReviewContainer>
+        <S.PaginationWrapper>
+          <div className="pagination">
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={9}
+              totalItemsCount={data?.totalElements}
+              pageRangeDisplayed={5}
+              onChange={pageChangeHandler}
+              prevPageText={'‹'}
+              nextPageText={'›'}
+            />
+          </div>
+        </S.PaginationWrapper>
+      </>
+    );
+  }
 }
