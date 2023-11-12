@@ -3,7 +3,7 @@ import IconX from '../../assets/svg/X.svg';
 import IconNoImage from '../../assets/svg/noImageUser.svg';
 import { useState } from 'react';
 import { Rating } from '../common/Rating/Rating';
-import { Comment } from '../Comment/Comment';
+import { Comment, CommentType } from '../Comment/Comment';
 import IconComment from '../../assets/svg/comment.svg';
 import { Heart } from '../Heart/Heart';
 import { useGetDetailReview } from '../../querys/reviewQuery';
@@ -12,16 +12,6 @@ type ReviewIdModalProps = {
   selectedReviewId: number | null;
   reviewModal: boolean;
   setReviewModal: (value: boolean) => void;
-};
-
-export type CommentType = {
-  commentAuthor: string;
-  commentCreatedAt: string;
-  commentAuthorProfileUrl: string;
-  commentId: number;
-  contents: string;
-  isMine: boolean;
-  reviewId: number;
 };
 
 export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: ReviewIdModalProps) {

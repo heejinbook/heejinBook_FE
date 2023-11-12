@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import * as S from './BookListReview.styles';
-import { useParams } from 'react-router-dom';
-import { getReviewList, getReviewPromise } from '../../../apis/review';
 import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
@@ -9,13 +7,13 @@ import IconNoImage from '../../../assets/svg/noImageUser.svg';
 import { FilterType } from '../../MainBookList/BookList';
 import { Heart } from '../../Heart/Heart';
 import { Rating } from '../../common/Rating/Rating';
-import { useQuery } from '@tanstack/react-query';
+import { useGetBookReview } from '../../../querys/reviewQuery';
 
 type Text = {
   text: string;
 };
 
-const reviewFilter: FilterType[] = [
+export const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
   { filterId: 1, filterName: '별점순', sortName: 'RATING_DESC' },
   { filterId: 2, filterName: '좋아요순', sortName: 'COUNT_LIKE' },
@@ -28,20 +26,7 @@ export function BookListReview() {
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
 
-  const { bookId } = useParams();
-
-  const bookReviewList = async () => {
-    return await getReviewList(Number(bookId), {
-      page: currentPage - 1,
-      sort: reviewFilter[sortOption].sortName,
-      size: 9,
-    });
-  };
-
-  const { data } = useQuery<getReviewPromise>({
-    queryKey: ['reviewList', currentPage, sortOption],
-    queryFn: bookReviewList,
-  });
+  const { data } = useGetBookReview(currentPage, sortOption);
 
   const EllipsisText = ({ text }: Text) => {
     const maxLength = 20;
@@ -107,7 +92,7 @@ export function BookListReview() {
             <Pagination
               activePage={currentPage}
               itemsCountPerPage={9}
-              totalItemsCount={data?.totalElements}
+              totalItemsCount={data.totalElements}
               pageRangeDisplayed={5}
               onChange={pageChangeHandler}
               prevPageText={'‹'}
