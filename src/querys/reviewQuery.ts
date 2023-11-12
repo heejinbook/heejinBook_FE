@@ -1,6 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
-import { getDetailReview } from '../apis/review';
+import { getDetailReview, getReviewList, getReviewPromise } from '../apis/review';
 import { ReviewType } from '../components/BookReview/Review';
+import { reviewFilter } from '../components/BookReview/BookListReview/BookListReview';
+import { useParams } from 'react-router-dom';
+
+export function useGetBookReview(currentPage: number, sortOption: number) {
+  const { bookId } = useParams();
+
+  const bookReviewList = () => {
+    return getReviewList(Number(bookId), {
+      page: currentPage - 1,
+      sort: reviewFilter[sortOption].sortName,
+      size: 9,
+    });
+  };
+  return useQuery<getReviewPromise>({
+    queryKey: ['reviewList', currentPage, sortOption],
+    queryFn: bookReviewList,
+  });
+}
 
 export function useGetDetailReview(selectedReviewId: number | null) {
   const detailReview = () => {

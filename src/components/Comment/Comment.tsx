@@ -1,4 +1,3 @@
-import { CommentType } from '../ReviewModal/ReviewModal';
 import * as S from './Comment.styles';
 import { CreateComment } from './CreateComment/CreateComment';
 import IconX from '../../assets/svg/X.svg';
@@ -7,12 +6,22 @@ import { Contents, deleteComment, putComment } from '../../apis/review';
 import { Input } from '../common/Input/Input';
 import { useState } from 'react';
 import { Toast } from '../common/Toastify/Toastify';
+import { useEditComment } from '../../querys/CommentsQuery';
 
 type CommentProps = {
   reviewId: number;
   comments: CommentType[];
-  // detailReview: (reviewId: number) => void;
   setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
+};
+
+export type CommentType = {
+  commentAuthor: string;
+  commentCreatedAt: string;
+  commentAuthorProfileUrl: string;
+  commentId: number;
+  contents: string;
+  isMine: boolean;
+  reviewId: number;
 };
 
 export function Comment({ comments, setComments, reviewId }: CommentProps) {
@@ -36,14 +45,14 @@ export function Comment({ comments, setComments, reviewId }: CommentProps) {
     setInvisible(true);
   };
 
-  const editMyContent = (commentId: number, reviewId: number) => {
-    putComment(commentId, myContents).then((result) => {
-      console.log(myContents);
-      if (result.status === 200) {
-        Toast.success('댓글이 수정되었습니다');
+  const { editCommentMutate } = useEditComment(editId);
+
+  const editMyContent = () => {
+    editCommentMutate(myContents, {
+      onSuccess: () => {
         setInvisible(false);
         setEditId(null);
-      }
+      },
     });
   };
 
@@ -78,11 +87,7 @@ export function Comment({ comments, setComments, reviewId }: CommentProps) {
                     topSlot="comment"
                     type="text"
                     style={{ height: '20px' }}
-                    rightSlot={
-                      <S.EditBtn onClick={() => editMyContent(comment.commentId, comment.reviewId)}>
-                        수정
-                      </S.EditBtn>
-                    }
+                    rightSlot={<S.EditBtn onClick={editMyContent}>수정</S.EditBtn>}
                     value={myContents.contents}
                     onChange={commentChangeHandler}
                   />
