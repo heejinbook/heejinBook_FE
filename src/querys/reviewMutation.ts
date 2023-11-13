@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateReviewType, postReview } from '../apis/review';
+import { CreateReviewType, postReview, putLibraryReview } from '../apis/review';
 import { Toast } from '../components/common/Toastify/Toastify';
 
 type CreateReview = {
@@ -31,4 +31,31 @@ export function useCreateReview() {
     },
   });
   return { ...mutation, createReviewMutate: mutation.mutateAsync };
+}
+
+type editReview = {
+  reviewId: number;
+  payload: CreateReviewType;
+};
+
+export function useEditReview() {
+  const queryClient = useQueryClient();
+
+  const put = ({ reviewId, payload }: editReview) => {
+    return putLibraryReview(reviewId, payload)
+      .then((result) => {
+        if (result.data.status === 200) {
+          Toast.success('리뷰가 수정되었습니다');
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const mutation = useMutation({
+    mutationFn: put,
+    // onSuccess:()=>{
+
+    // }
+  });
+  return { ...mutation, editReviewMutate: mutation.mutateAsync };
 }

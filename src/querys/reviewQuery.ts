@@ -3,6 +3,8 @@ import { getDetailReview, getReviewList, getReviewPromise } from '../apis/review
 import { ReviewType } from '../components/BookReview/Review';
 import { reviewFilter } from '../components/BookReview/BookListReview/BookListReview';
 import { useParams } from 'react-router-dom';
+import { getMyReview } from '../apis/library';
+import { MyReview } from '../components/MyLibrary/LibraryReview/LibraryReview';
 
 export function useGetBookReview(currentPage: number, sortOption: number) {
   const { bookId } = useParams();
@@ -42,5 +44,12 @@ export function useGetDetailReview(selectedReviewId: number | null) {
     queryKey: ['detailReview', selectedReviewId],
     queryFn: detailReview,
     enabled: !!selectedReviewId,
+  });
+}
+
+export function useGetMyReview() {
+  return useQuery<MyReview[]>({
+    queryKey: ['myReview'],
+    queryFn: () => getMyReview(),
   });
 }

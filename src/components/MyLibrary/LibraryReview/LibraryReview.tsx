@@ -4,6 +4,7 @@ import { getMyReview } from '../../../apis/library';
 import { useNavigate } from 'react-router-dom';
 import { deleteLibraryReview } from '../../../apis/review';
 import { CreateReview } from '../../CreateReview/CreateReview';
+import { useGetMyReview } from '../../../querys/reviewQuery';
 
 export type MyReview = {
   reviewId: number;
@@ -18,7 +19,7 @@ export type MyReview = {
 };
 
 export function LibraryReview() {
-  const [myReview, setMyReview] = useState<MyReview[]>([]);
+  // const [myReview, setMyReview] = useState<MyReview[]>([]);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number>(0);
   const [writtenReview, setWrittenReview] = useState<MyReview>({
@@ -35,13 +36,15 @@ export function LibraryReview() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getMyReview()
-      .then((result) => {
-        setMyReview(result.data.data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  // useEffect(() => {
+  //   getMyReview()
+  //     .then((result) => {
+  //       setMyReview(result.data.data);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
+
+  const { data: myReview } = useGetMyReview();
 
   const deleteMyReview = (reviewId: number) => {
     deleteLibraryReview(reviewId)
@@ -64,7 +67,7 @@ export function LibraryReview() {
     }
   };
 
-  return (
+  return myReview ? (
     <S.LibraryReviewContainer>
       <CreateReview
         reviewModal={reviewModal}
@@ -118,5 +121,5 @@ export function LibraryReview() {
         </S.NoReview>
       )}
     </S.LibraryReviewContainer>
-  );
+  ) : null;
 }

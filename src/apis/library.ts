@@ -1,4 +1,5 @@
 import { client } from '.';
+import { MyReview } from '../components/MyLibrary/LibraryReview/LibraryReview';
 
 const LIBRARY_URL = '/api/library';
 
@@ -17,7 +18,7 @@ export async function deleteLibraryBook(bookId: number) {
   return response;
 }
 
-export async function getMyReview() {
+export async function getMyReview(): Promise<MyReview[]> {
   const response = await client.get('/api/user/my-info/reviews');
-  return response;
+  return response.data.data;
 }
