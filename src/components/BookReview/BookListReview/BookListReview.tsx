@@ -26,7 +26,7 @@ export function BookListReview() {
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
 
-  const { data } = useGetBookReview(currentPage, sortOption);
+  const { data, isLoading } = useGetBookReview(currentPage, sortOption);
 
   const EllipsisText = ({ text }: Text) => {
     const maxLength = 20;
@@ -46,61 +46,62 @@ export function BookListReview() {
     setReviewModal(true);
   };
 
-  if (data) {
-    return (
-      <>
-        <ReviewModal
-          selectedReviewId={selectedReviewId}
-          reviewModal={reviewModal}
-          setReviewModal={setReviewModal}
-        />
-        <S.LibraryReviewContainer>
-          <S.ReviewFilterContainer>
-            <p>리뷰 {data?.totalElements}</p>
-            <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
-          </S.ReviewFilterContainer>
-          <S.LibraryReviewGrid>
-            {data?.contents.map((review) => (
-              <S.LibraryReview key={review.reviewId}>
-                <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
-                  {review.reviewAuthorProfileUrl === null ? (
-                    <S.ReviewImage src={IconNoImage} />
-                  ) : (
-                    <S.ReviewImage src={review.reviewAuthorProfileUrl} />
-                  )}
-                  <Rating count={review.reviewRating} readonly />
-                  <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
-                  <S.ReviewPhraseContainer>
-                    <p>"</p>
-                    <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
-                    <p>"</p>
-                  </S.ReviewPhraseContainer>
-                </S.ReviewContainer>
-                <S.HeartContainer>
-                  <Heart
-                    reviewId={review.reviewId}
-                    isLike={review.isLike}
-                    likeCount={review.likeCount}
-                  />
-                </S.HeartContainer>
-              </S.LibraryReview>
-            ))}
-          </S.LibraryReviewGrid>
-        </S.LibraryReviewContainer>
-        <S.PaginationWrapper>
-          <div className="pagination">
-            <Pagination
-              activePage={currentPage}
-              itemsCountPerPage={9}
-              totalItemsCount={data.totalElements}
-              pageRangeDisplayed={5}
-              onChange={pageChangeHandler}
-              prevPageText={'‹'}
-              nextPageText={'›'}
-            />
-          </div>
-        </S.PaginationWrapper>
-      </>
-    );
-  }
+  if (isLoading) return <p>isLoading</p>;
+  //memo item 컴포넌트 감싸주고 비교함수 2번째
+  //함수 props로 넘길 때는 useCallback으로 감싸주기-memo를 쓸 때만(props로 넘겨주는 함수를 다른 함수로 취급)
+  return data ? (
+    <>
+      <ReviewModal
+        selectedReviewId={selectedReviewId}
+        reviewModal={reviewModal}
+        setReviewModal={setReviewModal}
+      />
+      <S.LibraryReviewContainer>
+        <S.ReviewFilterContainer>
+          <p>리뷰 {data?.totalElements}</p>
+          <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
+        </S.ReviewFilterContainer>
+        <S.LibraryReviewGrid>
+          {data?.contents.map((review) => (
+            <S.LibraryReview key={review.reviewId}>
+              <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
+                {review.reviewAuthorProfileUrl === null ? (
+                  <S.ReviewImage src={IconNoImage} />
+                ) : (
+                  <S.ReviewImage src={review.reviewAuthorProfileUrl} />
+                )}
+                <Rating count={review.reviewRating} readonly />
+                <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
+                <S.ReviewPhraseContainer>
+                  <p>"</p>
+                  <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
+                  <p>"</p>
+                </S.ReviewPhraseContainer>
+              </S.ReviewContainer>
+              <S.HeartContainer>
+                <Heart
+                  reviewId={review.reviewId}
+                  isLike={review.isLike}
+                  likeCount={review.likeCount}
+                />
+              </S.HeartContainer>
+            </S.LibraryReview>
+          ))}
+        </S.LibraryReviewGrid>
+      </S.LibraryReviewContainer>
+      <S.PaginationWrapper>
+        <div className="pagination">
+          <Pagination
+            activePage={currentPage}
+            itemsCountPerPage={9}
+            totalItemsCount={data?.totalElements}
+            pageRangeDisplayed={5}
+            onChange={pageChangeHandler}
+            prevPageText={'‹'}
+            nextPageText={'›'}
+          />
+        </div>
+      </S.PaginationWrapper>
+    </>
+  ) : null;
 }

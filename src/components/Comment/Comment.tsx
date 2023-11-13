@@ -2,16 +2,14 @@ import * as S from './Comment.styles';
 import { CreateComment } from './CreateComment/CreateComment';
 import IconX from '../../assets/svg/X.svg';
 import IconNoImage from '../../assets/svg/noImageUser.svg';
-import { Contents, deleteComment, putComment } from '../../apis/review';
+import { Contents } from '../../apis/review';
 import { Input } from '../common/Input/Input';
 import { useState } from 'react';
-import { Toast } from '../common/Toastify/Toastify';
-import { useEditComment } from '../../querys/CommentsQuery';
+import { useDeleteComment, useEditComment } from '../../querys/commentsQuery';
 
 type CommentProps = {
   reviewId: number;
   comments: CommentType[];
-  setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
 };
 
 export type CommentType = {
@@ -24,17 +22,17 @@ export type CommentType = {
   reviewId: number;
 };
 
-export function Comment({ comments, setComments, reviewId }: CommentProps) {
+export function Comment({ comments, reviewId }: CommentProps) {
   const [invisible, setInvisible] = useState<boolean>(false);
   const [editId, setEditId] = useState<number | null>(null);
   const [myContents, setMyContents] = useState<Contents>({
     contents: '',
   });
 
+  const { deleteCommentMutate } = useDeleteComment();
+
   const deleteMyComment = (commentId: number) => {
-    deleteComment(commentId).then(() => {
-      setComments((prev) => prev.filter((comment) => comment.commentId !== commentId));
-    });
+    deleteCommentMutate(commentId);
   };
 
   const editBtnInVisible = (commentId: number, contents: string) => {
@@ -45,15 +43,18 @@ export function Comment({ comments, setComments, reviewId }: CommentProps) {
     setInvisible(true);
   };
 
-  const { editCommentMutate } = useEditComment(editId);
+  const { editCommentMutate } = useEditComment();
 
   const editMyContent = () => {
-    editCommentMutate(myContents, {
-      onSuccess: () => {
-        setInvisible(false);
-        setEditId(null);
+    editCommentMutate(
+      { editId, payload: myContents },
+      {
+        onSuccess: () => {
+          setInvisible(false);
+          setEditId(null);
+        },
       },
-    });
+    );
   };
 
   const commentChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

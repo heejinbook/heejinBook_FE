@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Input } from '../../common/Input/Input';
 import * as S from './CreateComment.styles';
-import { Contents, postComment } from '../../../apis/review';
-import { useCreateComment } from '../../../querys/CommentsQuery';
+import { Contents } from '../../../apis/review';
+import { useCreateComment } from '../../../querys/commentsQuery';
 
 type CreateCommentProps = {
   reviewId: number;
@@ -17,15 +17,18 @@ export function CreateComment({ reviewId }: CreateCommentProps) {
     setComment({ contents: e.target.value });
   };
 
-  const { postCommentMutate } = useCreateComment(reviewId);
+  const { postCommentMutate } = useCreateComment();
 
   const postComments = () => {
-    postCommentMutate(comment, {
-      onSuccess: () =>
-        setComment({
-          contents: '',
-        }),
-    });
+    postCommentMutate(
+      { reviewId, payload: comment },
+      {
+        onSuccess: () =>
+          setComment({
+            contents: '',
+          }),
+      },
+    );
   };
 
   return (

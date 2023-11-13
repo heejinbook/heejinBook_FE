@@ -1,15 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Contents, postComment, putComment } from '../apis/review';
+import { Contents, deleteComment, postComment, putComment } from '../apis/review';
+import { Toast } from '../components/common/Toastify/Toastify';
 
-export function useCreateComment(reviewId: number) {
+type CreateComment = {
+  reviewId: number;
+  payload: Contents;
+};
+
+export function useCreateComment() {
   const queryClient = useQueryClient();
 
-  const createComment = (payload: Contents) => {
+  const post = ({ reviewId, payload }: CreateComment) => {
     return postComment(reviewId, payload);
   };
 
   const mutation = useMutation({
-    mutationFn: createComment,
+    mutationFn: post,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['detailReview'] });
     },
@@ -17,20 +23,46 @@ export function useCreateComment(reviewId: number) {
   return { ...mutation, postCommentMutate: mutation.mutateAsync };
 }
 
-export function useEditComment(commentId: number | null) {
+type EditComment = {
+  editId: number | null;
+  payload: Contents;
+};
+
+export function useEditComment() {
   const queryClient = useQueryClient();
 
-  const editComment = (payload: Contents) => {
-    if (commentId) {
-      return putComment(commentId, payload);
+  const put = ({ editId, payload }: EditComment) => {
+    if (editId) {
+      return putComment(editId, payload);
+    } else {
+      return Promise.reject(Toast.error('No Edit Id'));
     }
   };
 
   const mutation = useMutation({
-    mutationFn: editComment,
+    mutationFn: put,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['detailReview'] });
     },
   });
   return { ...mutation, editCommentMutate: mutation.mutateAsync };
 }
+
+export function useDeleteComment() {
+  const queryClient = useQueryClient();
+
+  const deleteC = (commentId: number) => {
+    return deleteComment(commentId);
+  };
+
+  const mutation = useMutation({
+    mutationFn: deleteC,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['detailReview'] });
+    },
+  });
+  return { ...mutation, deleteCommentMutate: mutation.mutateAsync };
+}
+
+//Promise study 여러 번의 요청을 동시에? promise all / allsettled
+//img url로 change 동시에 여러번의 요청 => Promise All 제발 공부해

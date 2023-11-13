@@ -3,7 +3,7 @@ import IconX from '../../assets/svg/X.svg';
 import IconNoImage from '../../assets/svg/noImageUser.svg';
 import { useState } from 'react';
 import { Rating } from '../common/Rating/Rating';
-import { Comment, CommentType } from '../Comment/Comment';
+import { Comment } from '../Comment/Comment';
 import IconComment from '../../assets/svg/comment.svg';
 import { Heart } from '../Heart/Heart';
 import { useGetDetailReview } from '../../querys/reviewQuery';
@@ -15,7 +15,6 @@ type ReviewIdModalProps = {
 };
 
 export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: ReviewIdModalProps) {
-  const [comments, setComments] = useState<CommentType[]>([]);
   const [commentsOpen, setCommentOpen] = useState<boolean>(false);
 
   const { data: review } = useGetDetailReview(selectedReviewId);
@@ -60,13 +59,7 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
               comment <span>{review.comments.length}</span>
             </p>
           </S.CommentInfo>
-          {commentsOpen && (
-            <Comment
-              reviewId={review.reviewId}
-              setComments={setComments}
-              comments={review.comments}
-            />
-          )}
+          {commentsOpen && <Comment reviewId={review.reviewId} comments={review.comments} />}
         </S.Review>
       </S.ReviewModalContainer>
     );
