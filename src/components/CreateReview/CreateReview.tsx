@@ -142,7 +142,6 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
       );
     }
   };
-  console.log('writtenReview.reviewId', writtenReview.reviewId);
 
   const validateReview = () => {
     if (!validateEmpty(review.title)) {
