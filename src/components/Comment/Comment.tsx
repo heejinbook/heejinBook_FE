@@ -5,7 +5,7 @@ import IconNoImage from '../../assets/svg/noImageUser.svg';
 import { Contents } from '../../apis/review';
 import { Input } from '../common/Input/Input';
 import { useState } from 'react';
-import { useDeleteComment, useEditComment } from '../../querys/commentsQuery';
+import { useDeleteComment, useEditComment } from '../../querys/commentsMutation';
 
 type CommentProps = {
   reviewId: number;

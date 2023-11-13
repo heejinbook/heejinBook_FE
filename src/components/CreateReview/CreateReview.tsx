@@ -8,6 +8,7 @@ import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
 import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
 import { Rating } from '../common/Rating/Rating';
+import { useCreateReview } from '../../querys/reviewMutation';
 
 type ReviewProps = {
   reviewModal: boolean;
@@ -16,12 +17,28 @@ type ReviewProps = {
   writtenReview?: MyReview;
 };
 
+type ReviewInputType = {
+  name: string;
+  type: HTMLInputTypeAttribute;
+  placeholder: string;
+  topSlot: string;
+  value: string;
+  style?: CSSProperties;
+};
+
 export function CreateReview({
   reviewModal,
   setReviewModal,
   reviewId,
   writtenReview,
 }: ReviewProps) {
+  const [review, setReview] = useState<CreateReviewType>({
+    title: '',
+    phrase: '',
+    contents: '',
+    rating: 0,
+  });
+
   const { bookId } = useParams();
 
   useEffect(() => {
@@ -41,22 +58,6 @@ export function CreateReview({
       });
     }
   }, [writtenReview]);
-
-  const [review, setReview] = useState<CreateReviewType>({
-    title: '',
-    phrase: '',
-    contents: '',
-    rating: 0,
-  });
-
-  type ReviewInputType = {
-    name: string;
-    type: HTMLInputTypeAttribute;
-    placeholder: string;
-    topSlot: string;
-    value: string;
-    style?: CSSProperties;
-  };
 
   const Inputs: ReviewInputType[] = [
     {
@@ -98,29 +99,27 @@ export function CreateReview({
     });
   };
 
+  const { createReviewMutate } = useCreateReview();
+
   const postWriteReview = (review: CreateReviewType) => {
     if (!writtenReview) {
       if (!validateReview()) {
         return;
       }
-      postReview(Number(bookId), review)
-        .then((result) => {
-          if (result.data.status === 201) {
+      createReviewMutate(
+        { bookId: Number(bookId), payload: review },
+        {
+          onSuccess: () => {
             setReviewModal(false);
-            Toast.success('리뷰 작성 성공!');
             setReview({
               title: '',
               phrase: '',
               contents: '',
               rating: 0,
             });
-          }
-        })
-        .catch((error) => {
-          if (error.response.status === 409) {
-            Toast.error('이미 리뷰를 작성했습니다');
-          }
-        });
+          },
+        },
+      );
     } else {
       putLibraryReview(Number(reviewId), {
         title: review.title,
@@ -173,15 +172,11 @@ export function CreateReview({
             onChange={inputChangeHandler}
           />
         ))}
-        {!writtenReview ? (
-          <S.WriteBtn>
-            <button onClick={() => postWriteReview(review)}>작성하기</button>
-          </S.WriteBtn>
-        ) : (
-          <S.WriteBtn>
-            <button onClick={() => postWriteReview(review)}>수정하기</button>
-          </S.WriteBtn>
-        )}
+        <S.WriteBtn>
+          <button onClick={() => postWriteReview(review)}>
+            {writtenReview ? '수정하기' : '작성하기'}
+          </button>
+        </S.WriteBtn>
       </S.CreateRModal>
     </S.CreateRContainer>
   );

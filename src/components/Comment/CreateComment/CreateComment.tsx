@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Input } from '../../common/Input/Input';
 import * as S from './CreateComment.styles';
 import { Contents } from '../../../apis/review';
-import { useCreateComment } from '../../../querys/commentsQuery';
+import { useCreateComment } from '../../../querys/commentsMutation';
 
 type CreateCommentProps = {
   reviewId: number;
