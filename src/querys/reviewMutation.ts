@@ -1,5 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateReviewType, postReview, putLibraryReview } from '../apis/review';
+import {
+  CreateReviewType,
+  deleteLibraryReview,
+  postReview,
+  putLibraryReview,
+} from '../apis/review';
 import { Toast } from '../components/common/Toastify/Toastify';
 
 type CreateReview = {
@@ -53,9 +58,21 @@ export function useEditReview() {
 
   const mutation = useMutation({
     mutationFn: put,
-    // onSuccess:()=>{
-
-    // }
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myReview'] });
+    },
   });
   return { ...mutation, editReviewMutate: mutation.mutateAsync };
+}
+
+export function useDeleteReview() {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (reviewId: number) => deleteLibraryReview(reviewId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myReview'] });
+    },
+  });
+  return { ...mutation, deleteReviewMutate: mutation.mutateAsync };
 }

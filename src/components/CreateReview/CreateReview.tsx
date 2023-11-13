@@ -1,20 +1,26 @@
-import { CSSProperties, HTMLInputTypeAttribute, useEffect, useState } from 'react';
+import {
+  CSSProperties,
+  Dispatch,
+  HTMLInputTypeAttribute,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import { Input } from '../common/Input/Input';
 import * as S from './CreateReview.styles';
 import IconX from '../../assets/svg/X.svg';
-import { CreateReviewType, postReview, putLibraryReview } from '../../apis/review';
+import { CreateReviewType } from '../../apis/review';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
 import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
 import { Rating } from '../common/Rating/Rating';
-import { useCreateReview } from '../../querys/reviewMutation';
+import { useCreateReview, useEditReview } from '../../querys/reviewMutation';
 
 type ReviewProps = {
   reviewModal: boolean;
-  setReviewModal: (value: boolean) => void;
-  reviewId?: number;
-  writtenReview?: MyReview;
+  setReviewModal: Dispatch<SetStateAction<boolean>>;
+  writtenReview: MyReview;
 };
 
 type ReviewInputType = {
@@ -26,12 +32,7 @@ type ReviewInputType = {
   style?: CSSProperties;
 };
 
-export function CreateReview({
-  reviewModal,
-  setReviewModal,
-  reviewId,
-  writtenReview,
-}: ReviewProps) {
+export function CreateReview({ reviewModal, setReviewModal, writtenReview }: ReviewProps) {
   const [review, setReview] = useState<CreateReviewType>({
     title: '',
     phrase: '',
@@ -101,6 +102,15 @@ export function CreateReview({
 
   const { createReviewMutate } = useCreateReview();
 
+  const { editReviewMutate } = useEditReview();
+
+  const editPayload = {
+    title: review.title,
+    contents: review.contents,
+    phrase: review.phrase,
+    rating: review.rating,
+  };
+
   const postWriteReview = (review: CreateReviewType) => {
     if (!writtenReview) {
       if (!validateReview()) {
@@ -121,21 +131,18 @@ export function CreateReview({
         },
       );
     } else {
-      putLibraryReview(Number(reviewId), {
-        title: review.title,
-        contents: review.contents,
-        phrase: review.phrase,
-        rating: review.rating,
-      })
-        .then((result) => {
-          if (result.data.status === 200) {
+      editReviewMutate(
+        { reviewId: writtenReview.reviewId, payload: editPayload },
+        {
+          onSuccess: () => {
             Toast.success('리뷰가 수정되었습니다');
             setReviewModal(false);
-          }
-        })
-        .catch((error) => console.error(error));
+          },
+        },
+      );
     }
   };
+  console.log('writtenReview.reviewId', writtenReview.reviewId);
 
   const validateReview = () => {
     if (!validateEmpty(review.title)) {
@@ -148,6 +155,10 @@ export function CreateReview({
     }
     if (!validateEmpty(review.contents)) {
       Toast.error('내용을 입력해주세요');
+      return false;
+    }
+    if (review.rating < 0) {
+      Toast.error('별점을 선택해주세요');
       return false;
     }
     return true;
