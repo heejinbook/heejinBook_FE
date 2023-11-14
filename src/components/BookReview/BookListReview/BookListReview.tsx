@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react';
-import { ReviewType } from '../Review';
+import { useState } from 'react';
 import * as S from './BookListReview.styles';
-import { useParams } from 'react-router-dom';
-import { getReviewList } from '../../../apis/review';
 import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
@@ -10,58 +7,26 @@ import IconNoImage from '../../../assets/svg/noImageUser.svg';
 import { FilterType } from '../../MainBookList/BookList';
 import { Heart } from '../../Heart/Heart';
 import { Rating } from '../../common/Rating/Rating';
+import { useGetBookReview } from '../../../querys/reviewQuery';
 
 type Text = {
   text: string;
 };
 
-const reviewFilter: FilterType[] = [
+export const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
   { filterId: 1, filterName: '별점순', sortName: 'RATING_DESC' },
   { filterId: 2, filterName: '좋아요순', sortName: 'COUNT_LIKE' },
-  // { filterId: 2, filterName: '댓글순', sortName: 'COUNT_COMMENT' },
+  { filterId: 3, filterName: '댓글순', sortName: 'COUNT_COMMENT' },
 ];
 
 export function BookListReview() {
-  const [reviewItems, setReviewItems] = useState<ReviewType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortOption, setSortOption] = useState<number>(0);
-  const [totalReviews, setTotalReviews] = useState<number>(0);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
 
-  const { bookId } = useParams();
-
-  useEffect(() => {
-    reviewList(currentPage);
-  }, [currentPage, sortOption]);
-
-  useEffect(() => {
-    !reviewModal && reviewList(currentPage);
-  }, [reviewModal]);
-
-  const reviewList = (page: number) => {
-    getReviewList(Number(bookId), {
-      page: page - 1,
-      sort: reviewFilter[sortOption].sortName,
-      size: 9,
-    })
-      .then((result) => {
-        setTotalReviews(result.data.data.totalElements);
-        const reviews: ReviewType[] = result.data.data.contents.map((review: ReviewType) => ({
-          reviewId: review.reviewId,
-          reviewAuthorProfileUrl: review.reviewAuthorProfileUrl,
-          reviewTitle: review.reviewTitle,
-          reviewPhrase: review.reviewPhrase,
-          reviewContents: review.reviewContents,
-          reviewRating: review.reviewRating,
-          isLike: review.isLike,
-          likeCount: review.likeCount,
-        }));
-        setReviewItems(reviews);
-      })
-      .catch((error) => console.error(error));
-  };
+  const { data, isLoading } = useGetBookReview(currentPage, sortOption);
 
   const EllipsisText = ({ text }: Text) => {
     const maxLength = 20;
@@ -81,11 +46,10 @@ export function BookListReview() {
     setReviewModal(true);
   };
 
-  const likeChangeHandler = () => {
-    reviewList(currentPage);
-  };
-
-  return (
+  if (isLoading) return <p>isLoading</p>;
+  //memo item 컴포넌트 감싸주고 비교함수 2번째
+  //함수 props로 넘길 때는 useCallback으로 감싸주기-memo를 쓸 때만(props로 넘겨주는 함수를 다른 함수로 취급)
+  return data ? (
     <>
       <ReviewModal
         selectedReviewId={selectedReviewId}
@@ -94,11 +58,11 @@ export function BookListReview() {
       />
       <S.LibraryReviewContainer>
         <S.ReviewFilterContainer>
-          <p>리뷰 {totalReviews}</p>
+          <p>리뷰 {data?.totalElements}</p>
           <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
         </S.ReviewFilterContainer>
         <S.LibraryReviewGrid>
-          {reviewItems.map((review) => (
+          {data?.contents.map((review) => (
             <S.LibraryReview key={review.reviewId}>
               <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
                 {review.reviewAuthorProfileUrl === null ? (
@@ -119,7 +83,6 @@ export function BookListReview() {
                   reviewId={review.reviewId}
                   isLike={review.isLike}
                   likeCount={review.likeCount}
-                  onLikeChange={likeChangeHandler}
                 />
               </S.HeartContainer>
             </S.LibraryReview>
@@ -131,7 +94,7 @@ export function BookListReview() {
           <Pagination
             activePage={currentPage}
             itemsCountPerPage={9}
-            totalItemsCount={totalReviews}
+            totalItemsCount={data?.totalElements}
             pageRangeDisplayed={5}
             onChange={pageChangeHandler}
             prevPageText={'‹'}
@@ -140,5 +103,5 @@ export function BookListReview() {
         </div>
       </S.PaginationWrapper>
     </>
-  );
+  ) : null;
 }

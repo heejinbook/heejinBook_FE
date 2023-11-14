@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as S from './LibraryReview.styles';
-import { getMyReview } from '../../../apis/library';
 import { useNavigate } from 'react-router-dom';
-import { deleteLibraryReview } from '../../../apis/review';
 import { CreateReview } from '../../CreateReview/CreateReview';
+import { useGetMyReview } from '../../../querys/reviewQuery';
+import { useDeleteReview } from '../../../querys/reviewMutation';
 
 export type MyReview = {
   reviewId: number;
@@ -18,9 +18,7 @@ export type MyReview = {
 };
 
 export function LibraryReview() {
-  const [myReview, setMyReview] = useState<MyReview[]>([]);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
-  const [selectedReviewId, setSelectedReviewId] = useState<number>(0);
   const [writtenReview, setWrittenReview] = useState<MyReview>({
     reviewId: 0,
     bookId: 0,
@@ -35,21 +33,9 @@ export function LibraryReview() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getMyReview()
-      .then((result) => {
-        setMyReview(result.data.data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  const { data: myReview } = useGetMyReview();
 
-  const deleteMyReview = (reviewId: number) => {
-    deleteLibraryReview(reviewId)
-      .then(() => {
-        setMyReview((prev) => prev.filter((review) => review.reviewId !== reviewId));
-      })
-      .catch((error) => console.error(error));
-  };
+  const { deleteReviewMutate } = useDeleteReview();
 
   type Text = {
     text: string;
@@ -64,12 +50,11 @@ export function LibraryReview() {
     }
   };
 
-  return (
+  return myReview ? (
     <S.LibraryReviewContainer>
       <CreateReview
         reviewModal={reviewModal}
         setReviewModal={setReviewModal}
-        reviewId={selectedReviewId}
         writtenReview={writtenReview}
       />
       <p>리뷰 {myReview.length}</p>
@@ -93,15 +78,13 @@ export function LibraryReview() {
               <S.ReviewDeleteNEdit>
                 <p
                   onClick={() => {
-                    setSelectedReviewId(review.reviewId);
-                    deleteMyReview(review.reviewId);
+                    deleteReviewMutate(review.reviewId);
                   }}
                 >
                   리뷰 삭제
                 </p>
                 <p
                   onClick={() => {
-                    setSelectedReviewId(review.reviewId);
                     setWrittenReview(review);
                     setReviewModal(true);
                   }}
@@ -118,5 +101,5 @@ export function LibraryReview() {
         </S.NoReview>
       )}
     </S.LibraryReviewContainer>
-  );
+  ) : null;
 }

@@ -1,31 +1,38 @@
-import { CommentType } from '../ReviewModal/ReviewModal';
 import * as S from './Comment.styles';
 import { CreateComment } from './CreateComment/CreateComment';
 import IconX from '../../assets/svg/X.svg';
 import IconNoImage from '../../assets/svg/noImageUser.svg';
-import { Contents, deleteComment, putComment } from '../../apis/review';
+import { Contents } from '../../apis/review';
 import { Input } from '../common/Input/Input';
 import { useState } from 'react';
-import { Toast } from '../common/Toastify/Toastify';
+import { useDeleteComment, useEditComment } from '../../querys/commentsMutation';
 
 type CommentProps = {
   reviewId: number;
   comments: CommentType[];
-  detailReview: (reviewId: number) => void;
-  setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
 };
 
-export function Comment({ comments, detailReview, setComments, reviewId }: CommentProps) {
+export type CommentType = {
+  commentAuthor: string;
+  commentCreatedAt: string;
+  commentAuthorProfileUrl: string;
+  commentId: number;
+  contents: string;
+  isMine: boolean;
+  reviewId: number;
+};
+
+export function Comment({ comments, reviewId }: CommentProps) {
   const [invisible, setInvisible] = useState<boolean>(false);
   const [editId, setEditId] = useState<number | null>(null);
   const [myContents, setMyContents] = useState<Contents>({
     contents: '',
   });
 
+  const { deleteCommentMutate } = useDeleteComment();
+
   const deleteMyComment = (commentId: number) => {
-    deleteComment(commentId).then(() => {
-      setComments((prev) => prev.filter((comment) => comment.commentId !== commentId));
-    });
+    deleteCommentMutate(commentId);
   };
 
   const editBtnInVisible = (commentId: number, contents: string) => {
@@ -36,16 +43,18 @@ export function Comment({ comments, detailReview, setComments, reviewId }: Comme
     setInvisible(true);
   };
 
-  const editMyContent = (commentId: number, reviewId: number) => {
-    putComment(commentId, myContents).then((result) => {
-      console.log(myContents);
-      if (result.status === 200) {
-        Toast.success('댓글이 수정되었습니다');
-        setInvisible(false);
-        setEditId(null);
-        detailReview(reviewId);
-      }
-    });
+  const { editCommentMutate } = useEditComment();
+
+  const editMyContent = () => {
+    editCommentMutate(
+      { editId, payload: myContents },
+      {
+        onSuccess: () => {
+          setInvisible(false);
+          setEditId(null);
+        },
+      },
+    );
   };
 
   const commentChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +63,7 @@ export function Comment({ comments, detailReview, setComments, reviewId }: Comme
 
   return (
     <S.Comment>
-      <CreateComment detailReview={detailReview} reviewId={reviewId} />
+      <CreateComment reviewId={reviewId} />
       {comments.length > 0 ? (
         comments.map((comment) => (
           <S.CommentsContainer>
@@ -79,11 +88,7 @@ export function Comment({ comments, detailReview, setComments, reviewId }: Comme
                     topSlot="comment"
                     type="text"
                     style={{ height: '20px' }}
-                    rightSlot={
-                      <S.EditBtn onClick={() => editMyContent(comment.commentId, comment.reviewId)}>
-                        수정
-                      </S.EditBtn>
-                    }
+                    rightSlot={<S.EditBtn onClick={editMyContent}>수정</S.EditBtn>}
                     value={myContents.contents}
                     onChange={commentChangeHandler}
                   />

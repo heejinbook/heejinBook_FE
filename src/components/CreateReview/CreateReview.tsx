@@ -1,27 +1,45 @@
-import { CSSProperties, HTMLInputTypeAttribute, useEffect, useState } from 'react';
+import {
+  CSSProperties,
+  Dispatch,
+  HTMLInputTypeAttribute,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import { Input } from '../common/Input/Input';
 import * as S from './CreateReview.styles';
 import IconX from '../../assets/svg/X.svg';
-import { CreateReviewType, postReview, putLibraryReview } from '../../apis/review';
+import { CreateReviewType } from '../../apis/review';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
 import { validateEmpty } from '../../utils/validate';
 import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
 import { Rating } from '../common/Rating/Rating';
+import { useCreateReview, useEditReview } from '../../querys/reviewMutation';
 
 type ReviewProps = {
   reviewModal: boolean;
-  setReviewModal: (value: boolean) => void;
-  reviewId?: number;
-  writtenReview?: MyReview;
+  setReviewModal: Dispatch<SetStateAction<boolean>>;
+  writtenReview: MyReview;
 };
 
-export function CreateReview({
-  reviewModal,
-  setReviewModal,
-  reviewId,
-  writtenReview,
-}: ReviewProps) {
+type ReviewInputType = {
+  name: string;
+  type: HTMLInputTypeAttribute;
+  placeholder: string;
+  topSlot: string;
+  value: string;
+  style?: CSSProperties;
+};
+
+export function CreateReview({ reviewModal, setReviewModal, writtenReview }: ReviewProps) {
+  const [review, setReview] = useState<CreateReviewType>({
+    title: '',
+    phrase: '',
+    contents: '',
+    rating: 0,
+  });
+
   const { bookId } = useParams();
 
   useEffect(() => {
@@ -41,22 +59,6 @@ export function CreateReview({
       });
     }
   }, [writtenReview]);
-
-  const [review, setReview] = useState<CreateReviewType>({
-    title: '',
-    phrase: '',
-    contents: '',
-    rating: 0,
-  });
-
-  type ReviewInputType = {
-    name: string;
-    type: HTMLInputTypeAttribute;
-    placeholder: string;
-    topSlot: string;
-    value: string;
-    style?: CSSProperties;
-  };
 
   const Inputs: ReviewInputType[] = [
     {
@@ -98,43 +100,46 @@ export function CreateReview({
     });
   };
 
+  const { createReviewMutate } = useCreateReview();
+
+  const { editReviewMutate } = useEditReview();
+
+  const editPayload = {
+    title: review.title,
+    contents: review.contents,
+    phrase: review.phrase,
+    rating: review.rating,
+  };
+
   const postWriteReview = (review: CreateReviewType) => {
     if (!writtenReview) {
       if (!validateReview()) {
         return;
       }
-      postReview(Number(bookId), review)
-        .then((result) => {
-          if (result.data.status === 201) {
+      createReviewMutate(
+        { bookId: Number(bookId), payload: review },
+        {
+          onSuccess: () => {
             setReviewModal(false);
-            Toast.success('리뷰 작성 성공!');
             setReview({
               title: '',
               phrase: '',
               contents: '',
               rating: 0,
             });
-          }
-        })
-        .catch((error) => {
-          if (error.response.status === 409) {
-            Toast.error('이미 리뷰를 작성했습니다');
-          }
-        });
+          },
+        },
+      );
     } else {
-      putLibraryReview(Number(reviewId), {
-        title: review.title,
-        contents: review.contents,
-        phrase: review.phrase,
-        rating: review.rating,
-      })
-        .then((result) => {
-          if (result.data.status === 200) {
+      editReviewMutate(
+        { reviewId: writtenReview.reviewId, payload: editPayload },
+        {
+          onSuccess: () => {
             Toast.success('리뷰가 수정되었습니다');
             setReviewModal(false);
-          }
-        })
-        .catch((error) => console.error(error));
+          },
+        },
+      );
     }
   };
 
@@ -149,6 +154,10 @@ export function CreateReview({
     }
     if (!validateEmpty(review.contents)) {
       Toast.error('내용을 입력해주세요');
+      return false;
+    }
+    if (review.rating < 0) {
+      Toast.error('별점을 선택해주세요');
       return false;
     }
     return true;
@@ -173,15 +182,11 @@ export function CreateReview({
             onChange={inputChangeHandler}
           />
         ))}
-        {!writtenReview ? (
-          <S.WriteBtn>
-            <button onClick={() => postWriteReview(review)}>작성하기</button>
-          </S.WriteBtn>
-        ) : (
-          <S.WriteBtn>
-            <button onClick={() => postWriteReview(review)}>수정하기</button>
-          </S.WriteBtn>
-        )}
+        <S.WriteBtn>
+          <button onClick={() => postWriteReview(review)}>
+            {writtenReview ? '수정하기' : '작성하기'}
+          </button>
+        </S.WriteBtn>
       </S.CreateRModal>
     </S.CreateRContainer>
   );

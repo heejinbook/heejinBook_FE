@@ -15,11 +15,10 @@ import { Swiper } from 'swiper/types';
 import { Rating } from '../../common/Rating/Rating';
 
 type reviewProps = {
-  reviews: ReviewType[];
-  likeChangeHandler: () => void;
+  review: ReviewType[];
 };
 
-export function BookSwiper({ reviews, likeChangeHandler }: reviewProps) {
+export function BookSwiper({ review }: reviewProps) {
   const [swiper] = useState<Swiper | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -38,46 +37,43 @@ export function BookSwiper({ reviews, likeChangeHandler }: reviewProps) {
   }, [swiper]);
 
   return (
-    <S.BookSwiperContainer>
-      <S.LeftBtn src={IconLeftBtn} className="swiper-button-prev" />
-      <S.BookSwiper
-        onInit={onInit}
-        onSlideChange={onSlideChange}
-        modules={[Navigation, Pagination]}
-        slidesPerView={1}
-        spaceBetween={30}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-      >
-        {reviews.map((r) => (
-          <S.ReviewSlide key={r.reviewId}>
-            {r.reviewAuthorProfileUrl === null ? (
-              <S.UserImage src={IconNoImage} />
-            ) : (
-              <S.UserImage src={r.reviewAuthorProfileUrl} />
-            )}
-            <Rating count={r.reviewRating} readonly />
-            <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
-            <S.PhraseContainer>
-              <img src={IconLeftQuote} />
-              <S.ReviewPhrase>{r.reviewPhrase}</S.ReviewPhrase>
-              <img src={IconRightQuote} />
-            </S.PhraseContainer>
-            <S.ReviewContent>{r.reviewContents}</S.ReviewContent>
-            <S.HeartContainer>
-              <Heart
-                reviewId={r.reviewId}
-                isLike={r.isLike}
-                likeCount={r.likeCount}
-                onLikeChange={likeChangeHandler}
-              />
-            </S.HeartContainer>
-          </S.ReviewSlide>
-        ))}
-      </S.BookSwiper>
-      <S.RightBtn src={IconRightBtn} className="swiper-button-next" />
-    </S.BookSwiperContainer>
+    review && (
+      <S.BookSwiperContainer>
+        <S.LeftBtn src={IconLeftBtn} className="swiper-button-prev" />
+        <S.BookSwiper
+          onInit={onInit}
+          onSlideChange={onSlideChange}
+          modules={[Navigation, Pagination]}
+          slidesPerView={1}
+          spaceBetween={30}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }}
+        >
+          {review.map((r) => (
+            <S.ReviewSlide key={r.reviewId}>
+              {r.reviewAuthorProfileUrl === null ? (
+                <S.UserImage src={IconNoImage} />
+              ) : (
+                <S.UserImage src={r.reviewAuthorProfileUrl} />
+              )}
+              <Rating count={r.reviewRating} readonly />
+              <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
+              <S.PhraseContainer>
+                <img src={IconLeftQuote} />
+                <S.ReviewPhrase>{r.reviewPhrase}</S.ReviewPhrase>
+                <img src={IconRightQuote} />
+              </S.PhraseContainer>
+              <S.ReviewContent>{r.reviewContents}</S.ReviewContent>
+              <S.HeartContainer>
+                <Heart reviewId={r.reviewId} isLike={r.isLike} likeCount={r.likeCount} />
+              </S.HeartContainer>
+            </S.ReviewSlide>
+          ))}
+        </S.BookSwiper>
+        <S.RightBtn src={IconRightBtn} className="swiper-button-next" />
+      </S.BookSwiperContainer>
+    )
   );
 }

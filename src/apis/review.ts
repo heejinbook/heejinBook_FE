@@ -1,4 +1,5 @@
 import { client } from '.';
+import { ReviewType } from '../components/BookReview/Review';
 
 export type CreateReviewType = {
   title: string;
@@ -13,8 +14,13 @@ export type getReviewListParams = {
   sort: string;
 };
 
-type getSwiperParams = {
+export type getSwiperParams = {
   size: number;
+};
+
+export type getReviewPromise = {
+  contents: ReviewType[];
+  totalElements: number;
 };
 
 const REVIEW_URL = 'api/reviews';
@@ -24,12 +30,15 @@ export async function postReview(bookId: number, payload: CreateReviewType) {
   return response;
 }
 
-export async function getReviewList(bookId: number, params: getReviewListParams) {
+export async function getReviewList(
+  bookId: number,
+  params: getReviewListParams,
+): Promise<getReviewPromise> {
   const { page, size, sort } = params;
   const response = await client.get(`${REVIEW_URL}/list/${bookId}`, {
     params: { page, size, sort },
   });
-  return response;
+  return response.data.data;
 }
 
 export async function deleteLibraryReview(reviewId: number) {
@@ -42,14 +51,17 @@ export async function putLibraryReview(reviewId: number, payload: CreateReviewTy
   return response;
 }
 
-export async function getSwiperReview(bookId: number, params: getSwiperParams) {
+export async function getSwiperReview(
+  bookId: number,
+  params: getSwiperParams,
+): Promise<ReviewType[]> {
   const { size } = params;
   const response = await client.get(`${REVIEW_URL}/swiper/${bookId}`, {
     params: {
       size,
     },
   });
-  return response;
+  return response.data.data;
 }
 
 export async function postHeart(reviewId: number) {
@@ -57,9 +69,9 @@ export async function postHeart(reviewId: number) {
   return response;
 }
 
-export async function getDetailReview(reviewId: number) {
+export async function getDetailReview(reviewId: number): Promise<ReviewType> {
   const response = await client.get(`${REVIEW_URL}/${reviewId}`);
-  return response;
+  return response.data.data;
 }
 
 export type Contents = {

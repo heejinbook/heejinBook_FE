@@ -1,9 +1,8 @@
-import { useParams } from 'react-router-dom';
 import { BookSwiper } from './BookSwiper/BookSwiper';
 import * as S from './Review.styles';
-import { useEffect, useState } from 'react';
 import { BookListReview } from './BookListReview/BookListReview';
-import { getSwiperReview } from '../../apis/review';
+import { CommentType } from '../Comment/Comment';
+import { useGetReviewSwiper } from '../../querys/reviewQuery';
 
 export type ReviewType = {
   reviewId: number;
@@ -14,38 +13,20 @@ export type ReviewType = {
   reviewRating: number;
   isLike: boolean;
   likeCount: number;
+  comments: CommentType[];
 };
 
 export function Review() {
-  const { bookId } = useParams();
-  const [reviews, setReviews] = useState<ReviewType[]>([]);
-
-  useEffect(() => {
-    getBookReview(Number(bookId));
-  }, []);
-
-  const getBookReview = (bookId: number) => {
-    getSwiperReview(bookId, {
-      size: 3,
-    }).then((result) => {
-      if (result.status === 200) {
-        setReviews(result.data.data);
-      }
-    });
-  };
-
-  const likeChangeHandler = () => {
-    getBookReview(Number(bookId));
-  };
+  const { data: review } = useGetReviewSwiper();
 
   return (
     <S.ReviewContainer>
       <S.Review>
         <p>책 리뷰</p>
-        {reviews.length > 0 ? (
+        {review && review.length > 0 ? (
           <>
             <S.BookSwiperContainer>
-              <BookSwiper reviews={reviews} likeChangeHandler={likeChangeHandler} />
+              <BookSwiper review={review} />
             </S.BookSwiperContainer>
             <BookListReview />
           </>
