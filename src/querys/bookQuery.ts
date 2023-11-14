@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getBookList, getBookPromise } from '../apis/books';
+import { getBook, getBookList, getBookPromise } from '../apis/books';
 import { bookFilter } from '../components/MainBookList/BookList';
 import { LibraryBookType } from '../components/MyLibrary/LibraryList/LibraryList';
 import { getLibraryBookList } from '../apis/library';
+import { detailBook } from '../pages/BookPage/BookPage';
+import { useParams } from 'react-router-dom';
 
 type MainBookList = {
   currentPage: number;
@@ -36,5 +38,14 @@ export function useGetLibraryBook() {
   return useQuery<LibraryBookType[]>({
     queryKey: ['libraryBook'],
     queryFn: () => getLibraryBookList(),
+  });
+}
+
+export function useGetDetailBook() {
+  const { bookId } = useParams();
+
+  return useQuery<detailBook>({
+    queryKey: ['detailBook'],
+    queryFn: () => getBook(Number(bookId)),
   });
 }

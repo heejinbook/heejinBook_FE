@@ -1,5 +1,6 @@
 import { client } from '.';
 import { Book } from '../components/MainBookList/BookList';
+import { detailBook } from '../pages/BookPage/BookPage';
 
 const BOOK_URL = '/api/books';
 
@@ -24,9 +25,10 @@ export async function getBookList(params: getBookListParams): Promise<getBookPro
   return response.data.data;
 }
 
-export async function getBook(book_id: number) {
+export async function getBook(book_id: number): Promise<detailBook> {
   const response = await client.get(`${BOOK_URL}/${book_id}`);
-  return response;
+  console.log(response.data);
+  return response.data.data;
 }
 
 export async function getBestBook() {
