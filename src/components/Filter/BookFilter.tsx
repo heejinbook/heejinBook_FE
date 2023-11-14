@@ -9,7 +9,7 @@ type FilterProps = {
 
 export function BookFilter({ filter, onSelect }: FilterProps) {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const [filterName, setFilterName] = useState<string>('최신순');
+  const [filterName, setFilterName] = useState<string>('sort by');
 
   return (
     <>
@@ -20,11 +20,7 @@ export function BookFilter({ filter, onSelect }: FilterProps) {
           }}
         >
           {filterName}
-          {openCategory ? (
-            <img src="src/assets/svg/arrowUp.svg" />
-          ) : (
-            <img src="src/assets/svg/arrowDown.svg" />
-          )}
+          <img src={openCategory ? 'src/assets/svg/arrowUp.svg' : 'src/assets/svg/arrowDown.svg'} />
         </p>
         {openCategory && (
           <S.FilterList>

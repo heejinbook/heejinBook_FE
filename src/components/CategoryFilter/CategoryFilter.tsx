@@ -9,7 +9,7 @@ type CategoryProps = {
 
 export function CategoryFilter({ category, onSelect }: CategoryProps) {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const [categoryName, setCategoryName] = useState<string>('Category');
+  const [categoryName, setCategoryName] = useState<string>('category');
 
   return (
     <>
@@ -20,11 +20,7 @@ export function CategoryFilter({ category, onSelect }: CategoryProps) {
           }}
         >
           {categoryName}
-          {openCategory ? (
-            <img src="src/assets/svg/arrowUp.svg" />
-          ) : (
-            <img src="src/assets/svg/arrowDown.svg" />
-          )}
+          <img src={openCategory ? 'src/assets/svg/arrowUp.svg' : 'src/assets/svg/arrowDown.svg'} />
         </p>
         {openCategory && (
           <S.CategoryList>
