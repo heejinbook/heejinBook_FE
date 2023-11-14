@@ -1,6 +1,5 @@
 import { client } from '.';
 import { Book } from '../components/MainBookList/BookList';
-import { detailBook } from '../pages/BookPage/BookPage';
 
 const BOOK_URL = '/api/books';
 
@@ -15,6 +14,22 @@ type getBookListParams = {
 export type getBookPromise = {
   contents: Book[];
   totalElements: number;
+};
+
+export type detailBook = {
+  bookId: number;
+  thumbnail: string;
+  title: string;
+  author: string;
+  reviewCount: number;
+  description: string;
+  category: string;
+  releaseDate: string;
+  publisher: string;
+  isbn: string;
+  isLibrary: boolean;
+  avgRating: number;
+  isBest: boolean;
 };
 
 export async function getBookList(params: getBookListParams): Promise<getBookPromise> {

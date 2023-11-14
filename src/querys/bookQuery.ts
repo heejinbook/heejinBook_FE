@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { getBook, getBookList, getBookPromise } from '../apis/books';
+import { detailBook, getBook, getBookList, getBookPromise } from '../apis/books';
 import { bookFilter } from '../components/MainBookList/BookList';
 import { LibraryBookType } from '../components/MyLibrary/LibraryList/LibraryList';
 import { getLibraryBookList } from '../apis/library';
-import { detailBook } from '../pages/BookPage/BookPage';
 import { useParams } from 'react-router-dom';
 
 type MainBookList = {
