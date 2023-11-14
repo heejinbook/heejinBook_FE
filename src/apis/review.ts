@@ -14,7 +14,7 @@ export type getReviewListParams = {
   sort: string;
 };
 
-type getSwiperParams = {
+export type getSwiperParams = {
   size: number;
 };
 
@@ -51,14 +51,17 @@ export async function putLibraryReview(reviewId: number, payload: CreateReviewTy
   return response;
 }
 
-export async function getSwiperReview(bookId: number, params: getSwiperParams) {
+export async function getSwiperReview(
+  bookId: number,
+  params: getSwiperParams,
+): Promise<ReviewType[]> {
   const { size } = params;
   const response = await client.get(`${REVIEW_URL}/swiper/${bookId}`, {
     params: {
       size,
     },
   });
-  return response;
+  return response.data.data;
 }
 
 export async function postHeart(reviewId: number) {

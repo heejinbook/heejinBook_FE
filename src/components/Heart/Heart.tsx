@@ -9,7 +9,6 @@ type HeartProps = {
   reviewId: number;
   isLike: boolean;
   likeCount: number;
-  onLikeChange?: () => void;
 };
 
 export function Heart({ reviewId, isLike, likeCount }: HeartProps) {
@@ -32,6 +31,7 @@ export function Heart({ reviewId, isLike, likeCount }: HeartProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reviewList'] });
       queryClient.invalidateQueries({ queryKey: ['detailReview'] });
+      queryClient.invalidateQueries({ queryKey: ['swiperReview'] });
     },
   });
 

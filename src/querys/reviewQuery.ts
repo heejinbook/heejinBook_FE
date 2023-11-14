@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getDetailReview, getReviewList, getReviewPromise } from '../apis/review';
+import { getDetailReview, getReviewList, getReviewPromise, getSwiperReview } from '../apis/review';
 import { ReviewType } from '../components/BookReview/Review';
 import { reviewFilter } from '../components/BookReview/BookListReview/BookListReview';
 import { useParams } from 'react-router-dom';
@@ -51,5 +51,17 @@ export function useGetMyReview() {
   return useQuery<MyReview[]>({
     queryKey: ['myReview'],
     queryFn: () => getMyReview(),
+  });
+}
+
+export function useGetReviewSwiper() {
+  const { bookId } = useParams();
+
+  return useQuery<ReviewType[]>({
+    queryKey: ['swiperReview'],
+    queryFn: () =>
+      getSwiperReview(Number(bookId), {
+        size: 3,
+      }),
   });
 }
