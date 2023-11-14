@@ -1,4 +1,5 @@
 import { client } from '.';
+import { LibraryBookType } from '../components/MyLibrary/LibraryList/LibraryList';
 import { MyReview } from '../components/MyLibrary/LibraryReview/LibraryReview';
 
 const LIBRARY_URL = '/api/library';
@@ -8,9 +9,9 @@ export async function postBookToLibrary(bookId: number) {
   return response;
 }
 
-export async function getLibraryBookList() {
+export async function getLibraryBookList(): Promise<LibraryBookType[]> {
   const response = await client.get(`${LIBRARY_URL}`);
-  return response;
+  return response.data.data;
 }
 
 export async function deleteLibraryBook(bookId: number) {

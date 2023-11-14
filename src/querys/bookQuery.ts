@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { getBookList, getBookPromise } from '../apis/books';
 import { bookFilter } from '../components/MainBookList/BookList';
+import { LibraryBookType } from '../components/MyLibrary/LibraryList/LibraryList';
+import { getLibraryBookList } from '../apis/library';
 
 type MainBookList = {
   currentPage: number;
@@ -27,5 +29,12 @@ export function useGetBookList({
   return useQuery<getBookPromise>({
     queryKey: ['bookList', currentPage, sortOption, searchBook, selectedCategory],
     queryFn: bookList,
+  });
+}
+
+export function useGetLibraryBook() {
+  return useQuery<LibraryBookType[]>({
+    queryKey: ['libraryBook'],
+    queryFn: () => getLibraryBookList(),
   });
 }
