@@ -58,7 +58,7 @@ export function BookList() {
 
   const navigate = useNavigate();
 
-  const { data: books } = useGetBookList({ currentPage, sortOption, searchBook, selectedCategory });
+  const { data: books } = useGetBookList(currentPage, sortOption, searchBook, selectedCategory);
 
   return (
     books && (
@@ -103,7 +103,7 @@ export function BookList() {
               itemsCountPerPage={40}
               totalItemsCount={books.totalElements}
               pageRangeDisplayed={5}
-              onChange={() => setCurrentPage(currentPage)}
+              onChange={(currentPage: number) => setCurrentPage(currentPage)}
               prevPageText={'‹'}
               nextPageText={'›'}
             />

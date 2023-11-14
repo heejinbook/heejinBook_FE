@@ -5,19 +5,12 @@ import { LibraryBookType } from '../components/MyLibrary/LibraryList/LibraryList
 import { getLibraryBookList } from '../apis/library';
 import { useParams } from 'react-router-dom';
 
-type MainBookList = {
-  currentPage: number;
-  sortOption: number;
-  searchBook: string;
-  selectedCategory: number;
-};
-
-export function useGetBookList({
-  currentPage,
-  sortOption,
-  searchBook,
-  selectedCategory,
-}: MainBookList) {
+export function useGetBookList(
+  currentPage: number,
+  sortOption: number,
+  searchBook: string,
+  selectedCategory: number,
+) {
   const bookList = () => {
     return getBookList({
       page: currentPage - 1,
