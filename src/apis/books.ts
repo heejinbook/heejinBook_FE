@@ -42,7 +42,6 @@ export async function getBookList(params: getBookListParams): Promise<getBookPro
 
 export async function getBook(book_id: number): Promise<detailBook> {
   const response = await client.get(`${BOOK_URL}/${book_id}`);
-  console.log(response.data);
   return response.data.data;
 }
 
