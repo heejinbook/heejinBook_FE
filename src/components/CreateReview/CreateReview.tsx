@@ -20,7 +20,7 @@ import { useCreateReview, useEditReview } from '../../querys/reviewMutation';
 type ReviewProps = {
   reviewModal: boolean;
   setReviewModal: Dispatch<SetStateAction<boolean>>;
-  writtenReview: MyReview;
+  writtenReview?: MyReview;
 };
 
 type ReviewInputType = {

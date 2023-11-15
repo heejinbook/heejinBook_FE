@@ -11,7 +11,7 @@ type ReviewFilterProps = {
 
 export function ReviewFilter({ reviewFilter, onSortChange }: ReviewFilterProps) {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const [filterName, setFilterName] = useState<string>('최신순');
+  const [filterName, setFilterName] = useState<string>('sort by');
 
   return (
     <>

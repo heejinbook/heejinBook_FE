@@ -46,6 +46,10 @@ export function BookListReview() {
     setReviewModal(true);
   };
 
+  const sortOptionHandler = (filterId: number) => {
+    setSortOption(filterId);
+  };
+
   if (isLoading) return <p>isLoading</p>;
   //memo item 컴포넌트 감싸주고 비교함수 2번째
   //함수 props로 넘길 때는 useCallback으로 감싸주기-memo를 쓸 때만(props로 넘겨주는 함수를 다른 함수로 취급)
@@ -59,7 +63,7 @@ export function BookListReview() {
       <S.LibraryReviewContainer>
         <S.ReviewFilterContainer>
           <p>리뷰 {data?.totalElements}</p>
-          <ReviewFilter reviewFilter={reviewFilter} onSortChange={setSortOption} />
+          <ReviewFilter reviewFilter={reviewFilter} onSortChange={() => sortOptionHandler} />
         </S.ReviewFilterContainer>
         <S.LibraryReviewGrid>
           {data?.contents.map((review) => (

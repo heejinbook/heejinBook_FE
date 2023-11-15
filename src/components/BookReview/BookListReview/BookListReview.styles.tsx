@@ -117,10 +117,10 @@ export const PaginationWrapper = styled.div`
       width: 30px;
       font-size: 16px;
 
-      &:first-child,
+      &:first-of-type,
       &:last-child,
-      &:nth-child(2),
-      &:nth-last-child(2) {
+      &:nth-of-type(2),
+      &:nth-last-of-type(2) {
         font-size: 20px;
       }
 

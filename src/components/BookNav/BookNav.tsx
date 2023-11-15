@@ -4,30 +4,19 @@ import IconBookDelete from '../../assets/svg/noAddBook.svg';
 import IconWrite from '../../assets/svg/pencil.svg';
 import IconShare from '../../assets/svg/share.svg';
 import { useParams } from 'react-router-dom';
-import { Toast } from '../common/Toastify/Toastify';
-import { postBookToLibrary } from '../../apis/library';
+import { usePostBook } from '../../querys/bookMutation';
 
 type AddBookProps = {
   addBookLibrary: boolean;
-  toggleLibrary: () => void;
-  setReviewModal: (value: boolean) => void;
+  modalOpen: () => void;
 };
 
-export function BookNav({ addBookLibrary, toggleLibrary, setReviewModal }: AddBookProps) {
+export function BookNav({ addBookLibrary, modalOpen }: AddBookProps) {
   const { bookId } = useParams();
 
+  const { postBookMutate } = usePostBook();
   const postBook = () => {
-    postBookToLibrary(Number(bookId))
-      .then((result) => {
-        if (result.data.status === 201) {
-          toggleLibrary();
-        }
-      })
-      .catch((error) => {
-        if (error.response.status === 403) {
-          Toast.error('!로그인!');
-        }
-      });
+    postBookMutate(Number(bookId));
   };
 
   return (
@@ -37,7 +26,7 @@ export function BookNav({ addBookLibrary, toggleLibrary, setReviewModal }: AddBo
           {addBookLibrary ? <img src={IconBookAdd} /> : <img src={IconBookDelete} />}
           <p>내 책장에 담기</p>
         </S.Library>
-        <S.WriteReview onClick={() => setReviewModal(true)}>
+        <S.WriteReview onClick={() => modalOpen}>
           <img src={IconWrite} />
           <p>리뷰쓰기</p>
         </S.WriteReview>

@@ -4,12 +4,13 @@ import { FilterType } from '../MainBookList/BookList';
 
 type FilterProps = {
   filter: FilterType[];
-  onSelect: (filterId: number) => void;
+  onSelectId: (filterId: number) => void;
+  onSelectedName: (filterName: string) => void;
+  filterName: string;
 };
-
-export function BookFilter({ filter, onSelect }: FilterProps) {
+//렌더링 원치 않으면 setState 상위 컴포넌트에서 관리
+export function BookFilter({ filter, onSelectId, filterName, onSelectedName }: FilterProps) {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const [filterName, setFilterName] = useState<string>('최신순');
 
   return (
     <>
@@ -20,11 +21,7 @@ export function BookFilter({ filter, onSelect }: FilterProps) {
           }}
         >
           {filterName}
-          {openCategory ? (
-            <img src="src/assets/svg/arrowUp.svg" />
-          ) : (
-            <img src="src/assets/svg/arrowDown.svg" />
-          )}
+          <img src={openCategory ? 'src/assets/svg/arrowUp.svg' : 'src/assets/svg/arrowDown.svg'} />
         </p>
         {openCategory && (
           <S.FilterList>
@@ -33,8 +30,8 @@ export function BookFilter({ filter, onSelect }: FilterProps) {
                 key={option.filterId}
                 onClick={() => {
                   setOpenCategory(false);
-                  onSelect(option.filterId);
-                  setFilterName(option.filterName);
+                  onSelectId(option.filterId);
+                  onSelectedName(option.filterName);
                 }}
                 style={{
                   fontWeight: option.filterName === filterName ? 'bold' : 'normal',
