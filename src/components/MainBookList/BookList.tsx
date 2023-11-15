@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import * as S from './BookList.styles';
-import { useNavigate } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { BookFilter } from '../Filter/BookFilter';
 import { CategoryFilter } from '../CategoryFilter/CategoryFilter';
-import IconReviewer from '../../assets/svg/person.svg';
-import IconRating from '../../assets/svg/fullStar.svg';
 import { useGetBookList } from '../../querys/bookQuery';
+import BookItems from './BookItems/BookItems';
 
 export type Book = {
   bookId: number;
@@ -58,9 +56,12 @@ export function BookList() {
   const [filterName, setFilterName] = useState<string>('sort by');
   const [categoryName, setCategoryName] = useState<string>('category');
 
-  const navigate = useNavigate();
-
   const { data: books } = useGetBookList(currentPage, sortOption, searchBook, selectedCategory);
+
+  const selectFilter = (filterId: number, filterName: string) => {
+    setSortOption(filterId);
+    setFilterName(filterName);
+  };
 
   return (
     books && (
@@ -75,30 +76,16 @@ export function BookList() {
             <SearchBar onSearch={setSearchBook} />
             <BookFilter
               filter={bookFilter}
-              onSelectId={(filterId: number) => setSortOption(filterId)}
-              onSelectedName={(filterName: string) => setFilterName(filterName)}
+              onSelect={(filterId: number, filterName: string) =>
+                selectFilter(filterId, filterName)
+              }
               filterName={filterName}
             />
           </S.SearchNFilter>
         </S.Search>
         <S.BookListContainer>
-          {books.contents.map((book) => (
-            <S.BookListItems
-              key={book.bookId}
-              onClick={() => {
-                navigate(`books/${book.bookId}`);
-              }}
-            >
-              <S.BookImage src={book.thumbnail} />
-              <S.BookTitle>{book.title}</S.BookTitle>
-              <S.BookAuthor>{book.author}</S.BookAuthor>
-              <S.ReviewerContainer>
-                <S.ReviewerIcon src={IconReviewer} />
-                <S.Reviewer>{book.reviewCount}</S.Reviewer>
-                <S.RatingIcon src={IconRating} />
-                <S.RatingPoint>{book.avgRating}</S.RatingPoint>
-              </S.ReviewerContainer>
-            </S.BookListItems>
+          {books.contents.map((book, idx) => (
+            <BookItems {...book} key={idx} />
           ))}
         </S.BookListContainer>
         <S.PaginationWrapper>
