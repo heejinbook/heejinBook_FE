@@ -1,13 +1,5 @@
 import styled from '@emotion/styled';
 
-export const BookListContainer = styled.div`
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  justify-items: center;
-  padding: 0 20px;
-`;
-
 export const BookListItems = styled.div`
   width: 170px;
   height: auto;
