@@ -3,15 +3,16 @@ import { FilterType } from '../../../MainBookList/BookList';
 import * as S from './ReviewFilter.styles';
 import IconArrowD from '../../../../assets/svg/arrowDown.svg';
 import IconArrowU from '../../../../assets/svg/arrowUp.svg';
+import { reviewFilter } from '../BookListReview';
 
 type ReviewFilterProps = {
-  reviewFilter: FilterType[];
+  filterName: string;
   onSortChange: (filterId: number) => void;
+  onSelectName: (filterName: string) => void;
 };
 
-export function ReviewFilter({ reviewFilter, onSortChange }: ReviewFilterProps) {
+export function ReviewFilter({ filterName, onSortChange, onSelectName }: ReviewFilterProps) {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const [filterName, setFilterName] = useState<string>('sort by');
 
   return (
     <>
@@ -32,7 +33,7 @@ export function ReviewFilter({ reviewFilter, onSortChange }: ReviewFilterProps) 
                 onClick={() => {
                   setOpenCategory(false);
                   onSortChange(option.filterId);
-                  setFilterName(option.filterName);
+                  onSelectName(option.filterName);
                 }}
                 style={{
                   fontWeight: option.filterName === filterName ? 'bold' : 'normal',
