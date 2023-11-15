@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import * as S from './CategoryFilter.styles';
-import { CategoryType } from '../MainBookList/BookList';
+import { category } from '../MainBookList/BookList';
 
 type CategoryProps = {
-  category: CategoryType[];
+  categoryName: string;
+  onSelectName: (categoryName: string) => void;
   onSelect: (categoryId: number) => void;
 };
 
-export function CategoryFilter({ category, onSelect }: CategoryProps) {
+export function CategoryFilter({ categoryName, onSelectName, onSelect }: CategoryProps) {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const [categoryName, setCategoryName] = useState<string>('category');
 
   return (
     <>
@@ -30,7 +30,7 @@ export function CategoryFilter({ category, onSelect }: CategoryProps) {
                 onClick={() => {
                   setOpenCategory(false);
                   onSelect(option.categoryId);
-                  setCategoryName(option.categoryName);
+                  onSelectName(option.categoryName);
                 }}
                 style={{
                   backgroundColor: option.categoryName === categoryName ? '#503f15' : 'transparent',

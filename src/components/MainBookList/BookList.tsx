@@ -18,7 +18,7 @@ export type Book = {
   avgRating: number;
 };
 
-export type CategoryType = {
+type CategoryType = {
   categoryId: number;
   categoryName: string;
 };
@@ -29,7 +29,7 @@ export type FilterType = {
   sortName: string;
 };
 
-const category: CategoryType[] = [
+export const category: CategoryType[] = [
   { categoryId: 0, categoryName: 'All' },
   { categoryId: 1, categoryName: '로맨스' },
   { categoryId: 2, categoryName: '추리' },
@@ -55,6 +55,8 @@ export function BookList() {
   const [sortOption, setSortOption] = useState<number>(0);
   const [searchBook, setSearchBook] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const [filterName, setFilterName] = useState<string>('sort by');
+  const [categoryName, setCategoryName] = useState<string>('category');
 
   const navigate = useNavigate();
 
@@ -65,14 +67,17 @@ export function BookList() {
       <>
         <S.Search>
           <CategoryFilter
-            category={category}
+            categoryName={categoryName}
+            onSelectName={(categoryName: string) => setCategoryName(categoryName)}
             onSelect={(categoryId: number) => setSelectedCategory(categoryId)}
           />
           <S.SearchNFilter>
             <SearchBar onSearch={setSearchBook} />
             <BookFilter
               filter={bookFilter}
-              onSelect={(filterId: number) => setSortOption(filterId)}
+              onSelectId={(filterId: number) => setSortOption(filterId)}
+              onSelectedName={(filterName: string) => setFilterName(filterName)}
+              filterName={filterName}
             />
           </S.SearchNFilter>
         </S.Search>
