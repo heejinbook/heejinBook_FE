@@ -4,8 +4,6 @@ import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
 import { FilterType } from '../../MainBookList/BookList';
-import { Heart } from '../../Heart/Heart';
-import { Rating } from '../../common/Rating/Rating';
 import { useGetBookReview } from '../../../querys/reviewQuery';
 import ReviewItems from './ReviewItems/ReviewItems';
 
@@ -35,8 +33,7 @@ export function BookListReview() {
   }, []);
 
   if (isLoading) return <p>isLoading</p>;
-  //memo item 컴포넌트 감싸주고 비교함수 2번째
-  //함수 props로 넘길 때는 useCallback으로 감싸주기-memo를 쓸 때만(props로 넘겨주는 함수를 다른 함수로 취급)
+
   return data ? (
     <>
       <ReviewModal
