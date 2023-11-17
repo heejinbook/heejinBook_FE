@@ -1,17 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import * as S from './BookListReview.styles';
 import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
 import { ReviewFilter } from './ReviewFilter/ReviewFilter';
-import IconNoImage from '../../../assets/svg/noImageUser.svg';
 import { FilterType } from '../../MainBookList/BookList';
-import { Heart } from '../../Heart/Heart';
-import { Rating } from '../../common/Rating/Rating';
 import { useGetBookReview } from '../../../querys/reviewQuery';
-
-type Text = {
-  text: string;
-};
+import ReviewItems from './ReviewItems/ReviewItems';
 
 export const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
@@ -29,27 +23,17 @@ export function BookListReview() {
 
   const { data, isLoading } = useGetBookReview(currentPage, sortOption);
 
-  const EllipsisText = ({ text }: Text) => {
-    const maxLength = 20;
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
-    } else {
-      return text;
-    }
-  };
-
   const pageChangeHandler = (currentPage: number) => {
     setCurrentPage(currentPage);
   };
 
-  const modalOpenHandler = (reviewId: number) => {
+  const modalOpenHandler = useCallback((reviewId: number) => {
     setSelectedReviewId(reviewId);
     setReviewModal(true);
-  };
+  }, []);
 
   if (isLoading) return <p>isLoading</p>;
-  //memo item 컴포넌트 감싸주고 비교함수 2번째
-  //함수 props로 넘길 때는 useCallback으로 감싸주기-memo를 쓸 때만(props로 넘겨주는 함수를 다른 함수로 취급)
+
   return data ? (
     <>
       <ReviewModal
@@ -67,30 +51,12 @@ export function BookListReview() {
           />
         </S.ReviewFilterContainer>
         <S.LibraryReviewGrid>
-          {data?.contents.map((review) => (
-            <S.LibraryReview key={review.reviewId}>
-              <S.ReviewContainer onClick={() => modalOpenHandler(review.reviewId)}>
-                {review.reviewAuthorProfileUrl === null ? (
-                  <S.ReviewImage src={IconNoImage} />
-                ) : (
-                  <S.ReviewImage src={review.reviewAuthorProfileUrl} />
-                )}
-                <Rating count={review.reviewRating} readonly />
-                <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
-                <S.ReviewPhraseContainer>
-                  <p>"</p>
-                  <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
-                  <p>"</p>
-                </S.ReviewPhraseContainer>
-              </S.ReviewContainer>
-              <S.HeartContainer>
-                <Heart
-                  reviewId={review.reviewId}
-                  isLike={review.isLike}
-                  likeCount={review.likeCount}
-                />
-              </S.HeartContainer>
-            </S.LibraryReview>
+          {data?.contents.map((review, idx) => (
+            <ReviewItems
+              {...review}
+              key={idx}
+              modalOpen={() => modalOpenHandler(review.reviewId)}
+            />
           ))}
         </S.LibraryReviewGrid>
       </S.LibraryReviewContainer>

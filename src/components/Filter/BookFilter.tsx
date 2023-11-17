@@ -4,12 +4,11 @@ import { FilterType } from '../MainBookList/BookList';
 
 type FilterProps = {
   filter: FilterType[];
-  onSelectId: (filterId: number) => void;
-  onSelectedName: (filterName: string) => void;
+  onSelect: (filterId: number, filterName: string) => void;
   filterName: string;
 };
 //렌더링 원치 않으면 setState 상위 컴포넌트에서 관리
-export function BookFilter({ filter, onSelectId, filterName, onSelectedName }: FilterProps) {
+export function BookFilter({ filter, onSelect, filterName }: FilterProps) {
   const [openCategory, setOpenCategory] = useState<boolean>(false);
 
   return (
@@ -30,8 +29,7 @@ export function BookFilter({ filter, onSelectId, filterName, onSelectedName }: F
                 key={option.filterId}
                 onClick={() => {
                   setOpenCategory(false);
-                  onSelectId(option.filterId);
-                  onSelectedName(option.filterName);
+                  onSelect(option.filterId, option.filterName);
                 }}
                 style={{
                   fontWeight: option.filterName === filterName ? 'bold' : 'normal',
