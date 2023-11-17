@@ -26,7 +26,7 @@ export function BookNav({ addBookLibrary, modalOpen }: AddBookProps) {
           {addBookLibrary ? <img src={IconBookAdd} /> : <img src={IconBookDelete} />}
           <p>내 책장에 담기</p>
         </S.Library>
-        <S.WriteReview onClick={() => modalOpen}>
+        <S.WriteReview onClick={modalOpen}>
           <img src={IconWrite} />
           <p>리뷰쓰기</p>
         </S.WriteReview>
