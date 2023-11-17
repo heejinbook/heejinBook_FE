@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import * as S from './LibraryReview.styles';
-import { useNavigate } from 'react-router-dom';
 import { CreateReview } from '../../CreateReview/CreateReview';
 import { useGetMyReview } from '../../../querys/reviewQuery';
 import { useDeleteReview } from '../../../querys/reviewMutation';
+import { LibraryReviewItems } from './LibraryReviewItems/LibraryReviewItems';
 
 export type MyReview = {
   reviewId: number;
@@ -31,24 +31,9 @@ export function LibraryReview() {
     reviewRating: 0,
   });
 
-  const navigate = useNavigate();
-
   const { data: myReview } = useGetMyReview();
 
   const { deleteReviewMutate } = useDeleteReview();
-
-  type Text = {
-    text: string;
-  };
-
-  const EllipsisText = ({ text }: Text) => {
-    const maxLength = 100;
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
-    } else {
-      return text;
-    }
-  };
 
   return myReview ? (
     <S.LibraryReviewContainer>
@@ -62,19 +47,7 @@ export function LibraryReview() {
         <S.LibraryReviewGrid>
           {myReview.map((review) => (
             <S.LibraryReview key={review.reviewId}>
-              <S.BookImage
-                src={review.bookThumbnail}
-                onClick={() => {
-                  navigate(`/main/books/${review.bookId}`);
-                }}
-              />
-              <S.BookTitle>{review.bookTitle}</S.BookTitle>
-              <S.BookAuthor>{review.bookAuthor}</S.BookAuthor>
-              <S.ReviewPhraseContainer>
-                <p>"</p>
-                <S.ReviewPhrase>{EllipsisText({ text: review.reviewPhrase })}</S.ReviewPhrase>
-                <p>"</p>
-              </S.ReviewPhraseContainer>
+              <LibraryReviewItems {...review} />
               <S.ReviewDeleteNEdit>
                 <p
                   onClick={() => {
