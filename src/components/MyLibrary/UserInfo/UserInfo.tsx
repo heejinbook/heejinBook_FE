@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import * as S from './UserInfo.styles';
 import { getMyInfo } from '../../../apis/user';
 import IconNoImage from '../../../assets/svg/noImageUser.svg';
+import IconPencil from '../../../assets/svg/pencil.svg';
 
 export type UserType = {
   profileUrl: string | null;
@@ -25,7 +26,7 @@ export function UserInfo() {
   return (
     <S.UserInfoContainer>
       <S.EditIcon>
-        <img src="src/assets/svg/pencil.svg" />
+        <img src={IconPencil} />
       </S.EditIcon>
       <S.UserInfo>
         {myInfo.profileUrl === null ? (
