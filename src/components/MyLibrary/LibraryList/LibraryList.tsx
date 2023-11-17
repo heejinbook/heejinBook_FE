@@ -28,27 +28,16 @@ export function LibraryList() {
               <S.LibraryListItems key={book.bookId}>
                 <div style={{ position: 'relative' }}>
                   <S.LibraryDelete src={IconX} onClick={() => deleteBookMutate(book.bookId)} />
-                  <S.LibraryImage
-                    src={book.bookThumbnail}
+                  <div
                     onClick={() => {
                       navigate(`/main/books/${book.bookId}`);
                     }}
-                  />
+                  >
+                    <S.LibraryImage src={book.bookThumbnail} />
+                  </div>
+                  <S.LibraryTitle>{book.bookTitle}</S.LibraryTitle>
+                  <S.LibraryAuthor>{book.bookAuthor}</S.LibraryAuthor>
                 </div>
-                <S.LibraryTitle
-                  onClick={() => {
-                    navigate(`/main/books/${book.bookId}`);
-                  }}
-                >
-                  {book.bookTitle}
-                </S.LibraryTitle>
-                <S.LibraryAuthor
-                  onClick={() => {
-                    navigate(`/main/books/${book.bookId}`);
-                  }}
-                >
-                  {book.bookAuthor}
-                </S.LibraryAuthor>
               </S.LibraryListItems>
             ))
             .reverse()}
