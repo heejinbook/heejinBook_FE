@@ -1,4 +1,5 @@
 import { client } from '.';
+import { UserType } from '../components/MyLibrary/UserInfo/UserInfo';
 
 export type SignUpType = {
   nickname: string;
@@ -38,7 +39,7 @@ export async function kakaoLogin(payload: kakaoType) {
   return response;
 }
 
-export async function getMyInfo() {
+export async function getMyInfo(): Promise<UserType> {
   const response = await client.get(`${USER_URL}/my-info`);
-  return response;
+  return response.data.data;
 }
