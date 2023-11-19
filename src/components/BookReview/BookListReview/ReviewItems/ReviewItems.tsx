@@ -3,6 +3,7 @@ import * as S from './ReviewItems.styles';
 import { Rating } from '../../../common/Rating/Rating';
 import { Heart } from '../../../Heart/Heart';
 import IconNoImage from '../../../../assets/svg/noImageUser.svg';
+import IconComment from '../../../../assets/svg/comment.svg';
 
 type Text = {
   text: string;
@@ -16,6 +17,7 @@ type Props = {
   reviewId: number;
   isLike: boolean;
   likeCount: number;
+  commentCount: number;
   modalOpen: (reviewId: number) => void;
 };
 
@@ -38,6 +40,7 @@ const ReviewItems = React.memo(function ({
   reviewId,
   isLike,
   likeCount,
+  commentCount,
   modalOpen,
 }: Props) {
   const EllipsisText = ({ text }: Text) => {
@@ -65,9 +68,13 @@ const ReviewItems = React.memo(function ({
           <p>"</p>
         </S.ReviewPhraseContainer>
       </S.ReviewContainer>
-      <S.HeartContainer>
+      <S.CountContainer>
+        <S.CommentContainer>
+          <img src={IconComment} />
+          <S.CommentCount>{commentCount}</S.CommentCount>
+        </S.CommentContainer>
         <Heart reviewId={reviewId} isLike={isLike} likeCount={likeCount} />
-      </S.HeartContainer>
+      </S.CountContainer>
     </S.LibraryReview>
   );
 },
