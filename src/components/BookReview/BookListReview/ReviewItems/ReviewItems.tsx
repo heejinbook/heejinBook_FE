@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import * as S from './ReviewItems.styles';
 import { Rating } from '../../../common/Rating/Rating';
 import { Heart } from '../../../Heart/Heart';

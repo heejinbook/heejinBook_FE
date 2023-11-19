@@ -5,7 +5,7 @@ import { Rating } from '../common/Rating/Rating';
 import IconBest from '../../assets/svg/bestBook.svg';
 import { detailBook } from '../../apis/books';
 
-export type detailBookProps = {
+type detailBookProps = {
   books: detailBook;
 };
 
@@ -30,7 +30,7 @@ export function BookInfo({ books }: detailBookProps) {
           </S.ReviewerContainer>
         </S.BookInfoFrame>
       </S.BookInfo>
-      <BookIntroduction books={books} />
+      <BookIntroduction {...books} />
     </S.BookInfoContainer>
   );
 }

@@ -33,6 +33,7 @@ export function useCreateReview() {
     mutationFn: post,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reviewList'] });
+      queryClient.invalidateQueries({ queryKey: ['detailBook'] });
     },
   });
   return { ...mutation, createReviewMutate: mutation.mutateAsync };
