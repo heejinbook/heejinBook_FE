@@ -5,7 +5,7 @@ import { Heart } from '../../../Heart/Heart';
 import IconNoImage from '../../../../assets/svg/noImageUser.svg';
 import IconComment from '../../../../assets/svg/comment.svg';
 
-type Text = {
+export type Text = {
   text: string;
 };
 

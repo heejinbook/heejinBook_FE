@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { Swiper } from 'swiper/types';
 import { Rating } from '../../common/Rating/Rating';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
+import { Text } from '../BookListReview/ReviewItems/ReviewItems';
 
 type reviewProps = {
   review: ReviewType[];
@@ -43,6 +44,15 @@ export function BookSwiper({ review }: reviewProps) {
   const modalOpenHandler = (reviewId: number) => {
     setSelectedReviewId(reviewId);
     setReviewModal(true);
+  };
+
+  const EllipsisText = ({ text }: Text) => {
+    const maxLength = 155;
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    } else {
+      return text;
+    }
   };
 
   return (
@@ -81,7 +91,7 @@ export function BookSwiper({ review }: reviewProps) {
                     <S.ReviewPhrase>{r.reviewPhrase}</S.ReviewPhrase>
                     <img src={IconRightQuote} />
                   </S.PhraseContainer>
-                  <S.ReviewContent>{r.reviewContents}</S.ReviewContent>
+                  <S.ReviewContent>{EllipsisText({ text: r.reviewContents })}</S.ReviewContent>
                 </S.ReviewContainer>
                 <S.CountContainer>
                   <S.CommentContainer>
