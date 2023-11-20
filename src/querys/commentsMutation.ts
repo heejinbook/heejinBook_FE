@@ -18,6 +18,7 @@ export function useCreateComment() {
     mutationFn: post,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['detailReview'] });
+      queryClient.invalidateQueries({ queryKey: ['reviewList'] });
     },
   });
   return { ...mutation, postCommentMutate: mutation.mutateAsync };
