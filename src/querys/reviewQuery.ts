@@ -36,6 +36,7 @@ export function useGetDetailReview(selectedReviewId: number | null) {
         reviewRating: 0,
         isLike: false,
         likeCount: 0,
+        commentCount: 0,
         comments: [],
       };
     }

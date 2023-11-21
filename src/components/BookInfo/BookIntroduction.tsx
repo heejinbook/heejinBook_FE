@@ -1,29 +1,36 @@
-import { detailBookProps } from './BookInfo';
 import * as S from './BookIntroduction.styles';
 
-export function BookIntroduction({ books }: detailBookProps) {
+type Props = {
+  description: string;
+  category: string;
+  releaseDate: string;
+  publisher: string;
+  isbn: string;
+};
+
+export function BookIntroduction({ description, category, releaseDate, publisher, isbn }: Props) {
   return (
     <S.IntroductionContainer>
       <S.Introduction>
         <p>책 소개</p>
-        <S.BookContent>{books.description}</S.BookContent>
+        <S.BookContent>{description}</S.BookContent>
       </S.Introduction>
       <S.BookBox>
         <S.BookCategory>
           <p>카테고리</p>
-          {books.category}
+          {category}
         </S.BookCategory>
         <S.BookDate>
           <p>출간일</p>
-          {books.releaseDate}
+          {releaseDate}
         </S.BookDate>
         <S.BookPublisher>
           <p>출판사</p>
-          {books.publisher}
+          {publisher}
         </S.BookPublisher>
         <S.BookIsbn>
           <p>ISBN</p>
-          {books.isbn}
+          {isbn}
         </S.BookIsbn>
       </S.BookBox>
     </S.IntroductionContainer>

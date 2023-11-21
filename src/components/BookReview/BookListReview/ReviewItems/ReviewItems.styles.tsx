@@ -66,11 +66,28 @@ export const ReviewPhrase = styled.div`
   padding-top: 3px;
 `;
 
-export const HeartContainer = styled.div`
+export const CountContainer = styled.div`
   width: 100%;
   height: 50px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 30px 10px 0;
+  padding: 0 25px 10px 25px;
+`;
+
+export const CommentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+`;
+export const CommentCount = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  color: #bbb49e;
 `;
