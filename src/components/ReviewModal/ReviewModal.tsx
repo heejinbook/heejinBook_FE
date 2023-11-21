@@ -56,7 +56,7 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
           <S.CommentInfo onClick={() => setCommentOpen(!commentsOpen)}>
             <img src={IconComment} />
             <p>
-              comment <span>{review.comments.length}</span>
+              comment <span>{review.commentCount}</span>
             </p>
           </S.CommentInfo>
           {commentsOpen && <Comment reviewId={review.reviewId} comments={review.comments} />}

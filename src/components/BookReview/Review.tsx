@@ -13,6 +13,7 @@ export type ReviewType = {
   reviewRating: number;
   isLike: boolean;
   likeCount: number;
+  commentCount: number;
   comments: CommentType[];
 };
 
