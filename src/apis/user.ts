@@ -18,6 +18,10 @@ export type kakaoType = {
   code: string;
 };
 
+export type NicknameType = {
+  nickname: string;
+};
+
 const USER_URL = '/api/user';
 
 export async function signUp(payload: FormData) {
@@ -42,4 +46,9 @@ export async function kakaoLogin(payload: kakaoType) {
 export async function getMyInfo(): Promise<UserType> {
   const response = await client.get(`${USER_URL}/my-info`);
   return response.data.data;
+}
+
+export async function patchNickname(nickname: string) {
+  const response = await client.patch(`${USER_URL}/nickname?nickname=${nickname}`);
+  return response;
 }
