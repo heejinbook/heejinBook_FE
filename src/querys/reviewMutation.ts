@@ -32,6 +32,7 @@ export function useCreateReview() {
   const mutation = useMutation({
     mutationFn: post,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['swiperReview'] });
       queryClient.invalidateQueries({ queryKey: ['reviewList'] });
       queryClient.invalidateQueries({ queryKey: ['detailBook'] });
     },
