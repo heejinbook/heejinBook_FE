@@ -14,9 +14,14 @@ type Props = {
 };
 
 const equalProps = (prevProps: any, nextProps: any) => {
-  return (
-    prevProps.avgRating === nextProps.avgRating && prevProps.reviewCount === nextProps.reviewCount
-  );
+  const key1 = Object.keys(prevProps);
+  const key2 = Object.keys(nextProps);
+
+  if (key1.length !== key2.length) {
+    return false;
+  }
+
+  return key1.every((key) => prevProps[key] === nextProps[key]);
 };
 
 const BookItems = React.memo(function ({
