@@ -7,6 +7,7 @@ import { MyLibraryPage } from './MyLibraryPage/MyLibraryPage';
 import { BookPage } from './BookPage/BookPage';
 import { Kakao } from '../components/Kakao/Kakao';
 import { MainLayout } from '../components/MainLayout/MainLayout';
+import { ProtectedRoute } from './ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'main',
-        element: <MainLayout />,
+        element: (
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        ),
         children: [
           {
             index: true,
