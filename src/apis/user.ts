@@ -1,4 +1,5 @@
 import { client } from '.';
+import { UserType } from '../components/MyLibrary/UserInfo/UserInfo';
 
 export type SignUpType = {
   nickname: string;
@@ -15,6 +16,10 @@ export type LoginType = {
 
 export type kakaoType = {
   code: string;
+};
+
+export type NicknameType = {
+  nickname: string;
 };
 
 const USER_URL = '/api/user';
@@ -38,7 +43,12 @@ export async function kakaoLogin(payload: kakaoType) {
   return response;
 }
 
-export async function getMyInfo() {
+export async function getMyInfo(): Promise<UserType> {
   const response = await client.get(`${USER_URL}/my-info`);
+  return response.data.data;
+}
+
+export async function patchNickname(nickname: string) {
+  const response = await client.patch(`${USER_URL}/nickname?nickname=${nickname}`);
   return response;
 }
