@@ -39,6 +39,10 @@ export const ReviewSlide = styled(SwiperSlide)`
   background-color: #fcf2cc82;
   max-width: 900px;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 30px 50px;
   border-radius: 50px;
   box-sizing: border-box;

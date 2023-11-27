@@ -45,20 +45,20 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
               <p>"</p>
             </S.PhraseContainer>
             <S.ReviewContent>{review.reviewContents}</S.ReviewContent>
-            <S.HeartContainer>
+            <S.CountContainer>
+              <S.CommentContainer onClick={() => setCommentOpen(!commentsOpen)}>
+                <img src={IconComment} />
+                <p>
+                  comment <span>{review.commentCount}</span>
+                </p>
+              </S.CommentContainer>
               <Heart
                 reviewId={review.reviewId}
                 isLike={review.isLike}
                 likeCount={review.likeCount}
               />
-            </S.HeartContainer>
+            </S.CountContainer>
           </S.ReviewContainer>
-          <S.CommentInfo onClick={() => setCommentOpen(!commentsOpen)}>
-            <img src={IconComment} />
-            <p>
-              comment <span>{review.commentCount}</span>
-            </p>
-          </S.CommentInfo>
           {commentsOpen && <Comment reviewId={review.reviewId} comments={review.comments} />}
         </S.Review>
       </S.ReviewModalContainer>
