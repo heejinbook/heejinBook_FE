@@ -44,7 +44,7 @@ const ReviewItems = React.memo(function ({
   modalOpen,
 }: Props) {
   const EllipsisText = ({ text }: Text) => {
-    const maxLength = 20;
+    const maxLength = 50;
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     } else {

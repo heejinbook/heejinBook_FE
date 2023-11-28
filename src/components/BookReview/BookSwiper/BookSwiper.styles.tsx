@@ -7,7 +7,7 @@ export const BookSwiperContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 25px 50px;
   position: relative;
 `;
 
@@ -26,7 +26,8 @@ export const RightBtn = styled.img`
 `;
 
 export const BookSwiper = styled(Swiper)`
-  max-width: 900px;
+  max-width: 800px;
+  min-width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +38,7 @@ export const BookSwiper = styled(Swiper)`
 
 export const ReviewSlide = styled(SwiperSlide)`
   background-color: #fcf2cc82;
-  max-width: 900px;
+  max-width: 800px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -60,18 +61,7 @@ export const UserImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 100%;
-  padding: 15px 0;
-`;
-
-export const PhraseContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  img {
-    width: 24px;
-    height: 24px;
-    margin: 0 10px;
-  }
+  margin-bottom: 10px;
 `;
 
 export const ReviewTitle = styled.div`
@@ -82,7 +72,20 @@ export const ReviewTitle = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  padding: 15px 0;
+  margin: 10px 0;
+`;
+
+export const PhraseContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    display: flex;
+    margin: 0;
+    padding: 0 10px;
+    font-size: 24px;
+    color: #503f15;
+  }
 `;
 
 export const ReviewPhrase = styled.div`
@@ -92,9 +95,9 @@ export const ReviewPhrase = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: #503f15;
   font-size: 14px;
   font-weight: bold;
-  padding: 15px 0;
 `;
 
 export const ReviewContent = styled.div`
@@ -105,7 +108,7 @@ export const ReviewContent = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  padding: 15px 0;
+  margin: 15px 0;
 `;
 
 export const CountContainer = styled.div`
