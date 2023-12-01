@@ -39,5 +39,6 @@ export function useGetDetailBook() {
   return useQuery<detailBook>({
     queryKey: ['detailBook'],
     queryFn: () => getBook(Number(bookId)),
+    retry: 0,
   });
 }
