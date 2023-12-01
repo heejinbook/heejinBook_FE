@@ -32,7 +32,7 @@ export function LogInPage() {
       .catch((error) => {
         if (!validateEmail(data.email)) {
           Toast.error('이메일 형식이 옳지 않습니다.');
-        } else if (error.response.status === 404) {
+        } else if (error.response.status === 400) {
           Toast.error('이메일이나 비밀번호가 잘못 입력됐습니다');
         }
       });
