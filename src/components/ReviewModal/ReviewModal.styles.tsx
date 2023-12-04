@@ -14,7 +14,6 @@ export const ReviewModalContainer = styled.div<CreateRContainer>`
 
 export const Review = styled.div<CreateRContainer>`
   width: 600px;
-  /* min-width: 400px; */
   max-height: 600px;
   display: ${({ reviewModal }) => (reviewModal ? 'block' : 'none')};
   justify-content: center;
@@ -48,7 +47,7 @@ export const ReviewContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 50px;
+  padding: 20px 30px;
 `;
 export const UserImage = styled.img`
   width: 80px;
@@ -104,23 +103,23 @@ export const ReviewContent = styled.div`
   margin-bottom: 10px;
 `;
 
-export const HeartContainer = styled.div`
+export const CountContainer = styled.div`
   width: 100%;
+  height: 30px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-export const CommentInfo = styled.div`
-  width: 150px;
+export const CommentContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 0 0 10px 5px;
   img {
     width: 20px;
     height: 20px;
-    margin-right: 3px;
+    margin-right: 5px;
   }
   p {
     margin: 0;

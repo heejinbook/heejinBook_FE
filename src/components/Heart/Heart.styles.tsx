@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Heart = styled.div`
-  width: 50px;
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -7,14 +7,15 @@ export const ReviewFilterContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
-  p {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #b9b19c;
-    font-weight: bold;
-  }
+`;
+
+export const ReviewCount = styled.div`
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b9b19c;
+  font-weight: bold;
 `;
 
 export const LibraryReviewGrid = styled.div`

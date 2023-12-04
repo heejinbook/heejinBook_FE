@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const LibraryReview = styled.div`
-  width: 350px;
+  max-width: 350px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -19,34 +19,38 @@ export const ReviewContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15px 0;
+  padding: 15px;
 `;
 
 export const ReviewImage = styled.img`
   width: 80px;
   height: 80px;
-  border-radius: 100%;
+  border-radius: 50%;
+  margin-bottom: 10px;
 `;
 
 export const ReviewTitle = styled.div`
-  width: 300px;
+  max-width: 300px;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  margin: 16px 0 2px 0;
+  margin: 10px 0 5px 0;
   text-align: center;
 `;
 
 export const ReviewPhraseContainer = styled.div`
-  width: auto;
+  width: 350px;
   height: auto;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
+  justify-content: center;
   p {
+    height: auto;
     display: flex;
-    margin: 0 20px;
+    margin: 0;
+    padding: 0 10px;
     font-size: 24px;
     color: #503f15;
   }
@@ -58,12 +62,12 @@ export const ReviewPhrase = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
+  color: #503f15;
   text-align: center;
   font-size: 14px;
   font-weight: bold;
-  padding-top: 3px;
 `;
 
 export const CountContainer = styled.div`
@@ -85,6 +89,7 @@ export const CommentContainer = styled.div`
     margin-right: 5px;
   }
 `;
+
 export const CommentCount = styled.div`
   font-size: 14px;
   font-weight: bold;

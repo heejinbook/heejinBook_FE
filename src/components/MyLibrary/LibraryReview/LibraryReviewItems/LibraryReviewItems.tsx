@@ -23,7 +23,7 @@ export function LibraryReviewItems({
   const navigate = useNavigate();
 
   const EllipsisText = ({ text }: Text) => {
-    const maxLength = 100;
+    const maxLength = 30;
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     } else {
@@ -32,7 +32,7 @@ export function LibraryReviewItems({
   };
 
   return (
-    <>
+    <S.ReviewContainer>
       <S.BookImage
         src={bookThumbnail}
         onClick={() => {
@@ -46,6 +46,6 @@ export function LibraryReviewItems({
         <S.ReviewPhrase>{EllipsisText({ text: reviewPhrase })}</S.ReviewPhrase>
         <p>"</p>
       </S.ReviewPhraseContainer>
-    </>
+    </S.ReviewContainer>
   );
 }

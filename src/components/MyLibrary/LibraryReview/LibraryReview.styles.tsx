@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const LibraryReviewContainer = styled.div`
+  padding-bottom: 30px;
   p {
     padding: 0 0 0 20px;
     color: #b9b19c;
@@ -20,7 +21,7 @@ export const LibraryReviewGrid = styled.div`
   }
 `;
 export const LibraryReview = styled.div`
-  width: 350px;
+  max-width: 350px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -33,7 +34,7 @@ export const LibraryReview = styled.div`
 
 export const ReviewDeleteNEdit = styled.div`
   width: 100%;
-  height: 30px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;

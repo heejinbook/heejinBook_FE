@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const LibraryListContainer = styled.div`
   width: 100%;
+  padding-bottom: 30px;
   p {
     padding-left: 20px;
     color: #b9b19c;

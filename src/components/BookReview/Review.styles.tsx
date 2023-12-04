@@ -10,7 +10,6 @@ export const Review = styled.div`
     font-size: 16px;
     font-weight: bold;
     margin: 0;
-    margin-bottom: 12px;
   }
 `;
 

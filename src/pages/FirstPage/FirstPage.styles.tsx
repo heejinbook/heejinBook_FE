@@ -4,7 +4,11 @@ export const FirstPageContainer = styled.div`
   max-width: 1920px;
   height: 100vh;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
+
 export const BackImage = styled.img`
   width: 100%;
   height: 100%;

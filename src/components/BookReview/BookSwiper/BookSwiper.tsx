@@ -87,9 +87,9 @@ export function BookSwiper({ review }: reviewProps) {
                   <Rating count={r.reviewRating} readonly />
                   <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
                   <S.PhraseContainer>
-                    <img src={IconLeftQuote} />
+                    <p>"</p>
                     <S.ReviewPhrase>{r.reviewPhrase}</S.ReviewPhrase>
-                    <img src={IconRightQuote} />
+                    <p>"</p>
                   </S.PhraseContainer>
                   <S.ReviewContent>{EllipsisText({ text: r.reviewContents })}</S.ReviewContent>
                 </S.ReviewContainer>

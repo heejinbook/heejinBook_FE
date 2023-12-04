@@ -43,7 +43,7 @@ export function BookListReview() {
       />
       <S.LibraryReviewContainer>
         <S.ReviewFilterContainer>
-          <p>리뷰 {data?.totalElements}</p>
+          <S.ReviewCount>리뷰 {data?.totalElements}</S.ReviewCount>
           <ReviewFilter
             filterName={filterName}
             onSelectName={(filterName: string) => setFilterName(filterName)}
