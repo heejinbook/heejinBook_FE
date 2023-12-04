@@ -6,6 +6,7 @@ import { Toast } from './components/common/Toastify/Toastify.tsx';
 
 const loginError = () => {
   Toast.error('로그인 후 이용해주세요');
+  localStorage.clear();
   setTimeout(() => {
     window.location.href = '/';
   }, 1500);
