@@ -13,7 +13,6 @@ export function DeleteModal({ modalOpen, modalClose, clickDelete, selected, phra
     clickDelete(selected);
     modalClose();
   };
-  console.log(selected);
 
   return (
     <S.DeleteModalContainer modalOpen={modalOpen}>

@@ -37,7 +37,7 @@ export const DeleteModal = styled.div<Modal>`
     height: 80px;
     margin: 0;
     padding: 0;
-    color: #503f15;
+    color: #503f15 !important;
   }
 `;
 
