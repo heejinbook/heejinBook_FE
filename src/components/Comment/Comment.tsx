@@ -6,6 +6,7 @@ import { Contents } from '../../apis/review';
 import { Input } from '../common/Input/Input';
 import { useState } from 'react';
 import { useDeleteComment, useEditComment } from '../../querys/commentsMutation';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 
 type CommentProps = {
   reviewId: number;
@@ -28,12 +29,14 @@ export function Comment({ comments, reviewId }: CommentProps) {
   const [myContents, setMyContents] = useState<Contents>({
     contents: '',
   });
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<number>(0);
+
+  const modalCloseHandler = () => {
+    setModalOpen(false);
+  };
 
   const { deleteCommentMutate } = useDeleteComment();
-
-  const deleteMyComment = (commentId: number) => {
-    deleteCommentMutate(commentId);
-  };
 
   const editBtnInVisible = (commentId: number, contents: string) => {
     setMyContents({
@@ -63,6 +66,13 @@ export function Comment({ comments, reviewId }: CommentProps) {
 
   return (
     <S.Comment>
+      <DeleteModal
+        modalOpen={modalOpen}
+        modalClose={modalCloseHandler}
+        clickDelete={deleteCommentMutate}
+        selected={selected}
+        phrase={'댓글을 삭제하시겠습니까?'}
+      />
       <CreateComment reviewId={reviewId} />
       {comments.length > 0 ? (
         comments.map((comment) => (
@@ -97,7 +107,13 @@ export function Comment({ comments, reviewId }: CommentProps) {
             </S.Comments>
             {comment.isMine && (
               <S.IconXContainer>
-                <img src={IconX} onClick={() => deleteMyComment(comment.commentId)} />
+                <img
+                  src={IconX}
+                  onClick={() => {
+                    setModalOpen(true);
+                    setSelected(comment.commentId);
+                  }}
+                />
                 {!invisible && (
                   <button onClick={() => editBtnInVisible(comment.commentId, comment.contents)}>
                     수정
