@@ -4,6 +4,7 @@ import { CreateReview } from '../../CreateReview/CreateReview';
 import { useGetMyReview } from '../../../querys/reviewQuery';
 import { useDeleteReview } from '../../../querys/reviewMutation';
 import { LibraryReviewItems } from './LibraryReviewItems/LibraryReviewItems';
+import { DeleteModal } from '../../DeleteModal/DeleteModal';
 
 export type MyReview = {
   reviewId: number;
@@ -30,10 +31,16 @@ export function LibraryReview() {
     reviewTitle: '',
     reviewRating: 0,
   });
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<number>(0);
 
   const { data: myReview } = useGetMyReview();
 
   const { deleteReviewMutate } = useDeleteReview();
+
+  const modalCloseHandler = () => {
+    setModalOpen(false);
+  };
 
   return myReview ? (
     <S.LibraryReviewContainer>
@@ -41,6 +48,13 @@ export function LibraryReview() {
         reviewModal={reviewModal}
         setReviewModal={setReviewModal}
         writtenReview={writtenReview}
+      />
+      <DeleteModal
+        modalOpen={modalOpen}
+        modalClose={modalCloseHandler}
+        clickDelete={deleteReviewMutate}
+        selected={selected}
+        phrase={'리뷰를 삭제하시겠습니까?'}
       />
       <p>리뷰 {myReview.length}</p>
       {myReview.length > 0 ? (
@@ -51,7 +65,8 @@ export function LibraryReview() {
               <S.ReviewDeleteNEdit>
                 <p
                   onClick={() => {
-                    deleteReviewMutate(review.reviewId);
+                    setModalOpen(true);
+                    setSelected(review.reviewId);
                   }}
                 >
                   리뷰 삭제
