@@ -1,7 +1,7 @@
 import * as S from './Alarm.styles';
 import IconBell from '../../assets/svg/bell.svg';
 import { AlarmType } from '../MainLayout/MainLayout';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReviewModal } from '../ReviewModal/ReviewModal';
 
 type AlarmProps = {
@@ -13,6 +13,21 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
   const [openAlarm, setOpenAlarm] = useState<boolean>(false);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const clickOutsideHandler = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event?.target as Node)) {
+      setOpenAlarm(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', clickOutsideHandler, true);
+    return () => {
+      document.removeEventListener('click', clickOutsideHandler, true);
+    };
+  }, []);
 
   const allAlarmDeleteHandler = () => {
     setAlarmData([]);
@@ -56,7 +71,7 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
   };
 
   return (
-    <>
+    <div ref={ref}>
       <ReviewModal
         reviewModal={reviewModal}
         setReviewModal={setReviewModal}
@@ -104,6 +119,6 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
           </S.AlarmList>
         )}
       </S.Alarm>
-    </>
+    </div>
   );
 }
