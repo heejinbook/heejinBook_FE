@@ -1,10 +1,8 @@
 import * as S from './Alarm.styles';
 import IconBell from '../../assets/svg/bell.svg';
 import { AlarmType } from '../MainLayout/MainLayout';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReviewModal } from '../ReviewModal/ReviewModal';
-import { getMyReview } from '../../apis/library';
-import { ReviewType } from '../BookReview/Review';
 
 type AlarmProps = {
   alarmData: AlarmType[];
@@ -12,26 +10,24 @@ type AlarmProps = {
 };
 
 export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
-  const [reviewItems, setReviewItems] = useState<ReviewType[]>([]);
   const [openAlarm, setOpenAlarm] = useState<boolean>(false);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
-  const [selectedReview, setSelectedReview] = useState<ReviewType | null>(null);
+  const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
 
-  useEffect(() => {
-    getMyReview()
-      .then((result) => {
-        setReviewItems(result.data.data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  const ref = useRef<HTMLDivElement>(null);
 
-  const modalOpenHandler = (alarmData: AlarmType) => {
-    const equalReviewId = reviewItems.find((item) => item.reviewId === alarmData.reviewId);
-    if (equalReviewId) {
-      setSelectedReview(equalReviewId);
-      setReviewModal(true);
+  const clickOutsideHandler = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event?.target as Node)) {
+      setOpenAlarm(false);
     }
   };
+
+  useEffect(() => {
+    document.addEventListener('click', clickOutsideHandler, true);
+    return () => {
+      document.removeEventListener('click', clickOutsideHandler, true);
+    };
+  }, []);
 
   const allAlarmDeleteHandler = () => {
     setAlarmData([]);
@@ -75,11 +71,11 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
   };
 
   return (
-    <>
+    <div ref={ref}>
       <ReviewModal
         reviewModal={reviewModal}
         setReviewModal={setReviewModal}
-        selectedReview={selectedReview}
+        selectedReviewId={selectedReviewId}
       />
       <S.Alarm>
         <S.Bell
@@ -102,7 +98,13 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
             ) : null}
             {alarmData.length > 0 ? (
               alarmData.map((alarm, idx) => (
-                <S.List key={idx} onClick={() => modalOpenHandler(alarm)}>
+                <S.List
+                  key={idx}
+                  onClick={() => {
+                    setSelectedReviewId(alarm.reviewId);
+                    setReviewModal(true);
+                  }}
+                >
                   <S.ListInfo>
                     {alarm.nickname}
                     님이 회원님의 리뷰를 좋아합니다.<span> </span>
@@ -117,6 +119,6 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
           </S.AlarmList>
         )}
       </S.Alarm>
-    </>
+    </div>
   );
 }
