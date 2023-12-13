@@ -7,13 +7,13 @@ export const Alarm = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
 `;
 
 export const Bell = styled.img`
   width: 24px;
   height: 24px;
   cursor: pointer;
-  position: relative;
 `;
 
 export const YesAlarm = styled.div`
@@ -39,7 +39,7 @@ export const AlarmList = styled.div`
   z-index: 997;
   overflow-y: auto;
   position: absolute;
-  top: 68%;
+  top: 100%;
 `;
 
 export const AllDelete = styled.div`

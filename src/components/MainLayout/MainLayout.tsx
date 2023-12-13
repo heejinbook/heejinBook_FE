@@ -18,7 +18,7 @@ export function MainLayout() {
   useEffect(() => {
     const userId = getItem(localStorageKey.userId);
 
-    const eventSource = new EventSource(`http://43.200.172.180:8080/subscribe/${userId}`);
+    const eventSource = new EventSource(`http://3.37.130.182:8080/subscribe/${userId}`);
 
     eventSource.onopen = async () => {
       await console.log('sse opened!');
