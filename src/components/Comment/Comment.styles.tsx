@@ -80,6 +80,7 @@ export const IconXContainer = styled.div`
     border-radius: 5px;
     background-color: #fcf2cc;
     color: #503f15;
+    padding: 1px 6px;
     font-size: 12px;
     font-weight: bold;
   }
@@ -90,7 +91,9 @@ export const NoComment = styled.div`
   flex-direction: column;
   align-items: center;
   p {
-    margin-bottom: 5px;
+    margin: 0 0 5px 0;
     font-size: 14px;
+    color: #503f15;
+    font-weight: bold;
   }
 `;
