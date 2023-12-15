@@ -52,12 +52,17 @@ export const ReviewDeleteNEdit = styled.div`
 `;
 
 export const NoReview = styled.div`
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  height: 257px;
   p {
+    padding: 0;
+    margin: 16px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #b9b19c;
     text-align: center;
   }
 `;

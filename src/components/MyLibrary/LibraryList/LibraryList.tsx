@@ -31,40 +31,46 @@ export function LibraryList() {
     libraryBook && (
       <S.LibraryListContainer>
         <p>전체 {libraryBook.length}</p>
-        <S.LibraryList>
-          {libraryBook
-            .map((book) => (
-              <S.LibraryListItems key={book.bookId}>
-                <DeleteModal
-                  modalOpen={modalOpen}
-                  modalClose={modalCloseHandler}
-                  clickDelete={deleteBookMutate}
-                  selected={selected}
-                  phrase={'선택한 책을 책장에서 삭제하시겠습니까?'}
-                />
-
-                <div style={{ position: 'relative' }}>
-                  <S.LibraryDelete
-                    src={IconX}
-                    onClick={() => {
-                      setModalOpen(true);
-                      setSelected(book.bookId);
-                    }}
+        {libraryBook.length > 0 ? (
+          <S.LibraryList>
+            {libraryBook
+              .map((book) => (
+                <S.LibraryListItems key={book.bookId}>
+                  <DeleteModal
+                    modalOpen={modalOpen}
+                    modalClose={modalCloseHandler}
+                    clickDelete={deleteBookMutate}
+                    selected={selected}
+                    phrase={'선택한 책을 책장에서 삭제하시겠습니까?'}
                   />
-                  <div
-                    onClick={() => {
-                      navigate(`/main/books/${book.bookId}`);
-                    }}
-                  >
-                    <S.LibraryImage src={book.bookThumbnail} />
+
+                  <div style={{ position: 'relative' }}>
+                    <S.LibraryDelete
+                      src={IconX}
+                      onClick={() => {
+                        setModalOpen(true);
+                        setSelected(book.bookId);
+                      }}
+                    />
+                    <div
+                      onClick={() => {
+                        navigate(`/main/books/${book.bookId}`);
+                      }}
+                    >
+                      <S.LibraryImage src={book.bookThumbnail} />
+                    </div>
+                    <S.LibraryTitle>{book.bookTitle}</S.LibraryTitle>
+                    <S.LibraryAuthor>{book.bookAuthor}</S.LibraryAuthor>
                   </div>
-                  <S.LibraryTitle>{book.bookTitle}</S.LibraryTitle>
-                  <S.LibraryAuthor>{book.bookAuthor}</S.LibraryAuthor>
-                </div>
-              </S.LibraryListItems>
-            ))
-            .reverse()}
-        </S.LibraryList>
+                </S.LibraryListItems>
+              ))
+              .reverse()}
+          </S.LibraryList>
+        ) : (
+          <S.NoBook>
+            <p>책장에 책이 없어요</p>
+          </S.NoBook>
+        )}
       </S.LibraryListContainer>
     )
   );
