@@ -26,6 +26,7 @@ export const GoToLibrary = styled.div`
   font-weight: bold;
   color: #503f15;
 `;
+
 export const BtnContainer = styled.div`
   display: flex;
   align-items: center;
@@ -34,8 +35,8 @@ export const BtnContainer = styled.div`
     padding: 10px 40px;
     border: none;
     border-radius: 5px;
-    background-color: #b9b19c9a;
-    color: #503f15;
+    background-color: #503f15;
+    color: #fffdf6;
     font-size: 14px;
     font-weight: bold;
     margin-left: 15px;

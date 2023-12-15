@@ -30,6 +30,7 @@ export const DeleteModal = styled.div<Modal>`
   box-sizing: border-box;
   p {
     font-size: 16px;
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +51,10 @@ export const ButtonContainer = styled.div`
   padding: 12px 0;
 `;
 
-export const CancelBtn = styled.button`
+export const CancelBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   width: 100%;
   height: 50px;
@@ -63,7 +67,10 @@ export const CancelBtn = styled.button`
   font-weight: bold;
 `;
 
-export const DeleteBtn = styled.button`
+export const DeleteBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   width: 100%;
   height: 50px;

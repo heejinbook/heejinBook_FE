@@ -115,6 +115,8 @@ export const CommentContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   img {
     width: 20px;
@@ -123,6 +125,10 @@ export const CommentContainer = styled.div`
   }
   p {
     margin: 0;
+    color: #bbb49e;
+  }
+  span {
+    margin-left: 5px;
     color: #bbb49e;
   }
 `;

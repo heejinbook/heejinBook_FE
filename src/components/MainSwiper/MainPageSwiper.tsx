@@ -13,7 +13,7 @@ export type SwiperItems = {
   title: string;
   author: string;
   thumbnail: string;
-  backColor: string;
+  avgRating: number;
 };
 
 export function MainPageSwiper() {
