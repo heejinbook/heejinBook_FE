@@ -4,6 +4,7 @@ export const IntroductionContainer = styled.div`
   padding: 24px 24px 30px 24px;
   border-bottom: 15px solid #fcf2cc82;
 `;
+
 export const Introduction = styled.div`
   margin-bottom: 16px;
   p {
@@ -14,15 +15,18 @@ export const Introduction = styled.div`
     margin-bottom: 12px;
   }
 `;
+
 export const BookContent = styled.div`
   font-size: 14px;
 `;
+
 export const BookBox = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
-export const BookCategory = styled.div`
-  width: auto;
+
+export const Book = styled.div`
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -37,6 +41,3 @@ export const BookCategory = styled.div`
     font-size: 12px;
   }
 `;
-export const BookDate = styled(BookCategory)``;
-export const BookPublisher = styled(BookCategory)``;
-export const BookIsbn = styled(BookCategory)``;
