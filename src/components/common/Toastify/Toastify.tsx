@@ -2,6 +2,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ReactNode } from 'react';
 import { toast, ToastContainer, ToastOptions } from 'react-toastify';
 import styled from '@emotion/styled';
+import IconSuccess from '../../../assets/svg/success.svg';
+import IconFalse from '../../../assets/svg/false.svg';
 
 type ToastifyOptions = {
   position:
@@ -29,14 +31,14 @@ export const Toast = {
     toast.success(message, {
       ...defaultOption,
       ...options,
-      icon: options.icon || defaultOption.icon,
+      icon: <img src={IconSuccess} />,
     });
   },
   error: (message: ReactNode, options: ToastOptions = {}) => {
     toast.error(message, {
       ...defaultOption,
       ...options,
-      icon: options.icon || defaultOption.icon,
+      icon: <img src={IconFalse} />,
     });
   },
 };
@@ -47,13 +49,15 @@ export const StyledToastContainer = styled(ToastContainer)`
   align-items: center;
   justify-content: center;
   .Toastify__toast {
-    background-color: black;
-    color: white;
+    background-color: #fcf2cc;
+    color: #503f15;
   }
   .Toastify__toast--success {
     font-size: 14px;
+    font-weight: bold;
   }
   .Toastify__toast--error {
+    font-weight: bold;
     font-size: 14px;
   }
 `;
