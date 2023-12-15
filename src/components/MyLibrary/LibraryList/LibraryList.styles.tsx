@@ -49,3 +49,18 @@ export const LibraryAuthor = styled.div`
   width: 170px;
   font-size: 14px;
 `;
+
+export const NoBook = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 257px;
+  p {
+    padding: 0;
+    margin: 16px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #b9b19c;
+    text-align: center;
+  }
+`;
