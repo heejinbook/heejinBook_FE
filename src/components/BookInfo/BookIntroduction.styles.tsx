@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const IntroductionContainer = styled.div`
+  width: 100%;
   padding: 24px 24px 30px 24px;
   border-bottom: 15px solid #fcf2cc82;
 `;
