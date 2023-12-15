@@ -8,7 +8,7 @@ export function LibraryBar() {
 
   return (
     <S.LibraryBarContainer>
-      <S.LibraryBar>
+      <S.LibraryBar view={view}>
         <p onClick={() => setView('list')}>책장</p>
         <p onClick={() => setView('review')}>리뷰</p>
       </S.LibraryBar>
