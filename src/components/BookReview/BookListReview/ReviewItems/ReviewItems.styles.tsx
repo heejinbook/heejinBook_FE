@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const LibraryReview = styled.div`
-  max-width: 350px;
+  max-width: 400px;
   height: auto;
   display: flex;
   flex-direction: column;

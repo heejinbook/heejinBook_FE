@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+export const MainPageContainer = styled.div``
+
 export const Search = styled.div`
   height: auto;
   display: flex;
@@ -15,8 +17,9 @@ export const SearchNFilter = styled.div`
 `;
 
 export const BookListContainer = styled.div`
+  /* height: calc(100vh - 500px); */
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   justify-items: center;
   padding: 0 20px;
@@ -26,7 +29,7 @@ export const PaginationWrapper = styled.div`
   .pagination {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     padding: 10px 0;
     gap: 10px;
 

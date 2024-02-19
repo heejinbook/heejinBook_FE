@@ -24,7 +24,7 @@ export const NoReview = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  height: 360px;
   p {
     text-align: center;
   }

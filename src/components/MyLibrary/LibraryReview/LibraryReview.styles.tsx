@@ -12,9 +12,10 @@ export const LibraryReviewContainer = styled.div`
 export const LibraryReviewGrid = styled.div`
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   justify-items: center;
   padding: 0 20px;
+  height: 100vh;
   p {
     color: #b9b19c;
     font-weight: bold;
@@ -22,7 +23,7 @@ export const LibraryReviewGrid = styled.div`
 `;
 export const LibraryReview = styled.div`
   max-width: 350px;
-  height: auto;
+  height: 380px;
   display: flex;
   flex-direction: column;
   justify-content: center;

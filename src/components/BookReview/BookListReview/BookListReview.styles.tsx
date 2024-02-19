@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 
-export const LibraryReviewContainer = styled.div``;
-
 export const ReviewFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -18,16 +16,12 @@ export const ReviewCount = styled.div`
   font-weight: bold;
 `;
 
-export const LibraryReviewGrid = styled.div`
+export const ReviewGrid = styled.div`
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   justify-items: center;
   padding: 15px 20px 0 20px;
-  p {
-    color: #b9b19c;
-    font-weight: bold;
-  }
 `;
 
 export const PaginationWrapper = styled.div`
