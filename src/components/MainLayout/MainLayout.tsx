@@ -50,7 +50,7 @@ export function MainLayout() {
     <S.MainLayoutContainer>
       <Header alarmData={alarmData} setAlarmData={setAlarmData} />
       <S.OutletContainer>
-      <Outlet />
+        <Outlet />
       </S.OutletContainer>
     </S.MainLayoutContainer>
   );
