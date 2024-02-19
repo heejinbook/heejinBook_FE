@@ -41,7 +41,7 @@ export function BookListReview() {
         reviewModal={reviewModal}
         setReviewModal={setReviewModal}
       />
-      <S.LibraryReviewContainer>
+      <div>
         <S.ReviewFilterContainer>
           <S.ReviewCount>리뷰 {data?.totalElements}</S.ReviewCount>
           <ReviewFilter
@@ -50,7 +50,7 @@ export function BookListReview() {
             onSortChange={(filterId: number) => setSortOption(filterId)}
           />
         </S.ReviewFilterContainer>
-        <S.LibraryReviewGrid>
+        <S.ReviewGrid>
           {data?.contents.map((review, idx) => (
             <ReviewItems
               {...review}
@@ -58,8 +58,8 @@ export function BookListReview() {
               modalOpen={() => modalOpenHandler(review.reviewId)}
             />
           ))}
-        </S.LibraryReviewGrid>
-      </S.LibraryReviewContainer>
+        </S.ReviewGrid>
+      </div>
       <S.PaginationWrapper>
         <div className="pagination">
           <Pagination
