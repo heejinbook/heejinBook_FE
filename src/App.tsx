@@ -7,6 +7,7 @@ import { StyledToastContainer } from './components/common/Toastify/Toastify';
 function App() {
   return (
     <RecoilRoot>
+      <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'></link>
       <RouterProvider router={router} />
       <StyledToastContainer limit={1} />
     </RecoilRoot>

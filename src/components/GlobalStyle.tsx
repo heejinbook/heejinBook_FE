@@ -23,12 +23,10 @@ const styles = css`
     background: none;
   }
 
-  /* @font-face {
-    font-family: 'SUITE';
-    src: url('/fonts/SUIT-Bold.ttf');
-  } */
+  /* @font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
 
   body {
+    font-family:'Spoqa Han Sans Neo', 'sans-serif';
     margin: 0;
   }
 `;
