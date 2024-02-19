@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const BookNavContainer = styled.div`
+  position: sticky;
   width: 280px;
   height: 100vh;
   background-color: #fffdf6;

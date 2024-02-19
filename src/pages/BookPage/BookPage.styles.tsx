@@ -16,7 +16,7 @@ export const InfoContainer = styled.div`
 
 export const BookNavContainer = styled.div`
   position: fixed;
-  top: 8%;
+  top: 60px;
   right: 0;
   width: 280px;
 `;
