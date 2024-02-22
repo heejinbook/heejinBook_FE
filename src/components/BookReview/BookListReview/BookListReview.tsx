@@ -21,7 +21,7 @@ export function BookListReview() {
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
   const [filterName, setFilterName] = useState<string>('sort by');
 
-  const { data, isLoading } = useGetBookReview(currentPage, sortOption);
+  const { data } = useGetBookReview(currentPage, sortOption);
 
   const pageChangeHandler = (currentPage: number) => {
     setCurrentPage(currentPage);
@@ -31,8 +31,6 @@ export function BookListReview() {
     setSelectedReviewId(reviewId);
     setReviewModal(true);
   }, []);
-
-  if (isLoading) return <p>isLoading</p>;
 
   return data ? (
     <>

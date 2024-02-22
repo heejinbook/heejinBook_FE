@@ -23,10 +23,8 @@ const styles = css`
     background: none;
   }
 
-  /* @font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
-
   body {
-    font-family:'Spoqa Han Sans Neo', 'sans-serif';
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     margin: 0;
   }
 `;

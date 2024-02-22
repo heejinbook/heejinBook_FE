@@ -56,7 +56,7 @@ export function BookList() {
   const [filterName, setFilterName] = useState<string>('sort by');
   const [categoryName, setCategoryName] = useState<string>('category');
 
-  const { data: books, isLoading } = useGetBookList(currentPage, sortOption, searchBook, selectedCategory);
+  const { data: books } = useGetBookList(currentPage, sortOption, searchBook, selectedCategory);
 
   const selectFilter = (filterId: number, filterName: string) => {
     setSortOption(filterId);
