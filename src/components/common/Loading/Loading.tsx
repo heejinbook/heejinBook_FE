@@ -1,24 +1,15 @@
-import styled from '@emotion/styled';
-import spinner from '../../../assets/spinner.gif';
+import * as S from './Loading.styles';
 
 export function Loading() {
+  const text = ['H', 'e', 'e', 'J', 'i', 'n', 'B', 'o', 'o', 'k'];
+
   return (
-    <LoadingText>
-      <img src={spinner} />
-    </LoadingText>
+    <S.LoadingContainer>
+      {text.map((text, idx) => (
+        <S.LoadingText key={idx} delay={idx * 0.1}>
+          {text}
+        </S.LoadingText>
+      ))}
+    </S.LoadingContainer>
   );
 }
-
-const LoadingText = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
