@@ -7,6 +7,7 @@ import { Comment } from '../Comment/Comment';
 import IconComment from '../../assets/svg/comment.svg';
 import { Heart } from '../Heart/Heart';
 import { useGetDetailReview } from '../../querys/reviewQuery';
+import { Loading } from '../common/Loading/Loading';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -17,12 +18,14 @@ type ReviewIdModalProps = {
 export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: ReviewIdModalProps) {
   const [commentsOpen, setCommentOpen] = useState<boolean>(false);
 
-  const { data: review } = useGetDetailReview(selectedReviewId);
+  const { data: review, isLoading } = useGetDetailReview(selectedReviewId);
 
   const modalClose = () => {
     setReviewModal(false);
     setCommentOpen(false);
   };
+
+  if (isLoading) return <Loading />;
 
   if (review) {
     return (

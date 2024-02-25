@@ -19,7 +19,7 @@ export const LoadingText = styled.span<{ delay: number }>`
   font-weight: bold;
   color: #503f15;
   display: inline-block;
-  animation: loading 1.5s infinite;
+  animation: loading 1s infinite;
   animation-delay: ${(props) => props.delay}s;
   @keyframes loading {
     0% {

@@ -6,6 +6,7 @@ import { ReviewFilter } from './ReviewFilter/ReviewFilter';
 import { FilterType } from '../../MainBookList/BookList';
 import { useGetBookReview } from '../../../querys/reviewQuery';
 import ReviewItems from './ReviewItems/ReviewItems';
+import { Loading } from '../../common/Loading/Loading';
 
 export const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
@@ -21,7 +22,7 @@ export function BookListReview() {
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
   const [filterName, setFilterName] = useState<string>('sort by');
 
-  const { data } = useGetBookReview(currentPage, sortOption);
+  const { data, isLoading } = useGetBookReview(currentPage, sortOption);
 
   const pageChangeHandler = (currentPage: number) => {
     setCurrentPage(currentPage);
@@ -31,6 +32,8 @@ export function BookListReview() {
     setSelectedReviewId(reviewId);
     setReviewModal(true);
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return data ? (
     <>

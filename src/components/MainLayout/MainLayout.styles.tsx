@@ -8,6 +8,5 @@ export const MainLayoutContainer = styled.div`
 `;
 
 export const OutletContainer = styled.div`
-  height: calc(100% - 60px);
-  margin-top:60px;
-`
+  margin-top: 60px;
+`;

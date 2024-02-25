@@ -15,7 +15,6 @@ export const LibraryReviewGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   justify-items: center;
   padding: 0 20px;
-  height: 100vh;
   p {
     color: #b9b19c;
     font-weight: bold;

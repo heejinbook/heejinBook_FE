@@ -3,6 +3,7 @@ import * as S from './Review.styles';
 import { BookListReview } from './BookListReview/BookListReview';
 import { CommentType } from '../Comment/Comment';
 import { useGetReviewSwiper } from '../../querys/reviewQuery';
+import { Loading } from '../common/Loading/Loading';
 
 export type ReviewType = {
   reviewId: number;
@@ -18,7 +19,9 @@ export type ReviewType = {
 };
 
 export function Review() {
-  const { data: review } = useGetReviewSwiper();
+  const { data: review, isLoading } = useGetReviewSwiper();
+
+  if (isLoading) return <Loading />;
 
   return (
     <S.ReviewContainer>

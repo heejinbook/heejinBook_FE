@@ -5,6 +5,7 @@ import { useGetMyReview } from '../../../querys/reviewQuery';
 import { useDeleteReview } from '../../../querys/reviewMutation';
 import { LibraryReviewItems } from './LibraryReviewItems/LibraryReviewItems';
 import { DeleteModal } from '../../DeleteModal/DeleteModal';
+import { Loading } from '../../common/Loading/Loading';
 
 export type MyReview = {
   reviewId: number;
@@ -34,13 +35,15 @@ export function LibraryReview() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(0);
 
-  const { data: myReview } = useGetMyReview();
+  const { data: myReview, isLoading } = useGetMyReview();
 
   const { deleteReviewMutate } = useDeleteReview();
 
   const modalCloseHandler = () => {
     setModalOpen(false);
   };
+
+  if (isLoading) return <Loading />;
 
   return myReview ? (
     <S.LibraryReviewContainer>

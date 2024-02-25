@@ -26,5 +26,7 @@ const styles = css`
   body {
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     margin: 0;
+    height: calc(100vh - 60px);
+    background-color: #fffdf6;
   }
 `;
