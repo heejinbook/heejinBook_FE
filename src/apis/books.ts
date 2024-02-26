@@ -1,5 +1,6 @@
 import { client } from '.';
 import { Book } from '../components/MainBookList/BookList';
+import { SwiperItems } from '../components/MainSwiper/MainPageSwiper';
 
 const BOOK_URL = '/api/books';
 
@@ -45,7 +46,7 @@ export async function getBook(book_id: number): Promise<detailBook> {
   return response.data.data;
 }
 
-export async function getBestBook() {
+export async function getBestBook(): Promise<SwiperItems[]> {
   const response = await client.get(`${BOOK_URL}/best-books`);
-  return response;
+  return response.data.data;
 }

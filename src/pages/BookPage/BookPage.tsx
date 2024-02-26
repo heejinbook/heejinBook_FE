@@ -5,15 +5,18 @@ import { Review } from '../../components/BookReview/Review';
 import * as S from './BookPage.styles';
 import { CreateReview } from '../../components/CreateReview/CreateReview';
 import { useGetDetailBook } from '../../querys/bookQuery';
+import { Loading } from '../../components/common/Loading/Loading';
 
 export function BookPage() {
   const [reviewModal, setReviewModal] = useState<boolean>(false);
 
-  const { data: bookInfo } = useGetDetailBook();
+  const { data: bookInfo, isLoading } = useGetDetailBook();
 
   const modalOpen = () => {
     setReviewModal(true);
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     bookInfo && (

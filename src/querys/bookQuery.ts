@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { detailBook, getBook, getBookList, getBookPromise } from '../apis/books';
+import { detailBook, getBestBook, getBook, getBookList, getBookPromise } from '../apis/books';
 import { bookFilter } from '../components/MainBookList/BookList';
 import { LibraryBookType } from '../components/MyLibrary/LibraryList/LibraryList';
 import { getLibraryBookList } from '../apis/library';
 import { useParams } from 'react-router-dom';
+import { SwiperItems } from '../components/MainSwiper/MainPageSwiper';
 
 export function useGetBookList(
   currentPage: number,
@@ -39,6 +40,12 @@ export function useGetDetailBook() {
   return useQuery<detailBook>({
     queryKey: ['detailBook'],
     queryFn: () => getBook(Number(bookId)),
-    retry: 0,
+  });
+}
+
+export function useGetBestBook() {
+  return useQuery<SwiperItems[]>({
+    queryKey: ['bestBook'],
+    queryFn: () => getBestBook(),
   });
 }

@@ -6,6 +6,7 @@ import { BookFilter } from '../Filter/BookFilter';
 import { CategoryFilter } from '../CategoryFilter/CategoryFilter';
 import { useGetBookList } from '../../querys/bookQuery';
 import BookItems from './BookItems/BookItems';
+import { Loading } from '../common/Loading/Loading';
 
 export type Book = {
   bookId: number;
@@ -50,18 +51,25 @@ export const bookFilter: FilterType[] = [
 
 export function BookList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortOption, setSortOption] = useState<number>(0);
+  const [sortOption, setSortOption] = useState<number>(2);
   const [searchBook, setSearchBook] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const [filterName, setFilterName] = useState<string>('sort by');
   const [categoryName, setCategoryName] = useState<string>('category');
 
-  const { data: books, isLoading } = useGetBookList(currentPage, sortOption, searchBook, selectedCategory);
+  const { data: books, isLoading } = useGetBookList(
+    currentPage,
+    sortOption,
+    searchBook,
+    selectedCategory,
+  );
 
   const selectFilter = (filterId: number, filterName: string) => {
     setSortOption(filterId);
     setFilterName(filterName);
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     books && (

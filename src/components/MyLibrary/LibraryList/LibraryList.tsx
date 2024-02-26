@@ -1,10 +1,11 @@
 import * as S from './LibraryList.styles';
-import { useNavigate } from 'react-router-dom';
 import IconX from '../../../assets/svg/circleX.svg';
 import { useGetLibraryBook } from '../../../querys/bookQuery';
 import { useDeleteBook } from '../../../querys/bookMutation';
 import { useState } from 'react';
 import { DeleteModal } from '../../DeleteModal/DeleteModal';
+import { useNavigate } from 'react-router-dom';
+import { Loading } from '../../common/Loading/Loading';
 
 export type LibraryBookType = {
   bookId: number;
@@ -19,13 +20,14 @@ export function LibraryList() {
 
   const navigate = useNavigate();
 
-  const { data: libraryBook } = useGetLibraryBook();
-
+  const { data: libraryBook, isLoading } = useGetLibraryBook();
   const { deleteBookMutate } = useDeleteBook();
 
   const modalCloseHandler = () => {
     setModalOpen(false);
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     libraryBook && (

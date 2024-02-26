@@ -6,6 +6,7 @@ import { ReviewFilter } from './ReviewFilter/ReviewFilter';
 import { FilterType } from '../../MainBookList/BookList';
 import { useGetBookReview } from '../../../querys/reviewQuery';
 import ReviewItems from './ReviewItems/ReviewItems';
+import { Loading } from '../../common/Loading/Loading';
 
 export const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
@@ -32,7 +33,7 @@ export function BookListReview() {
     setReviewModal(true);
   }, []);
 
-  if (isLoading) return <p>isLoading</p>;
+  if (isLoading) return <Loading />;
 
   return data ? (
     <>
