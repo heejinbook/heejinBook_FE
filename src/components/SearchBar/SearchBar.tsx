@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import * as S from './SearchBar.styles';
 import { debounce } from 'lodash';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 export type SearchProp = {
   onSearch: (searchBook: string) => void;
@@ -8,7 +9,6 @@ export type SearchProp = {
 
 export function SearchBar({ onSearch }: SearchProp) {
   const [searchBook, setSearchBook] = useState<string>('');
-  const [inputVisible, setInputVisible] = useState<boolean>(false);
 
   const debouncedOnSearch = useMemo(() => debounce(onSearch, 1500), []);
 
@@ -18,18 +18,18 @@ export function SearchBar({ onSearch }: SearchProp) {
     debouncedOnSearch(search);
   };
 
+  const { ref, visible, setVisible } = useOutsideClick(false);
+
   return (
-    <>
-      <S.SearchBarContainer>
-        <S.SearchIconContainer onClick={() => setInputVisible(!inputVisible)}>
-          <S.SearchIcon src="src/assets/svg/search.svg" />
-        </S.SearchIconContainer>
-        {inputVisible && (
-          <S.InputContainer>
-            <S.Input type="text" value={searchBook} onChange={searchChangeHandler} />
-          </S.InputContainer>
-        )}
-      </S.SearchBarContainer>
-    </>
+    <S.SearchBarContainer ref={ref}>
+      <S.SearchIconContainer onClick={() => setVisible(!visible)}>
+        <S.SearchIcon src="src/assets/svg/search.svg" />
+      </S.SearchIconContainer>
+      {visible && (
+        <S.InputContainer>
+          <S.Input type="text" value={searchBook} onChange={searchChangeHandler} />
+        </S.InputContainer>
+      )}
+    </S.SearchBarContainer>
   );
 }

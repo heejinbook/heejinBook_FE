@@ -1,8 +1,9 @@
 import * as S from './Alarm.styles';
 import IconBell from '../../assets/svg/bell.svg';
 import { AlarmType } from '../MainLayout/MainLayout';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { ReviewModal } from '../ReviewModal/ReviewModal';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 type AlarmProps = {
   alarmData: AlarmType[];
@@ -10,24 +11,10 @@ type AlarmProps = {
 };
 
 export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
-  const [openAlarm, setOpenAlarm] = useState<boolean>(false);
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  const clickOutsideHandler = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event?.target as Node)) {
-      setOpenAlarm(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', clickOutsideHandler, true);
-    return () => {
-      document.removeEventListener('click', clickOutsideHandler, true);
-    };
-  }, []);
+  const { ref, visible, setVisible } = useOutsideClick(false);
 
   const allAlarmDeleteHandler = () => {
     setAlarmData([]);
@@ -81,17 +68,17 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
         <S.Bell
           src={IconBell}
           onClick={() => {
-            setOpenAlarm(!openAlarm);
+            setVisible(!visible);
           }}
         />
         {alarmData.length > 0 && (
           <S.YesAlarm
             onClick={() => {
-              setOpenAlarm(!openAlarm);
+              setVisible(!visible);
             }}
           />
         )}
-        {openAlarm && (
+        {visible && (
           <S.AlarmList>
             {alarmData.length > 0 ? (
               <S.AllDelete onClick={allAlarmDeleteHandler}>알람 모두 삭제</S.AllDelete>
