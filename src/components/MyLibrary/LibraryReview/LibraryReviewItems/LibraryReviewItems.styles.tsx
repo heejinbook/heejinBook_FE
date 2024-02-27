@@ -16,6 +16,21 @@ export const BookImage = styled.img`
   cursor: pointer;
 `;
 
+export const NoImage = styled.div`
+  width: 120px;
+  height: 180px;
+  border-radius: 1px 8px 8px 1px;
+  border: none;
+  box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
 export const BookTitle = styled.div`
   width: 300px;
   height: auto;

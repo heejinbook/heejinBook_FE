@@ -40,6 +40,22 @@ export const LibraryImage = styled.img`
   border-radius: 1px 8px 8px 1px;
   box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
 `;
+
+export const NoImage = styled.div`
+  width: 170px;
+  height: 220px;
+  border-radius: 1px 8px 8px 1px;
+  border: none;
+  box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
 export const LibraryTitle = styled.div`
   width: 170px;
   font-size: 16px;

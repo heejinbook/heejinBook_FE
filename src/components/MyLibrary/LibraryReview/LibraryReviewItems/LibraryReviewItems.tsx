@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import * as S from './LibraryReviewItems.styles';
+import NoImage from '../../../../assets/svg/image.svg';
 
 type Text = {
   text: string;
@@ -33,12 +34,18 @@ export function LibraryReviewItems({
 
   return (
     <S.ReviewContainer>
-      <S.BookImage
-        src={bookThumbnail}
-        onClick={() => {
-          navigate(`/main/books/${bookId}`);
-        }}
-      />
+      {bookThumbnail ? (
+        <S.BookImage
+          src={bookThumbnail}
+          onClick={() => {
+            navigate(`/main/books/${bookId}`);
+          }}
+        />
+      ) : (
+        <S.NoImage>
+          <img src={NoImage} />
+        </S.NoImage>
+      )}
       <S.BookTitle>{bookTitle}</S.BookTitle>
       <S.BookAuthor>{bookAuthor}</S.BookAuthor>
       <S.ReviewPhraseContainer>
