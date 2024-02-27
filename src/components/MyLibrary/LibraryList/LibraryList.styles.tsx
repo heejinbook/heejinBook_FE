@@ -12,7 +12,8 @@ export const LibraryListContainer = styled.div`
 
 export const LibraryList = styled.div`
   display: grid;
-  grid-gap: 10px;
+  grid-row-gap: 25px;
+  grid-column-gap: 15px;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   justify-items: center;
   padding: 0 20px;

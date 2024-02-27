@@ -24,7 +24,7 @@ export function LibraryReviewItems({
   const navigate = useNavigate();
 
   const EllipsisText = ({ text }: Text) => {
-    const maxLength = 30;
+    const maxLength = 23;
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     } else {

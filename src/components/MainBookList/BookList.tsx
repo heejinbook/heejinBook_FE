@@ -73,7 +73,7 @@ export function BookList() {
 
   return (
     books && (
-      <S.MainPageContainer>
+      <>
         <S.Search>
           <CategoryFilter
             categoryName={categoryName}
@@ -109,7 +109,7 @@ export function BookList() {
             />
           </div>
         </S.PaginationWrapper>
-      </S.MainPageContainer>
+      </>
     )
   );
 }
