@@ -8,8 +8,6 @@ export const DeleteModalContainer = styled.div<Modal>`
   background-color: ${({ modalOpen }) => (modalOpen ? 'rgba(0, 0, 0, 0.5)' : 'none')};
   z-index: ${({ modalOpen }) => (modalOpen ? '999' : '-1')};
   display: ${({ modalOpen }) => (modalOpen ? 'block' : 'none')};
-  width: 100%;
-  height: 100%;
   position: fixed;
   top: 0;
   bottom: 0;
