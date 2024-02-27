@@ -5,12 +5,13 @@ import IconNoImage from '../../assets/svg/noImageUser.svg';
 import { Contents } from '../../apis/review';
 import { Input } from '../common/Input/Input';
 import { useState } from 'react';
-import { useDeleteComment, useEditComment } from '../../querys/commentsMutation';
-import { DeleteModal } from '../DeleteModal/DeleteModal';
+import { useEditComment } from '../../querys/commentsMutation';
 
 type CommentProps = {
   reviewId: number;
   comments: CommentType[];
+  selectedCommentId: (commentId: number) => void;
+  modalOpen: () => void;
 };
 
 export type CommentType = {
@@ -23,20 +24,12 @@ export type CommentType = {
   reviewId: number;
 };
 
-export function Comment({ comments, reviewId }: CommentProps) {
+export function Comment({ comments, reviewId, selectedCommentId, modalOpen }: CommentProps) {
   const [invisible, setInvisible] = useState<boolean>(false);
   const [editId, setEditId] = useState<number | null>(null);
   const [myContents, setMyContents] = useState<Contents>({
     contents: '',
   });
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<number>(0);
-
-  const modalCloseHandler = () => {
-    setModalOpen(false);
-  };
-
-  const { deleteCommentMutate } = useDeleteComment();
 
   const editBtnInVisible = (commentId: number, contents: string) => {
     setMyContents({
@@ -66,13 +59,6 @@ export function Comment({ comments, reviewId }: CommentProps) {
 
   return (
     <S.Comment>
-      <DeleteModal
-        modalOpen={modalOpen}
-        modalClose={modalCloseHandler}
-        clickDelete={deleteCommentMutate}
-        selected={selected}
-        phrase={'댓글을 삭제하시겠습니까?'}
-      />
       <CreateComment reviewId={reviewId} />
       {comments.length > 0 ? (
         comments.map((comment) => (
@@ -110,8 +96,8 @@ export function Comment({ comments, reviewId }: CommentProps) {
                 <img
                   src={IconX}
                   onClick={() => {
-                    setModalOpen(true);
-                    setSelected(comment.commentId);
+                    modalOpen();
+                    selectedCommentId(comment.commentId);
                   }}
                 />
                 {!invisible && (

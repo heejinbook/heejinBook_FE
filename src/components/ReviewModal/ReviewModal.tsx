@@ -8,6 +8,8 @@ import IconComment from '../../assets/svg/comment.svg';
 import { Heart } from '../Heart/Heart';
 import { useGetDetailReview } from '../../querys/reviewQuery';
 import { Loading } from '../common/Loading/Loading';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
+import { useDeleteComment } from '../../querys/commentsMutation';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -17,12 +19,20 @@ type ReviewIdModalProps = {
 
 export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: ReviewIdModalProps) {
   const [commentsOpen, setCommentOpen] = useState<boolean>(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number>(0);
 
   const { data: review, isLoading } = useGetDetailReview(selectedReviewId);
+
+  const { deleteCommentMutate } = useDeleteComment();
 
   const modalClose = () => {
     setReviewModal(false);
     setCommentOpen(false);
+  };
+
+  const selectedCommentId = (commentId: number) => {
+    setSelectedId(commentId);
   };
 
   if (isLoading) return <Loading />;
@@ -30,6 +40,13 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
   if (review) {
     return (
       <S.ReviewModalContainer reviewModal={reviewModal}>
+        <DeleteModal
+          modalOpen={deleteModalOpen}
+          modalClose={() => setDeleteModalOpen(false)}
+          clickDelete={deleteCommentMutate}
+          selected={selectedId}
+          phrase={'댓글을 삭제하시겠습니까?'}
+        />
         <S.Review reviewModal={reviewModal}>
           <S.XContainer>
             <img src={IconX} onClick={modalClose} />
@@ -62,7 +79,14 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
               />
             </S.CountContainer>
           </S.ReviewContainer>
-          {commentsOpen && <Comment reviewId={review.reviewId} comments={review.comments} />}
+          {commentsOpen && (
+            <Comment
+              reviewId={review.reviewId}
+              comments={review.comments}
+              selectedCommentId={(commentId: number) => selectedCommentId(commentId)}
+              modalOpen={() => setDeleteModalOpen(true)}
+            />
+          )}
         </S.Review>
       </S.ReviewModalContainer>
     );

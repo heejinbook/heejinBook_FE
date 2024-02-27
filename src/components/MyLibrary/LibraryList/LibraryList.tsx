@@ -33,19 +33,19 @@ export function LibraryList() {
   return (
     libraryBook && (
       <S.LibraryListContainer>
+        <DeleteModal
+          modalOpen={modalOpen}
+          modalClose={modalCloseHandler}
+          clickDelete={deleteBookMutate}
+          selected={selected}
+          phrase={'선택한 책을 책장에서 삭제하시겠습니까?'}
+        />
         <p>전체 {libraryBook.length}</p>
         {libraryBook.length > 0 ? (
           <S.LibraryList>
             {libraryBook
               .map((book) => (
                 <S.LibraryListItems key={book.bookId}>
-                  <DeleteModal
-                    modalOpen={modalOpen}
-                    modalClose={modalCloseHandler}
-                    clickDelete={deleteBookMutate}
-                    selected={selected}
-                    phrase={'선택한 책을 책장에서 삭제하시겠습니까?'}
-                  />
                   <div style={{ position: 'relative' }}>
                     <S.LibraryDelete
                       src={IconX}

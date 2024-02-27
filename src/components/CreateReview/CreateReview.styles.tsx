@@ -5,7 +5,7 @@ export type CreateRContainer = {
 };
 
 export const CreateRContainer = styled.div<CreateRContainer>`
-  background-color: ${({ reviewModal }) => (reviewModal ? 'rgba(0, 0, 0, 0.8)' : 'none')};
+  background-color: ${({ reviewModal }) => (reviewModal ? 'rgba(0, 0, 0, 0.5)' : 'none')};
   z-index: ${({ reviewModal }) => (reviewModal ? '999' : '-1')};
   position: fixed;
   top: 0;
