@@ -16,6 +16,7 @@ import { validateEmpty } from '../../utils/validate';
 import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
 import { Rating } from '../common/Rating/Rating';
 import { useCreateReview, useEditReview } from '../../querys/reviewMutation';
+import { useLockScroll } from '../../hooks/useLockScroll';
 
 type ReviewProps = {
   reviewModal: boolean;
@@ -41,6 +42,8 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
   });
 
   const { bookId } = useParams();
+
+  useLockScroll(reviewModal);
 
   useEffect(() => {
     if (writtenReview) {

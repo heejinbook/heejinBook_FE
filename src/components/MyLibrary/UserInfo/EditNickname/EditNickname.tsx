@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEditNickname } from '../../../../querys/userMutation';
 import { validateEmpty } from '../../../../utils/validate';
 import { Toast } from '../../../common/Toastify/Toastify';
-import { NicknameType } from '../../../../apis/user';
+import { useLockScroll } from '../../../../hooks/useLockScroll';
 
 type EditNicknameProps = {
   currentNickname: string;
@@ -20,16 +20,18 @@ export default function EditNickname({
 }: EditNicknameProps) {
   const [nickname, setNickname] = useState<string>('');
 
+  useLockScroll(editModal);
+
   const nicknameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
 
   const { editNicknameMutate } = useEditNickname();
 
-  //   if (!validateEmpty(nickname.nickname)) {
-  //     Toast.error('닉네임을 입력해주세요');
-  //     return false;
-  //   }
+  // if (!validateEmpty(nickname)) {
+  //   Toast.error('닉네임을 입력해주세요');
+  //   return false;
+  // }
 
   const editNicknameHandler = () => {
     editNicknameMutate(nickname, {

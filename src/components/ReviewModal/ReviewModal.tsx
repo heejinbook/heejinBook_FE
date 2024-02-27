@@ -10,6 +10,7 @@ import { useGetDetailReview } from '../../querys/reviewQuery';
 import { Loading } from '../common/Loading/Loading';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
 import { useDeleteComment } from '../../querys/commentsMutation';
+import { useLockScroll } from '../../hooks/useLockScroll';
 
 type ReviewIdModalProps = {
   selectedReviewId: number | null;
@@ -25,6 +26,8 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
   const { data: review, isLoading } = useGetDetailReview(selectedReviewId);
 
   const { deleteCommentMutate } = useDeleteComment();
+
+  useLockScroll(reviewModal);
 
   const modalClose = () => {
     setReviewModal(false);

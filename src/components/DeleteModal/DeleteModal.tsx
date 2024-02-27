@@ -1,3 +1,4 @@
+import { useLockScroll } from '../../hooks/useLockScroll';
 import * as S from './DeleteModal.styles';
 
 type Props = {
@@ -13,6 +14,8 @@ export function DeleteModal({ modalOpen, modalClose, clickDelete, selected, phra
     clickDelete(selected);
     modalClose();
   };
+
+  useLockScroll(modalOpen);
 
   return (
     <S.DeleteModalContainer modalOpen={modalOpen}>
