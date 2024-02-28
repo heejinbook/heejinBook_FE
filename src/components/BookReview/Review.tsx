@@ -1,4 +1,4 @@
-import { BookSwiper } from './BookSwiper/BookSwiper';
+import { ReviewSwiper } from './BookSwiper/ReviewSwiper';
 import * as S from './Review.styles';
 import { BookListReview } from './BookListReview/BookListReview';
 import { CommentType } from '../Comment/Comment';
@@ -30,7 +30,7 @@ export function Review() {
         {review && review.length > 0 ? (
           <>
             <S.BookSwiperContainer>
-              <BookSwiper review={review} />
+              <ReviewSwiper review={review} />
             </S.BookSwiperContainer>
             <BookListReview />
           </>
