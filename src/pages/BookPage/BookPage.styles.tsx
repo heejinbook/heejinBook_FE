@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const BookPage = styled.div`
+  min-width: 750px;
   display: flex;
   flex-direction: column;
 `;

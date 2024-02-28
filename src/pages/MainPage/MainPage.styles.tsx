@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const MainPageContainer = styled.div`
+  min-width: 400px;
   background-color: #fffdf6;
 `;
 export const MainPage = styled.div``;

@@ -28,6 +28,7 @@ export const BookBox = styled.div`
 `;
 
 export const Book = styled.div`
+  max-width: 240px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -39,6 +40,7 @@ export const Book = styled.div`
   text-align: center;
   padding: 10px 20px;
   p {
+    width: 45px;
     font-size: 12px;
   }
 `;

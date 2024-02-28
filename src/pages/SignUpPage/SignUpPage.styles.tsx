@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const SignUpPageContainer = styled.div`
-  max-width: 1920px;
+  min-width: 300px;
   height: 100vh;
   background-color: #fffdf6;
   display: flex;
