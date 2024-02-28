@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const ReviewSwiperContainer = styled.div`
-  max-width: 900px;
+  max-width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
@@ -26,7 +26,7 @@ export const RightBtn = styled.img`
 `;
 
 export const ReviewSwiper = styled(Swiper)`
-  max-width: 800px;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +41,7 @@ export const ReviewSlide = styled.div`
 `;
 
 export const ReviewSlideContainer = styled(SwiperSlide)`
-  max-width: 800px;
+  max-width: 100%;
   height: auto;
   display: flex;
   justify-content: center;

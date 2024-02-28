@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 export const MainSwiper = styled.div`
   max-width: 900px;
   height: auto;
+  padding: 30px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +42,5 @@ export const BookSlide = styled(SwiperSlide)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
   cursor: pointer;
 `;

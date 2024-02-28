@@ -34,7 +34,7 @@ export const BookInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 0 50px 10px;
+  padding: 0 0 50px 15px;
 `;
 
 export const Best = styled.div`
