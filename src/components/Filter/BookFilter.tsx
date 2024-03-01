@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import * as S from './BookFilter.styles';
 import { FilterType } from '../MainBookList/BookList';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 type FilterProps = {
   filter: FilterType[];
@@ -9,26 +9,26 @@ type FilterProps = {
 };
 //렌더링 원치 않으면 setState 상위 컴포넌트에서 관리
 export function BookFilter({ filter, onSelect, filterName }: FilterProps) {
-  const [openCategory, setOpenCategory] = useState<boolean>(false);
+  const { ref, visible, setVisible } = useOutsideClick(false);
 
   return (
     <>
-      <S.Filter>
+      <S.Filter ref={ref}>
         <p
           onClick={() => {
-            setOpenCategory(!openCategory);
+            setVisible(!visible);
           }}
         >
           {filterName}
-          <img src={openCategory ? 'src/assets/svg/arrowUp.svg' : 'src/assets/svg/arrowDown.svg'} />
+          <img src={visible ? 'src/assets/svg/arrowUp.svg' : 'src/assets/svg/arrowDown.svg'} />
         </p>
-        {openCategory && (
+        {visible && (
           <S.FilterList>
             {filter.map((option) => (
               <li
                 key={option.filterId}
                 onClick={() => {
-                  setOpenCategory(false);
+                  setVisible(false);
                   onSelect(option.filterId, option.filterName);
                 }}
                 style={{

@@ -16,3 +16,11 @@ export const validateEqualPassword = (password1: string, password2: string) => {
 export const validateEmpty = (value: string) => {
   return value.trim() !== '';
 };
+
+export const validateRating = (value: number) => {
+  return value >= 1;
+};
+
+export const validateLimitLength = (value: string) => {
+  return value.length <= 10;
+};

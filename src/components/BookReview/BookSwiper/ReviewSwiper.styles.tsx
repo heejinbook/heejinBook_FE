@@ -1,28 +1,32 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
 import styled from '@emotion/styled';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-export const MainSwiper = styled.div`
-  max-width: 900px;
+export const ReviewSwiperContainer = styled.div`
+  max-width: 100%;
   height: auto;
-  padding: 30px 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 25px 50px;
   position: relative;
 `;
 
 export const LeftBtn = styled.img`
+  cursor: pointer;
   position: absolute;
   left: 0;
   top: 50%;
 `;
+
 export const RightBtn = styled.img`
+  cursor: pointer;
   position: absolute;
   right: 0;
   top: 50%;
 `;
 
-export const BookSwiper = styled(Swiper)`
+export const ReviewSwiper = styled(Swiper)`
+  max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,14 +35,14 @@ export const BookSwiper = styled(Swiper)`
   }
 `;
 
-export const BookSlideContainer = styled.div`
-  width: 900px;
-  height: 270px;
+export const ReviewSlide = styled.div`
+  width: 800px;
+  height: auto;
 `;
 
-export const BookSlide = styled(SwiperSlide)`
-  max-width: 900px;
-  height: 270px;
+export const ReviewSlideContainer = styled(SwiperSlide)`
+  max-width: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;

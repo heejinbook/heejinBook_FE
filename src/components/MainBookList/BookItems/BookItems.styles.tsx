@@ -18,6 +18,21 @@ export const BookImage = styled.img`
   box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
 `;
 
+export const NoImage = styled.div`
+  width: 190px;
+  height: 240px;
+  border-radius: 1px 8px 8px 1px;
+  border: none;
+  box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
 export const BookTitle = styled.div`
   width: 170px;
   font-size: 16px;

@@ -5,7 +5,7 @@ type Modal = {
 };
 
 export const DeleteModalContainer = styled.div<Modal>`
-  background-color: ${({ modalOpen }) => (modalOpen ? 'rgba(0, 0, 0, 0.2)' : 'none')};
+  background-color: ${({ modalOpen }) => (modalOpen ? 'rgba(0, 0, 0, 0.5)' : 'none')};
   z-index: ${({ modalOpen }) => (modalOpen ? '999' : '-1')};
   display: ${({ modalOpen }) => (modalOpen ? 'block' : 'none')};
   position: fixed;
@@ -28,6 +28,7 @@ export const DeleteModal = styled.div<Modal>`
   background-color: #fffdf6;
   border-radius: 10px;
   box-sizing: border-box;
+  box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
   p {
     font-size: 16px;
     font-weight: bold;

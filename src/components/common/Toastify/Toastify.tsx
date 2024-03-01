@@ -44,7 +44,6 @@ export const Toast = {
 };
 
 export const StyledToastContainer = styled(ToastContainer)`
-  margin-bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,11 +52,11 @@ export const StyledToastContainer = styled(ToastContainer)`
     color: #503f15;
   }
   .Toastify__toast--success {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
   }
   .Toastify__toast--error {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
   }
 `;

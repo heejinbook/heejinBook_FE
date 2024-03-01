@@ -1,10 +1,7 @@
 import styled from '@emotion/styled';
 
-export const ReviewContainer = styled.div`
-  padding: 24px 24px 30px 24px;
-`;
-
 export const Review = styled.div`
+  padding: 24px 24px 30px 24px;
   p {
     color: #503f15;
     font-size: 16px;
@@ -24,7 +21,7 @@ export const NoReview = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 360px;
+  height: 300px;
   p {
     text-align: center;
   }

@@ -16,9 +16,7 @@ export function LogInPage() {
 
   const navigate = useNavigate();
 
-  const postLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const postLogin = () => {
     logIn(data)
       .then((result) => {
         if (result.status === 200) {
@@ -45,6 +43,13 @@ export function LogInPage() {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      postLogin();
+    }
   };
 
   const REST_API_KEY: string = import.meta.env.VITE_REST_API_KEY;
@@ -76,6 +81,7 @@ export function LogInPage() {
           topSlot="비밀번호"
           value={data.password}
           onChange={changeHandler}
+          onKeyDown={activeEnter}
         />
         <button onClick={postLogin}>login</button>
         <S.SignUP>

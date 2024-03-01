@@ -1,42 +1,6 @@
 import styled from '@emotion/styled';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
-export const BookSwiperContainer = styled.div`
-  max-width: 900px;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 25px 50px;
-  position: relative;
-`;
-
-export const LeftBtn = styled.img`
-  cursor: pointer;
-  position: absolute;
-  left: 0;
-  top: 50%;
-`;
-
-export const RightBtn = styled.img`
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  top: 50%;
-`;
-
-export const BookSwiper = styled(Swiper)`
-  max-width: 800px;
-  min-width: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .swiper-pagination-bullet {
-    background-color: white;
-  }
-`;
-
-export const ReviewSlide = styled(SwiperSlide)`
+export const ReviewSlide = styled.div`
   background-color: #fcf2cc82;
   max-width: 800px;
   height: auto;

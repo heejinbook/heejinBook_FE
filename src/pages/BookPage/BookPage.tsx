@@ -21,11 +21,11 @@ export function BookPage() {
   return (
     bookInfo && (
       <S.BookPage>
+        <CreateReview reviewModal={reviewModal} setReviewModal={setReviewModal} />
         <S.InfoContainer>
           <BookInfo books={bookInfo} />
           <Review />
         </S.InfoContainer>
-        <CreateReview reviewModal={reviewModal} setReviewModal={setReviewModal} />
         <S.BookNavContainer>
           <BookNav addBookLibrary={bookInfo.isLibrary} modalOpen={modalOpen} />
         </S.BookNavContainer>

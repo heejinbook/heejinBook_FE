@@ -31,6 +31,13 @@ export function CreateComment({ reviewId }: CreateCommentProps) {
     );
   };
 
+  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      postComments();
+    }
+  };
+
   return (
     <S.CreateComment>
       <Input
@@ -41,6 +48,7 @@ export function CreateComment({ reviewId }: CreateCommentProps) {
         rightSlot={<button onClick={postComments}>등록</button>}
         value={comment.contents}
         onChange={commentChangeHandler}
+        onKeyDown={activeEnter}
       />
     </S.CreateComment>
   );

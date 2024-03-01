@@ -1,5 +1,6 @@
 import * as S from './LibraryList.styles';
 import IconX from '../../../assets/svg/circleX.svg';
+import NoImage from '../../../assets/svg/image.svg';
 import { useGetLibraryBook } from '../../../querys/bookQuery';
 import { useDeleteBook } from '../../../querys/bookMutation';
 import { useState } from 'react';
@@ -32,20 +33,19 @@ export function LibraryList() {
   return (
     libraryBook && (
       <S.LibraryListContainer>
+        <DeleteModal
+          modalOpen={modalOpen}
+          modalClose={modalCloseHandler}
+          clickDelete={deleteBookMutate}
+          selected={selected}
+          phrase={'선택한 책을 책장에서 삭제하시겠습니까?'}
+        />
         <p>전체 {libraryBook.length}</p>
         {libraryBook.length > 0 ? (
           <S.LibraryList>
             {libraryBook
               .map((book) => (
                 <S.LibraryListItems key={book.bookId}>
-                  <DeleteModal
-                    modalOpen={modalOpen}
-                    modalClose={modalCloseHandler}
-                    clickDelete={deleteBookMutate}
-                    selected={selected}
-                    phrase={'선택한 책을 책장에서 삭제하시겠습니까?'}
-                  />
-
                   <div style={{ position: 'relative' }}>
                     <S.LibraryDelete
                       src={IconX}
@@ -59,7 +59,13 @@ export function LibraryList() {
                         navigate(`/main/books/${book.bookId}`);
                       }}
                     >
-                      <S.LibraryImage src={book.bookThumbnail} />
+                      {book.bookThumbnail ? (
+                        <S.LibraryImage src={book.bookThumbnail} />
+                      ) : (
+                        <S.NoImage>
+                          <img src={NoImage} />
+                        </S.NoImage>
+                      )}
                     </div>
                     <S.LibraryTitle>{book.bookTitle}</S.LibraryTitle>
                     <S.LibraryAuthor>{book.bookAuthor}</S.LibraryAuthor>

@@ -17,10 +17,29 @@ export const BookInfo = styled.div`
   border-bottom: 15px solid #fcf2cc82;
 `;
 export const BookImage = styled.img`
+  width: 190px;
+  height: 240px;
   border-radius: 1px 8px 8px 1px;
   box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
   margin-right: 20px;
 `;
+
+export const NoImage = styled.div`
+  width: 190px;
+  height: 240px;
+  border-radius: 1px 8px 8px 1px;
+  border: none;
+  box-shadow: 8px 0px 8px -5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
 export const BookInfoFrame = styled.div`
   display: flex;
   flex-direction: column;

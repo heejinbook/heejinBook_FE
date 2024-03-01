@@ -30,6 +30,7 @@ export function UserInfo() {
           currentNickname={myInfo.nickname}
           editModal={editModal}
           modalClose={modalCloseHandler}
+          originalNickname={myInfo.nickname}
         />
         <S.UserInfoContainer>
           <S.EditIcon>

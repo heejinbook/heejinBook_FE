@@ -3,6 +3,7 @@ import * as S from './BookItems.styles';
 import { useNavigate } from 'react-router-dom';
 import IconReviewer from '../../../assets/svg/person.svg';
 import IconRating from '../../../assets/svg/fullStar.svg';
+import NoImage from '../../../assets/svg/image.svg';
 
 type Props = {
   author: string;
@@ -40,7 +41,13 @@ const BookItems = React.memo(function ({
         navigate(`books/${bookId}`);
       }}
     >
-      <S.BookImage src={thumbnail} />
+      {thumbnail ? (
+        <S.BookImage src={thumbnail} />
+      ) : (
+        <S.NoImage>
+          <img src={NoImage} />
+        </S.NoImage>
+      )}
       <S.BookTitle>{title}</S.BookTitle>
       <S.BookAuthor>{author}</S.BookAuthor>
       <S.ReviewerContainer>
