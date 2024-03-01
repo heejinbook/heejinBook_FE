@@ -12,7 +12,7 @@ import IconX from '../../assets/svg/X.svg';
 import { CreateReviewType } from '../../apis/review';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
-import { validateEmpty } from '../../utils/validate';
+import { validateEmpty, validateRating } from '../../utils/validate';
 import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
 import { Rating } from '../common/Rating/Rating';
 import { useCreateReview, useEditReview } from '../../querys/reviewMutation';
@@ -147,6 +147,10 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
   };
 
   const validateReview = () => {
+    if (!validateRating(review.rating)) {
+      Toast.error('별점을 선택해주세요');
+      return false;
+    }
     if (!validateEmpty(review.title)) {
       Toast.error('제목을 입력해주세요');
       return false;
@@ -159,10 +163,7 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
       Toast.error('내용을 입력해주세요');
       return false;
     }
-    if (review.rating < 0) {
-      Toast.error('별점을 선택해주세요');
-      return false;
-    }
+
     return true;
   };
 
