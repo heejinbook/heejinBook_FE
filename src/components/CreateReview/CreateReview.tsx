@@ -1,6 +1,7 @@
-import { CSSProperties, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { CSSProperties, Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 import * as S from './CreateReview.styles';
 import IconX from '../../assets/svg/X.svg';
+import IconRefresh from '../../assets/svg/refresh.svg';
 import { CreateReviewType } from '../../apis/review';
 import { useParams } from 'react-router-dom';
 import { Toast } from '../common/Toastify/Toastify';
@@ -176,8 +177,19 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
             onChange={textareaChangeHandler}
           />
         ))}
-
         <S.WriteBtn>
+          <S.RefreshBtn
+            title="다시 쓰기"
+            src={IconRefresh}
+            onClick={() =>
+              setReview({
+                title: '',
+                phrase: '',
+                contents: '',
+                rating: 0,
+              })
+            }
+          />
           <button onClick={() => postWriteReview(review)}>
             {writtenReview ? '수정하기' : '작성하기'}
           </button>

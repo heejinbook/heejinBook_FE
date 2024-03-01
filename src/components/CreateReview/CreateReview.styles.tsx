@@ -64,3 +64,8 @@ export const WriteBtn = styled.div`
     font-weight: bold;
   }
 `;
+
+export const RefreshBtn = styled.img`
+  margin-right: 10px;
+  cursor: pointer;
+`;
