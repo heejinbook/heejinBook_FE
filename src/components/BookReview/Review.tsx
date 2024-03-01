@@ -24,23 +24,21 @@ export function Review() {
   if (isLoading) return <Loading />;
 
   return (
-    <S.ReviewContainer>
-      <S.Review>
-        <p>책 리뷰</p>
-        {review && review.length > 0 ? (
-          <>
-            <S.BookSwiperContainer>
-              <ReviewSwiper review={review} />
-            </S.BookSwiperContainer>
-            <BookListReview />
-          </>
-        ) : (
-          <S.NoReview>
-            <p>리뷰가 없어요</p>
-            <p>이 책의 리뷰를 작성하는 첫 번째 회원이 되어주세요</p>
-          </S.NoReview>
-        )}
-      </S.Review>
-    </S.ReviewContainer>
+    <S.Review>
+      <p>책 리뷰</p>
+      {review && review.length > 0 ? (
+        <>
+          <S.BookSwiperContainer>
+            <ReviewSwiper review={review} />
+          </S.BookSwiperContainer>
+          <BookListReview />
+        </>
+      ) : (
+        <S.NoReview>
+          <p>리뷰가 없어요</p>
+          <p>이 책의 리뷰를 작성하는 첫 번째 회원이 되어주세요</p>
+        </S.NoReview>
+      )}
+    </S.Review>
   );
 }
