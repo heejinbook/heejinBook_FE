@@ -1,12 +1,4 @@
-import {
-  CSSProperties,
-  Dispatch,
-  HTMLInputTypeAttribute,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
-import { Input } from '../common/Input/Input';
+import { CSSProperties, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import * as S from './CreateReview.styles';
 import IconX from '../../assets/svg/X.svg';
 import { CreateReviewType } from '../../apis/review';
@@ -17,6 +9,7 @@ import { MyReview } from '../MyLibrary/LibraryReview/LibraryReview';
 import { Rating } from '../common/Rating/Rating';
 import { useCreateReview, useEditReview } from '../../querys/reviewMutation';
 import { useLockScroll } from '../../hooks/useLockScroll';
+import { Textarea } from '../common/Textarea/Textarea';
 
 type ReviewProps = {
   reviewModal: boolean;
@@ -24,13 +17,12 @@ type ReviewProps = {
   writtenReview?: MyReview;
 };
 
-type ReviewInputType = {
+type ReviewTextareaType = {
   name: string;
-  type: HTMLInputTypeAttribute;
-  placeholder: string;
   topSlot: string;
   value: string;
   style?: CSSProperties;
+  placeholder: string;
 };
 
 export function CreateReview({ reviewModal, setReviewModal, writtenReview }: ReviewProps) {
@@ -63,24 +55,23 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
     }
   }, [writtenReview]);
 
-  const Inputs: ReviewInputType[] = [
+  const TextAreas: ReviewTextareaType[] = [
     {
       name: 'title',
-      type: 'text',
       placeholder: '제목을 입력하세요',
       topSlot: 'title',
       value: review.title,
+      style: { height: '25px' },
     },
     {
       name: 'phrase',
-      type: 'text',
       placeholder: '기억나는 책 문구를 적어주세요',
       topSlot: '',
       value: review.phrase,
+      style: { height: '25px' },
     },
     {
       name: 'contents',
-      type: 'text',
       placeholder: '내용을 입력하세요',
       topSlot: 'content',
       value: review.contents,
@@ -88,7 +79,7 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
     },
   ];
 
-  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setReview((prevState) => ({
       ...prevState,
@@ -167,13 +158,6 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
     return true;
   };
 
-  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      postWriteReview(review);
-    }
-  };
-
   return (
     <S.CreateRContainer reviewModal={reviewModal}>
       <S.CreateRModal reviewModal={reviewModal}>
@@ -181,19 +165,18 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
           <Rating count={writtenReview?.reviewRating} onChange={ratingChangeHandler} />
           <img src={IconX} onClick={() => setReviewModal(false)} />
         </S.XContainer>
-        {Inputs.map((input) => (
-          <Input
-            key={input.name}
-            name={input.name}
-            type={input.type}
-            placeholder={input.placeholder}
-            topSlot={input.topSlot}
-            value={input.value}
-            style={input.style}
-            onChange={inputChangeHandler}
-            onKeyDown={activeEnter}
+        {TextAreas.map((t) => (
+          <Textarea
+            key={t.name}
+            name={t.name}
+            placeholder={t.placeholder}
+            topSlot={t.topSlot}
+            value={t.value}
+            style={t.style}
+            onChange={textareaChangeHandler}
           />
         ))}
+
         <S.WriteBtn>
           <button onClick={() => postWriteReview(review)}>
             {writtenReview ? '수정하기' : '작성하기'}
