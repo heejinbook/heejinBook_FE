@@ -57,6 +57,13 @@ export function Comment({ comments, reviewId, selectedCommentId, modalOpen }: Co
     setMyContents({ contents: e.target.value });
   };
 
+  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      editMyContent();
+    }
+  };
+
   return (
     <S.Comment>
       <CreateComment reviewId={reviewId} />
@@ -87,6 +94,7 @@ export function Comment({ comments, reviewId, selectedCommentId, modalOpen }: Co
                     rightSlot={<S.EditBtn onClick={editMyContent}>수정</S.EditBtn>}
                     value={myContents.contents}
                     onChange={commentChangeHandler}
+                    onKeyDown={activeEnter}
                   />
                 )}
               </div>

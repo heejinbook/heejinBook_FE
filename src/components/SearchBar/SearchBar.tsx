@@ -20,6 +20,13 @@ export function SearchBar({ onSearch }: SearchProp) {
 
   const { ref, visible, setVisible } = useOutsideClick(false);
 
+  // const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === 'Enter') {
+  //     e.preventDefault();
+  //     editNicknameHandler();
+  //   }
+  // };
+
   return (
     <S.SearchBarContainer ref={ref}>
       <S.SearchIconContainer onClick={() => setVisible(!visible)}>
@@ -27,7 +34,12 @@ export function SearchBar({ onSearch }: SearchProp) {
       </S.SearchIconContainer>
       {visible && (
         <S.InputContainer>
-          <S.Input type="text" value={searchBook} onChange={searchChangeHandler} />
+          <S.Input
+            type="text"
+            value={searchBook}
+            onChange={searchChangeHandler}
+            // onKeyDown={activeEnter}
+          />
         </S.InputContainer>
       )}
     </S.SearchBarContainer>

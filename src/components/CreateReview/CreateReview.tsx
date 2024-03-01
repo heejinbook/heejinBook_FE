@@ -167,6 +167,13 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
     return true;
   };
 
+  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      postWriteReview(review);
+    }
+  };
+
   return (
     <S.CreateRContainer reviewModal={reviewModal}>
       <S.CreateRModal reviewModal={reviewModal}>
@@ -184,6 +191,7 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
             value={input.value}
             style={input.style}
             onChange={inputChangeHandler}
+            onKeyDown={activeEnter}
           />
         ))}
         <S.WriteBtn>

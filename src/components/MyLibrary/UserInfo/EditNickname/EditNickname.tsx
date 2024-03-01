@@ -59,6 +59,13 @@ export default function EditNickname({
     });
   };
 
+  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      editNicknameHandler();
+    }
+  };
+
   return (
     <S.EditModalContainer editModal={editModal}>
       <S.EditModal editModal={editModal}>
@@ -72,6 +79,7 @@ export default function EditNickname({
             type="text"
             placeholder="닉네임 입력(최대 10글자)"
             onChange={nicknameChangeHandler}
+            onKeyDown={activeEnter}
           />
         </div>
         <S.CurrentNickname>현재 닉네임 : {currentNickname}</S.CurrentNickname>
