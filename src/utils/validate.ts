@@ -20,3 +20,7 @@ export const validateEmpty = (value: string) => {
 export const validateRating = (value: number) => {
   return value >= 1;
 };
+
+export const validateLimitLength = (value: string) => {
+  return value.length <= 10;
+};

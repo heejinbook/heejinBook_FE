@@ -3,7 +3,7 @@ import IconX from '../../../../assets/svg/X.svg';
 import { Input } from '../../../common/Input/Input';
 import { useState } from 'react';
 import { useEditNickname } from '../../../../querys/userMutation';
-import { validateEmpty } from '../../../../utils/validate';
+import { validateEmpty, validateLimitLength } from '../../../../utils/validate';
 import { Toast } from '../../../common/Toastify/Toastify';
 import { useLockScroll } from '../../../../hooks/useLockScroll';
 
@@ -11,12 +11,14 @@ type EditNicknameProps = {
   currentNickname: string;
   editModal: boolean;
   modalClose: () => void;
+  originalNickname: string;
 };
 
 export default function EditNickname({
   currentNickname,
   editModal,
   modalClose,
+  originalNickname,
 }: EditNicknameProps) {
   const [nickname, setNickname] = useState<string>('');
 
@@ -28,16 +30,30 @@ export default function EditNickname({
 
   const { editNicknameMutate } = useEditNickname();
 
-  // if (!validateEmpty(nickname)) {
-  //   Toast.error('닉네임을 입력해주세요');
-  //   return false;
-  // }
+  const validateEditNickname = () => {
+    if (!validateEmpty(nickname)) {
+      Toast.error('닉네임을 입력해주세요');
+      return false;
+    }
+    if (!validateLimitLength(nickname)) {
+      Toast.error('닉네임은 최대 10글자입니다');
+      return false;
+    }
+    if (originalNickname === nickname) {
+      Toast.error('기존의 닉네임과 동일합니다');
+      return false;
+    }
+    return true;
+  };
 
   const editNicknameHandler = () => {
+    if (!validateEditNickname()) {
+      return;
+    }
     editNicknameMutate(nickname, {
       onSuccess: () => {
-        Toast.success('닉네임 변경 성공');
         setNickname('');
+        Toast.success('닉네임 변경 성공');
         modalClose();
       },
     });
@@ -51,6 +67,7 @@ export default function EditNickname({
         </S.XContainer>
         <div style={{ padding: '0 20px' }}>
           <Input
+            value={nickname}
             variant="outline"
             type="text"
             placeholder="닉네임 입력(최대 10글자)"
