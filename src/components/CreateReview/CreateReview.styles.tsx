@@ -15,6 +15,7 @@ export const CreateRContainer = styled.div<CreateRContainer>`
 `;
 export const CreateRModal = styled.div<CreateRContainer>`
   max-width: 800px;
+  min-width: 550px;
   height: auto;
   display: ${({ reviewModal }) => (reviewModal ? 'block' : 'none')};
   justify-content: center;
@@ -26,6 +27,8 @@ export const CreateRModal = styled.div<CreateRContainer>`
   background-color: #fffdf6;
   border-radius: 10px;
   padding: 20px 50px;
+  max-height: 900px;
+  overflow: scroll;
 `;
 
 export const XContainer = styled.div`

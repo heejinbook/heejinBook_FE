@@ -11,6 +11,8 @@ import { Rating } from '../common/Rating/Rating';
 import { useCreateReview, useEditReview } from '../../querys/reviewMutation';
 import { useLockScroll } from '../../hooks/useLockScroll';
 import { Textarea } from '../common/Textarea/Textarea';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 type ReviewProps = {
   reviewModal: boolean;
@@ -62,21 +64,21 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
       placeholder: '제목을 입력하세요',
       topSlot: 'title',
       value: review.title,
-      style: { height: '25px' },
+      style: { height: '25px', minHeight: '25px' },
     },
     {
       name: 'phrase',
       placeholder: '기억나는 책 문구를 적어주세요',
       topSlot: '',
       value: review.phrase,
-      style: { height: '25px' },
+      style: { height: '25px', minHeight: '25px' },
     },
     {
       name: 'contents',
       placeholder: '내용을 입력하세요',
       topSlot: 'content',
       value: review.contents,
-      style: { height: '200px' },
+      style: { height: '200px', minHeight: '50px' },
     },
   ];
 
@@ -179,7 +181,9 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
         ))}
         <S.WriteBtn>
           <S.RefreshBtn
-            title="다시 쓰기"
+            // title="다시 쓰기"
+            data-tooltip-content="다시 쓰기"
+            data-tooltip-id="refresh"
             src={IconRefresh}
             onClick={() =>
               setReview({
@@ -189,6 +193,11 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
                 rating: 0,
               })
             }
+          />
+          <Tooltip
+            id="refresh"
+            place="bottom"
+            style={{ backgroundColor: '#503f15', color: 'white', fontWeight: 'bold' }}
           />
           <button onClick={() => postWriteReview(review)}>
             {writtenReview ? '수정하기' : '작성하기'}
