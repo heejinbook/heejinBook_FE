@@ -181,7 +181,6 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
         ))}
         <S.WriteBtn>
           <S.RefreshBtn
-            // title="다시 쓰기"
             data-tooltip-content="다시 쓰기"
             data-tooltip-id="refresh"
             src={IconRefresh}
