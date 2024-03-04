@@ -59,7 +59,7 @@ export function LibraryReview() {
         selected={selected}
         phrase={'리뷰를 삭제하시겠습니까?'}
       />
-      <p>리뷰 {myReview.length}</p>
+      <p className="libraryReview">리뷰 {myReview.length}</p>
       {myReview.length > 0 ? (
         <S.LibraryReviewGrid>
           {myReview.map((review) => (
@@ -88,7 +88,7 @@ export function LibraryReview() {
         </S.LibraryReviewGrid>
       ) : (
         <S.NoReview>
-          <p>리뷰를 작성해주세요</p>
+          <p className="noReview">리뷰를 작성해주세요</p>
         </S.NoReview>
       )}
     </S.LibraryReviewContainer>

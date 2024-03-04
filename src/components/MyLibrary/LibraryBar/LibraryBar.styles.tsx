@@ -5,8 +5,11 @@ type Props = {
 };
 
 export const LibraryBarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-top: 10px;
+  flex-grow: 1;
 `;
 
 export const LibraryBar = styled.div<Props>`
