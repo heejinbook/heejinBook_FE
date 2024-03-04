@@ -16,7 +16,8 @@ export function LogInPage() {
 
   const navigate = useNavigate();
 
-  const postLogin = () => {
+  const postLogin = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     logIn(data)
       .then((result) => {
         if (result.status === 200) {
@@ -48,7 +49,7 @@ export function LogInPage() {
   const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      postLogin();
+      postLogin(e);
     }
   };
 
