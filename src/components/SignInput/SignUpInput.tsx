@@ -63,50 +63,29 @@ export function SignUpInput() {
     },
   ];
 
-  const validateNickname = () => {
+  const signUpValidate = () => {
     if (!validateEmpty(form.nickname)) {
-      Toast.error('이름은 필수로 입력해야합니다.');
+      Toast.error('이름은 필수로 입력해야합니다');
       return false;
     }
-    return true;
-  };
-
-  const validateEmailFormat = () => {
     if (!validateEmail(form.email)) {
-      Toast.error('올바른 이메일 형식이 아닙니다.');
+      Toast.error('올바른 이메일 형식이 아닙니다');
       return false;
     }
-    return true;
-  };
-
-  const validatePasswordFormat = () => {
     if (!validatePassword(form.password)) {
-      Toast.error('8~20자 사이의 비밀번호를 작성해야합니다.');
+      Toast.error('8~20자 사이의 비밀번호를 작성해야합니다');
       return false;
     }
-    return true;
-  };
-
-  const validatePasswordMatch = () => {
     if (!validateEqualPassword(form.password, form.passwordCheck)) {
-      Toast.error('비밀번호가 일치하지 않습니다.');
+      Toast.error('비밀번호가 일치하지 않습니다');
       return false;
     }
     return true;
-  };
-
-  const validateInput = () => {
-    return (
-      validateNickname() &&
-      validateEmailFormat() &&
-      validatePasswordFormat() &&
-      validatePasswordMatch()
-    );
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateInput()) {
+    if (signUpValidate()) {
       const formData = new FormData();
       formData.append('email', form.email);
       formData.append('nickname', form.nickname);
@@ -171,7 +150,7 @@ export function SignUpInput() {
           onChange={changeHandler}
         />
       ))}
-      <button disabled={!validateInput}>signup</button>
+      <button>signup</button>
     </S.SignUpInputContainer>
   );
 }
