@@ -31,12 +31,13 @@ export const UserImage = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 100%;
+  margin-bottom: 10px;
 `;
 
 export const UserNameContainer = styled.div`
   height: auto;
   display: flex;
-  align-items: end;
+  align-items: center;
   p {
     height: auto;
     margin: 0;
@@ -49,7 +50,7 @@ export const UserNameContainer = styled.div`
 export const UserName = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 8px;
+  margin-right: 4px;
   font-size: 24px;
   font-weight: 550;
 `;
