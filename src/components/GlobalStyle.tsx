@@ -12,15 +12,7 @@ const styles = css`
   }
 
   ::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #d5cfbf;
-    border-radius: 80px;
-  }
-  ::-webkit-scrollbar-track {
-    background: none;
+    display: none;
   }
 
   body {
