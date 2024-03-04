@@ -13,10 +13,10 @@ export const CreateRContainer = styled.div<CreateRContainer>`
   left: 0;
   right: 0;
 `;
+
 export const CreateRModal = styled.div<CreateRContainer>`
   max-width: 800px;
   min-width: 550px;
-  height: auto;
   display: ${({ reviewModal }) => (reviewModal ? 'block' : 'none')};
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@ export const CreateRModal = styled.div<CreateRContainer>`
   transform: translate(-50%, -50%);
   background-color: #fffdf6;
   border-radius: 10px;
-  padding: 20px 50px;
+  padding: 30px 50px;
   max-height: 900px;
   overflow: scroll;
 `;
@@ -39,14 +39,6 @@ export const XContainer = styled.div`
     cursor: pointer;
     margin-bottom: 5px;
   }
-`;
-
-export const InputContainer = styled.div`
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const WriteBtn = styled.div`

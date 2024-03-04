@@ -128,6 +128,9 @@ export function CreateReview({ reviewModal, setReviewModal, writtenReview }: Rev
         },
       );
     } else {
+      if (!validateReview()) {
+        return;
+      }
       editReviewMutate(
         { reviewId: writtenReview.reviewId, payload: editPayload },
         {
