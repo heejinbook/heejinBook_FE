@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import * as S from './BookListReview.styles';
 import Pagination from 'react-js-pagination';
 import { ReviewModal } from '../../ReviewModal/ReviewModal';
@@ -7,6 +7,8 @@ import { FilterType } from '../../MainBookList/BookList';
 import { useGetBookReview } from '../../../querys/reviewQuery';
 import ReviewItems from './ReviewItems/ReviewItems';
 import { Loading } from '../../common/Loading/Loading';
+import { useSetRecoilState } from 'recoil';
+import { reviewIdState } from '../../../recoil/reviewIdState';
 
 export const reviewFilter: FilterType[] = [
   { filterId: 0, filterName: '최신순', sortName: 'CREATED_AT' },
@@ -21,6 +23,7 @@ export function BookListReview() {
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
   const [filterName, setFilterName] = useState<string>('sort by');
+  const setReviewId = useSetRecoilState(reviewIdState);
 
   const { data, isLoading } = useGetBookReview(currentPage, sortOption);
 
@@ -32,6 +35,13 @@ export function BookListReview() {
     setSelectedReviewId(reviewId);
     setReviewModal(true);
   }, []);
+
+  useEffect(() => {
+    if (data?.contents) {
+      const reviewIds = data?.contents.map((r) => r.reviewId);
+      setReviewId(reviewIds);
+    }
+  }, [data]);
 
   if (isLoading) return <Loading />;
 

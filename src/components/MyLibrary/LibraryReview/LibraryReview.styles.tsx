@@ -2,7 +2,10 @@ import styled from '@emotion/styled';
 
 export const LibraryReviewContainer = styled.div`
   padding-bottom: 30px;
-  p {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  .libraryReview {
     padding: 0 0 0 20px;
     color: #b9b19c;
     font-weight: bold;
@@ -57,10 +60,10 @@ export const NoReview = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 257px;
-  p {
+  flex-grow: 1;
+  .noReview {
     padding: 0;
-    margin: 16px 0;
+    margin: 0;
     font-size: 20px;
     font-weight: bold;
     color: #b9b19c;

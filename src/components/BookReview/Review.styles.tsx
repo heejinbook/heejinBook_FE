@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
 
 export const Review = styled.div`
+  flex-grow: 1;
   padding: 24px 24px 30px 24px;
+  display: flex;
+  flex-direction: column;
   p {
     color: #503f15;
     font-size: 16px;
@@ -12,16 +15,17 @@ export const Review = styled.div`
 
 export const BookSwiperContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 export const NoReview = styled.div`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 300px;
   p {
     text-align: center;
   }

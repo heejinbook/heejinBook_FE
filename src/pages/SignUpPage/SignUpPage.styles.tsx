@@ -26,7 +26,7 @@ export const SignUpPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   padding: 80px 30px;
   h1 {
     color: #503f15;

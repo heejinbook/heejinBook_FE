@@ -26,7 +26,7 @@ export const SignUpInputContainer = styled.form`
 export const Profile = styled.img`
   border: 1px solid #b9b19c;
   border-radius: 100%;
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 70px;
   padding: 15px;
 `;

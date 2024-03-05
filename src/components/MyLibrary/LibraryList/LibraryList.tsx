@@ -40,7 +40,7 @@ export function LibraryList() {
           selected={selected}
           phrase={'선택한 책을 책장에서 삭제하시겠습니까?'}
         />
-        <p>전체 {libraryBook.length}</p>
+        <p className="libraryBook">전체 {libraryBook.length}</p>
         {libraryBook.length > 0 ? (
           <S.LibraryList>
             {libraryBook
@@ -76,7 +76,7 @@ export function LibraryList() {
           </S.LibraryList>
         ) : (
           <S.NoBook>
-            <p>책장에 책이 없어요</p>
+            <p className="noBook">책장에 책이 없어요</p>
           </S.NoBook>
         )}
       </S.LibraryListContainer>

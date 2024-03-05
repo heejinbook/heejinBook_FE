@@ -3,7 +3,10 @@ import styled from '@emotion/styled';
 export const LibraryListContainer = styled.div`
   width: 100%;
   padding-bottom: 30px;
-  p {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  .libraryBook {
     padding-left: 20px;
     color: #b9b19c;
     font-weight: bold;
@@ -18,6 +21,7 @@ export const LibraryList = styled.div`
   justify-items: center;
   padding: 0 20px;
 `;
+
 export const LibraryListItems = styled.div`
   width: 170px;
   height: auto;
@@ -62,6 +66,7 @@ export const LibraryTitle = styled.div`
   font-size: 16px;
   font-weight: bold;
 `;
+
 export const LibraryAuthor = styled.div`
   width: 170px;
   font-size: 14px;
@@ -71,10 +76,10 @@ export const NoBook = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 257px;
-  p {
+  flex-grow: 1;
+  .noBook {
     padding: 0;
-    margin: 16px 0;
+    margin: 0;
     font-size: 20px;
     font-weight: bold;
     color: #b9b19c;

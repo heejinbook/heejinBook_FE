@@ -6,14 +6,27 @@ import * as S from './BookPage.styles';
 import { CreateReview } from '../../components/CreateReview/CreateReview';
 import { useGetDetailBook } from '../../querys/bookQuery';
 import { Loading } from '../../components/common/Loading/Loading';
+import { useGetMyReview } from '../../querys/reviewQuery';
+import { useRecoilValue } from 'recoil';
+import { reviewIdState } from '../../recoil/reviewIdState';
+import { Toast } from '../../components/common/Toastify/Toastify';
 
 export function BookPage() {
   const [reviewModal, setReviewModal] = useState<boolean>(false);
+  const reviewIds = useRecoilValue(reviewIdState);
 
   const { data: bookInfo, isLoading } = useGetDetailBook();
 
+  const { data: myReview } = useGetMyReview();
+
   const modalOpen = () => {
-    setReviewModal(true);
+    if (myReview) {
+      const alreadyHaveReview = myReview.filter((review) => reviewIds.includes(review.reviewId));
+      if (alreadyHaveReview.length > 0) {
+        setReviewModal(false);
+        Toast.error('이미 리뷰를 작성했습니다');
+      } else setReviewModal(true);
+    }
   };
 
   if (isLoading) return <Loading />;
