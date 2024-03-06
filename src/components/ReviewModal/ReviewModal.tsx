@@ -61,17 +61,32 @@ export function ReviewModal({ reviewModal, selectedReviewId, setReviewModal }: R
               <S.UserImage src={review.reviewAuthorProfileUrl} />
             )}
             <Rating count={review.reviewRating} readonly />
-            <S.ReviewTitle>{review.reviewTitle}</S.ReviewTitle>
+            {review.reviewTitle.split('\n').map((title, idx) => (
+              <S.ReviewTitle key={idx}>
+                {title}
+                <br />
+              </S.ReviewTitle>
+            ))}
             <S.PhraseContainer>
-              <p>"</p>
-              <S.ReviewPhrase>{review.reviewPhrase}</S.ReviewPhrase>
-              <p>"</p>
+              <p className="quotationMarks">"</p>
+              {review.reviewPhrase.split('\n').map((phrase, idx) => (
+                <S.ReviewPhrase key={idx}>
+                  {phrase}
+                  <br />
+                </S.ReviewPhrase>
+              ))}
+              <p className="quotationMarks">"</p>
             </S.PhraseContainer>
-            <S.ReviewContent>{review.reviewContents}</S.ReviewContent>
+            {review.reviewContents.split('\n').map((contents, idx) => (
+              <S.ReviewContent key={idx}>
+                {contents}
+                <br />
+              </S.ReviewContent>
+            ))}
             <S.CountContainer>
               <S.CommentContainer onClick={() => setCommentOpen(!commentsOpen)}>
                 <img src={IconComment} />
-                <p>
+                <p className="commentCount">
                   comment <span>{review.commentCount}</span>
                 </p>
               </S.CommentContainer>

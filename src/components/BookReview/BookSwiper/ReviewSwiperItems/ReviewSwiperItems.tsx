@@ -29,13 +29,28 @@ export function ReviewSwiperItems({ modalOpenHandler, r }: ReviewSwiperProps) {
           <S.UserImage src={r.reviewAuthorProfileUrl} />
         )}
         <Rating count={r.reviewRating} readonly />
-        <S.ReviewTitle>{r.reviewTitle}</S.ReviewTitle>
+        {r.reviewTitle.split('\n').map((title, idx) => (
+          <S.ReviewTitle key={idx}>
+            {title}
+            <br />
+          </S.ReviewTitle>
+        ))}
         <S.PhraseContainer>
           <p>"</p>
-          <S.ReviewPhrase>{r.reviewPhrase}</S.ReviewPhrase>
+          {r.reviewPhrase.split('\n').map((phrase, idx) => (
+            <S.ReviewPhrase key={idx}>
+              {phrase}
+              <br />
+            </S.ReviewPhrase>
+          ))}
           <p>"</p>
-        </S.PhraseContainer>
-        <S.ReviewContent>{EllipsisText({ text: r.reviewContents })}</S.ReviewContent>
+        </S.PhraseContainer>{' '}
+        {r.reviewContents.split('\n').map((contents, idx) => (
+          <S.ReviewContent key={idx}>
+            {EllipsisText({ text: contents })}
+            <br />
+          </S.ReviewContent>
+        ))}
       </S.ReviewContainer>
       <S.CountContainer>
         <S.CommentContainer>

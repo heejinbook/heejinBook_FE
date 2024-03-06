@@ -8,7 +8,7 @@ export const ReviewSlide = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px 50px;
+  padding: 30px 40px;
   border-radius: 50px;
   box-sizing: border-box;
   cursor: pointer;
@@ -72,7 +72,6 @@ export const ReviewContent = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin: 15px 0;
 `;
 
 export const CountContainer = styled.div`

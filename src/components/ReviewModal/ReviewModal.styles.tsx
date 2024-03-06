@@ -13,7 +13,7 @@ export const ReviewModalContainer = styled.div<CreateRContainer>`
 `;
 
 export const Review = styled.div<CreateRContainer>`
-  width: 600px;
+  max-width: 800px;
   max-height: 600px;
   display: ${({ reviewModal }) => (reviewModal ? 'block' : 'none')};
   justify-content: center;
@@ -72,7 +72,7 @@ export const PhraseContainer = styled.div`
   align-items: start;
   justify-content: center;
   text-align: center;
-  p {
+  .quotationMarks {
     display: flex;
     margin: 0 20px;
     font-size: 24px;
@@ -109,6 +109,7 @@ export const CountContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 `;
 
 export const CommentContainer = styled.div`
@@ -123,7 +124,7 @@ export const CommentContainer = styled.div`
     height: 20px;
     margin-right: 5px;
   }
-  p {
+  .commentCount {
     margin: 0;
     color: #bbb49e;
   }
