@@ -102,6 +102,7 @@ export function Comment({ comments, reviewId, selectedCommentId, modalOpen }: Co
             {comment.isMine && (
               <S.IconXContainer>
                 <img
+                  style={{ display: invisible ? 'none' : 'block' }}
                   src={IconX}
                   onClick={() => {
                     modalOpen();
