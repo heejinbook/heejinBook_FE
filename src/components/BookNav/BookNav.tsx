@@ -5,6 +5,7 @@ import IconWrite from '../../assets/svg/pencil.svg';
 import IconShare from '../../assets/svg/share.svg';
 import { useParams } from 'react-router-dom';
 import { usePostBook } from '../../querys/bookMutation';
+import { Toast } from '../common/Toastify/Toastify';
 
 type AddBookProps = {
   addBookLibrary: boolean;
@@ -17,6 +18,21 @@ export function BookNav({ addBookLibrary, modalOpen }: AddBookProps) {
   const { postBookMutate } = usePostBook();
   const postBook = () => {
     postBookMutate(Number(bookId));
+  };
+
+  const copyLink = () => {
+    document.getElementById('copyBtn')?.addEventListener('click', async () => {
+      const url = window.location.href;
+
+      await navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          Toast.success('클립보드에 복사됐습니다');
+        })
+        .catch(() => {
+          Toast.error('클립보드에 복사하지 못했습니다');
+        });
+    });
   };
 
   return (
@@ -32,7 +48,9 @@ export function BookNav({ addBookLibrary, modalOpen }: AddBookProps) {
         </S.WriteReview>
         <S.Share>
           <img src={IconShare} />
-          <p>공유하기</p>
+          <p id="copyBtn" onClick={copyLink}>
+            공유하기
+          </p>
         </S.Share>
       </S.BookNav>
     </S.BookNavContainer>
