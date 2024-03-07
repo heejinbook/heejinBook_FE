@@ -6,6 +6,7 @@ import { Contents } from '../../apis/review';
 import { Input } from '../common/Input/Input';
 import { useState } from 'react';
 import { useEditComment } from '../../querys/commentsMutation';
+import { validateEmpty } from '../../utils/validate';
 
 type CommentProps = {
   reviewId: number;
@@ -42,6 +43,7 @@ export function Comment({ comments, reviewId, selectedCommentId, modalOpen }: Co
   const { editCommentMutate } = useEditComment();
 
   const editMyContent = () => {
+    if (!validateEmpty(myContents.contents)) return;
     editCommentMutate(
       { editId, payload: myContents },
       {

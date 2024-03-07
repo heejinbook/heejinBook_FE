@@ -3,6 +3,7 @@ import { Input } from '../../common/Input/Input';
 import * as S from './CreateComment.styles';
 import { Contents } from '../../../apis/review';
 import { useCreateComment } from '../../../querys/commentsMutation';
+import { validateEmpty } from '../../../utils/validate';
 
 type CreateCommentProps = {
   reviewId: number;
@@ -20,6 +21,7 @@ export function CreateComment({ reviewId }: CreateCommentProps) {
   const { postCommentMutate } = useCreateComment();
 
   const postComments = () => {
+    if (!validateEmpty(comment.contents)) return;
     postCommentMutate(
       { reviewId, payload: comment },
       {
