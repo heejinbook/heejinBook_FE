@@ -1,7 +1,7 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import * as S from './MainPageSwiper.styles';
 import { SwiperBookItems } from './SwiperBookItems/SwiperBookItems';
 import { useNavigate } from 'react-router-dom';
@@ -29,12 +29,13 @@ export function MainPageSwiper() {
         <S.LeftBtn className="swiper-button-prev" src="src/assets/svg/leftBtn.svg" />
         <S.RightBtn className="swiper-button-next" src="src/assets/svg/rightBtn.svg" />
         <S.BookSwiper
-          modules={[Navigation, Pagination]}
+          modules={[Navigation, Pagination, Autoplay]}
           slidesPerView={1}
           navigation={{
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           }}
+          autoplay={{ delay: 3000 }}
         >
           {bestBooks.map((item, idx) => (
             <S.BookSlideContainer key={idx}>

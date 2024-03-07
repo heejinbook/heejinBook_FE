@@ -1,7 +1,7 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import * as S from './ReviewSwiper.styles';
 import { ReviewType } from '../Review';
 import IconLeftBtn from '../../../assets/svg/leftBtn.svg';
@@ -53,13 +53,14 @@ export function ReviewSwiper({ review }: ReviewProps) {
           <S.ReviewSwiper
             onInit={onInit}
             onSlideChange={onSlideChange}
-            modules={[Navigation, Pagination]}
+            modules={[Navigation, Pagination, Autoplay]}
             slidesPerView={1}
             spaceBetween={30}
             navigation={{
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             }}
+            autoplay={{ delay: 3000 }}
           >
             {review.map((r, idx) => (
               <S.ReviewSlideContainer key={idx}>
