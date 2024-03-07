@@ -1,7 +1,14 @@
 import styled from '@emotion/styled';
 
+export const BookListContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`;
+
 export const Search = styled.div`
-  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +21,8 @@ export const SearchNFilter = styled.div`
   align-items: center;
 `;
 
-export const BookListContainer = styled.div`
+export const BookItemsContainer = styled.div`
+  flex-grow: 1;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -23,6 +31,9 @@ export const BookListContainer = styled.div`
 `;
 
 export const PaginationWrapper = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
   .pagination {
     display: flex;
     justify-content: center;

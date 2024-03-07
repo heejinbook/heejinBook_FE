@@ -73,7 +73,7 @@ export function BookList() {
 
   return (
     books && (
-      <>
+      <S.BookListContainer>
         <S.Search>
           <CategoryFilter
             categoryName={categoryName}
@@ -91,11 +91,11 @@ export function BookList() {
             />
           </S.SearchNFilter>
         </S.Search>
-        <S.BookListContainer>
+        <S.BookItemsContainer>
           {books.contents.map((book, idx) => (
             <BookItems {...book} key={idx} />
           ))}
-        </S.BookListContainer>
+        </S.BookItemsContainer>
         <S.PaginationWrapper>
           <div className="pagination">
             <Pagination
@@ -109,7 +109,7 @@ export function BookList() {
             />
           </div>
         </S.PaginationWrapper>
-      </>
+      </S.BookListContainer>
     )
   );
 }
