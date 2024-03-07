@@ -94,7 +94,8 @@ export function Alarm({ alarmData, setAlarmData }: AlarmProps) {
                 >
                   <S.ListInfo>
                     {alarm.nickname}
-                    님이 회원님의 리뷰를 좋아합니다.<span> </span>
+                    님이 회원님의 리뷰를 좋아합니다.
+                    <br />
                     <span className="time">{time(alarm.likedTime)}</span>
                   </S.ListInfo>
                   <img src={alarm.thumbnail} />
