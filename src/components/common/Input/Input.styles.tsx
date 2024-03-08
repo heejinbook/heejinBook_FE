@@ -57,7 +57,7 @@ export const TopSlot = styled.div`
   font-weight: bold;
   font-size: 14px;
   color: #503f15;
-  padding-left: 6px;
+  padding-left: 3px;
   padding-bottom: 3px;
 `;
 

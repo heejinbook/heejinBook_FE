@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, useState } from 'react';
+import { HTMLInputTypeAttribute, ReactNode, useState } from 'react';
 import {
   validateEmail,
   validateEmpty,
@@ -12,12 +12,13 @@ import { Toast } from '../common/Toastify/Toastify';
 import { SignUpType, signUp } from '../../apis/user';
 import { setItem } from '../../utils/localstorage';
 import { localStorageKey } from '../../constants';
+import { InfoToolTip } from '../../assets/svg/InfoToolTip';
 
 export type InputType = {
   name: string;
   type: HTMLInputTypeAttribute;
   placeholder: string;
-  topSlot: string;
+  topSlot: string | ReactNode;
   value: string;
 };
 
@@ -37,28 +38,28 @@ export function SignUpInput() {
       name: 'nickname',
       type: 'text',
       placeholder: '김희진',
-      topSlot: '이름',
+      topSlot: 'name',
       value: form.nickname,
     },
     {
       name: 'email',
       type: 'text',
-      placeholder: 'heejin@heejin.com',
-      topSlot: '이메일',
+      placeholder: 'heejin0857@naver.com',
+      topSlot: 'email',
       value: form.email,
     },
     {
       name: 'password',
       type: 'password',
       placeholder: 'heejin1234',
-      topSlot: '비밀번호',
+      topSlot: <InfoToolTip />,
       value: form.password,
     },
     {
       name: 'passwordCheck',
       type: 'password',
       placeholder: 'heejin1234',
-      topSlot: '비밀번호 확인',
+      topSlot: 'password check',
       value: form.passwordCheck,
     },
   ];
@@ -102,9 +103,8 @@ export function SignUpInput() {
             navigate('/main');
           }
         })
-        .catch((error) => {
-          console.error(error);
-          Toast.error('회원가입 실패');
+        .catch((err) => {
+          if (err.response.status === 409) Toast.error('중복된 이메일입니다');
         });
     }
   };
@@ -150,7 +150,7 @@ export function SignUpInput() {
           onChange={changeHandler}
         />
       ))}
-      <button>signup</button>
+      <button>sign up</button>
     </S.SignUpInputContainer>
   );
 }
