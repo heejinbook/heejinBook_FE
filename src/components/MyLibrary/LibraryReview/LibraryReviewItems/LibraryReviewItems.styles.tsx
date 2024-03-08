@@ -60,12 +60,12 @@ export const ReviewPhraseContainer = styled.div`
   justify-content: center;
   text-align: center;
   margin-top: 10px;
-  p {
+  .quotationMarks {
     display: flex;
     align-items: start;
     padding: 0;
     margin: 0;
-    font-size: 24px;
+    font-size: 18px;
     color: #503f15;
   }
 `;
@@ -75,7 +75,7 @@ export const ReviewPhrase = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 14px;

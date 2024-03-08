@@ -49,9 +49,9 @@ export function LibraryReviewItems({
       <S.BookTitle>{bookTitle}</S.BookTitle>
       <S.BookAuthor>{bookAuthor}</S.BookAuthor>
       <S.ReviewPhraseContainer>
-        <p>"</p>
+        <p className="quotationMarks">"</p>
         <S.ReviewPhrase>{EllipsisText({ text: reviewPhrase })}</S.ReviewPhrase>
-        <p>"</p>
+        <p className="quotationMarks">"</p>
       </S.ReviewPhraseContainer>
     </S.ReviewContainer>
   );
