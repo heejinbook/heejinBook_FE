@@ -37,12 +37,11 @@ export const LibraryReview = styled.div`
 `;
 
 export const ReviewDeleteNEdit = styled.div`
+  flex-grow: 1;
   width: 100%;
-  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15px;
   padding: 12px 0;
   border-top: 1px solid #b9b19c9a;
   p {

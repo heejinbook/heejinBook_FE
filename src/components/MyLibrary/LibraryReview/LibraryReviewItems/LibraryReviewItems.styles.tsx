@@ -5,7 +5,7 @@ export const ReviewContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 30px;
+  padding: 0 30px 20px 30px;
 `;
 
 export const BookImage = styled.img`
