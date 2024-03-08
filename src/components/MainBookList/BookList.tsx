@@ -91,24 +91,34 @@ export function BookList() {
             />
           </S.SearchNFilter>
         </S.Search>
-        <S.BookItemsContainer>
-          {books.contents.map((book, idx) => (
-            <BookItems {...book} key={idx} />
-          ))}
-        </S.BookItemsContainer>
-        <S.PaginationWrapper>
-          <div className="pagination">
-            <Pagination
-              activePage={currentPage}
-              itemsCountPerPage={40}
-              totalItemsCount={books.totalElements}
-              pageRangeDisplayed={5}
-              onChange={(currentPage: number) => setCurrentPage(currentPage)}
-              prevPageText={'‹'}
-              nextPageText={'›'}
-            />
-          </div>
-        </S.PaginationWrapper>
+        {books.contents.length > 0 ? (
+          <>
+            <S.BookItemsContainer>
+              {books.contents.map((book, idx) => (
+                <BookItems {...book} key={idx} />
+              ))}
+            </S.BookItemsContainer>
+            <S.PaginationWrapper>
+              <div className="pagination">
+                <Pagination
+                  activePage={currentPage}
+                  itemsCountPerPage={40}
+                  totalItemsCount={books.totalElements}
+                  pageRangeDisplayed={5}
+                  onChange={(currentPage: number) => setCurrentPage(currentPage)}
+                  prevPageText={'‹'}
+                  nextPageText={'›'}
+                />
+              </div>
+            </S.PaginationWrapper>
+          </>
+        ) : (
+          <S.NoSearchedBook>
+            검색결과가 없습니다
+            <br />
+            검색어를 다시 확인해주세요
+          </S.NoSearchedBook>
+        )}
       </S.BookListContainer>
     )
   );

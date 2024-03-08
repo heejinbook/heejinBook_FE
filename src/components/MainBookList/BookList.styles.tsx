@@ -71,3 +71,14 @@ export const PaginationWrapper = styled.div`
     }
   }
 `;
+
+export const NoSearchedBook = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #503f15;
+`;
