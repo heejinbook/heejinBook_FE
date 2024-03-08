@@ -63,49 +63,45 @@ export const ReviewTitle = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin: 10px 0;
+  margin-top: 10px;
 `;
+
 export const PhraseContainer = styled.div`
-  width: 100%;
-  height: auto;
   display: flex;
-  align-items: start;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   .quotationMarks {
     display: flex;
-    margin: 0 20px;
-    font-size: 24px;
+    padding: 0 10px;
+    font-size: 18px;
     color: #503f15;
   }
 `;
+
 export const ReviewPhrase = styled.div`
-  height: auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 100%;
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
-  padding-top: 3px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 `;
+
 export const ReviewContent = styled.div`
   width: 100%;
-  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 export const CountContainer = styled.div`
   width: 100%;
-  height: 30px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;

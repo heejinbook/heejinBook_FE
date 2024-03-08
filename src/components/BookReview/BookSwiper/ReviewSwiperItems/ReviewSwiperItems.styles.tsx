@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 export const ReviewSlide = styled.div`
   background-color: #fcf2cc82;
   max-width: 800px;
-  height: auto;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 30px 40px;
   border-radius: 50px;
@@ -15,6 +15,7 @@ export const ReviewSlide = styled.div`
 `;
 
 export const ReviewContainer = styled.div`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,42 +37,42 @@ export const ReviewTitle = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  margin: 10px 0;
+  margin-top: 10px;
 `;
 
 export const PhraseContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  p {
+  .quotationMarks {
     display: flex;
     margin: 0;
     padding: 0 10px;
-    font-size: 24px;
+    font-size: 18px;
     color: #503f15;
   }
 `;
 
 export const ReviewPhrase = styled.div`
   width: 100%;
-  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #503f15;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
+  margin: 10px 0;
 `;
 
 export const ReviewContent = styled.div`
   width: 100%;
-  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
   text-align: center;
+  margin-bottom: 5px;
 `;
 
 export const CountContainer = styled.div`

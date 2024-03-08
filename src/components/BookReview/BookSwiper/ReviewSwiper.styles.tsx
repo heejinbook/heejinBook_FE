@@ -42,7 +42,6 @@ export const ReviewSlide = styled.div`
 
 export const ReviewSlideContainer = styled(SwiperSlide)`
   max-width: 100%;
-  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;

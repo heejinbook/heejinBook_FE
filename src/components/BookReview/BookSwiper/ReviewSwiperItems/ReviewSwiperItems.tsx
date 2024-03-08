@@ -36,14 +36,14 @@ export function ReviewSwiperItems({ modalOpenHandler, r }: ReviewSwiperProps) {
           </S.ReviewTitle>
         ))}
         <S.PhraseContainer>
-          <p>"</p>
+          <p className="quotationMarks">"</p>
           {r.reviewPhrase.split('\n').map((phrase, idx) => (
             <S.ReviewPhrase key={idx}>
               {phrase}
               <br />
             </S.ReviewPhrase>
           ))}
-          <p>"</p>
+          <p className="quotationMarks">"</p>
         </S.PhraseContainer>{' '}
         {r.reviewContents.split('\n').map((contents, idx) => (
           <S.ReviewContent key={idx}>
