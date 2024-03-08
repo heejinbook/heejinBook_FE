@@ -35,7 +35,9 @@ export function MainPageSwiper() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           }}
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          speed={1000}
+          loop={true}
         >
           {bestBooks.map((item, idx) => (
             <S.BookSlideContainer key={idx}>

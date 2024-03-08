@@ -60,8 +60,9 @@ export function ReviewSwiper({ review }: ReviewProps) {
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             }}
-            autoplay={{ delay: 4000 }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
             speed={1000}
+            loop={true}
           >
             {review.map((r, idx) => (
               <S.ReviewSlideContainer key={idx}>
