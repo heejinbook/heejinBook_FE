@@ -74,6 +74,7 @@ export function useDeleteReview() {
     mutationFn: (reviewId: number) => deleteLibraryReview(reviewId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['myReview'] });
+      Toast.success('리뷰가 삭제됐습니다');
     },
   });
   return { ...mutation, deleteReviewMutate: mutation.mutateAsync };
