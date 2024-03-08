@@ -35,6 +35,7 @@ export function useCreateReview() {
       queryClient.invalidateQueries({ queryKey: ['swiperReview'] });
       queryClient.invalidateQueries({ queryKey: ['reviewList'] });
       queryClient.invalidateQueries({ queryKey: ['detailBook'] });
+      queryClient.invalidateQueries({ queryKey: ['myReview'] });
     },
   });
   return { ...mutation, createReviewMutate: mutation.mutateAsync };
