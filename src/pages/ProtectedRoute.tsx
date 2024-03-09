@@ -9,7 +9,7 @@ export function ProtectedRoute({ children }: PropsWithChildren) {
 
   if (!accessToken) {
     Toast.error('로그인 후 이용 가능합니다');
-    return <Navigate to={'/'} replace />;
+    return <Navigate to={'/login'} replace />;
   }
   return children;
 }
