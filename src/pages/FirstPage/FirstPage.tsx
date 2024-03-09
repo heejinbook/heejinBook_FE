@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as S from './FirstPage.styles';
 import { useNavigate } from 'react-router-dom';
+import backgroundImage from '../../assets/books.png';
 
 export function FirstPage() {
   const [startButton, setStartButton] = useState(false);
@@ -12,23 +13,29 @@ export function FirstPage() {
 
   return (
     <S.FirstPageContainer>
-      <S.BackImage src={'src/assets/backImage.png'} />
+      <S.BackImageContainer>
+        <S.BackImage src={backgroundImage} />
+      </S.BackImageContainer>
       <S.FirstPage>
         {!startButton && (
           <>
-            <button onClick={startBtnClickHandler}>시작하기</button>
-            <p
+            <button className="startBtn" onClick={startBtnClickHandler}>
+              시작하기
+            </button>
+            <button
+              className="loginBtn"
               onClick={() => {
                 navigate('/login');
               }}
             >
               로그인
-            </p>
+            </button>
           </>
         )}
         {startButton && (
           <S.SignUpBtn>
             <button
+              className="emailBtn"
               onClick={() => {
                 navigate('/signup');
               }}
@@ -36,7 +43,7 @@ export function FirstPage() {
               이메일로 가입하기
             </button>
             <S.KakaoBtn>
-              <button>카카오톡으로 가입하기</button>
+              <button className="KaKaoBtn">카카오톡으로 가입하기</button>
             </S.KakaoBtn>
           </S.SignUpBtn>
         )}

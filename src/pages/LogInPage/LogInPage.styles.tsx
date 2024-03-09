@@ -22,13 +22,12 @@ export const LoginPageContainer = styled.div`
 export const BackImageWrapper = styled.div`
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: end;
+  align-items: end;
 `;
 
 export const BackImage = styled.img`
   max-width: 100%;
-  min-width: 100%;
   height: 100%;
   object-fit: cover;
 `;

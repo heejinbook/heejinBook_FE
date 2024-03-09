@@ -7,6 +7,7 @@ import { Toast } from '../../components/common/Toastify/Toastify';
 import { validateEmail } from '../../utils/validate';
 import { setItem } from '../../utils/localstorage';
 import { localStorageKey } from '../../constants';
+import backgroundImage from '../../assets/books.png';
 
 export function LogInPage() {
   const [data, setData] = useState<LoginType>({
@@ -61,7 +62,7 @@ export function LogInPage() {
   return (
     <S.LoginPageContainer>
       <S.BackImageWrapper>
-        <S.BackImage src={'src/assets/backImage.png'} />
+        <S.BackImage src={backgroundImage} />
       </S.BackImageWrapper>
       <S.LoginPage>
         <h1>Login</h1>
