@@ -23,6 +23,13 @@ export const SignUpInputContainer = styled.form`
   }
 `;
 
+export const PreviewProfile = styled.img`
+  border: 1px solid #b9b19c;
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+`;
+
 export const Profile = styled.img`
   border: 1px solid #b9b19c;
   border-radius: 100%;

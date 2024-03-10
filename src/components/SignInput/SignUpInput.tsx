@@ -23,6 +23,7 @@ export type InputType = {
 };
 
 export function SignUpInput() {
+  const [profilePreview, setProfilePreview] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const [form, setForm] = useState<SignUpType>({
@@ -121,6 +122,8 @@ export function SignUpInput() {
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      const preview = URL.createObjectURL(file);
+      setProfilePreview(preview);
       setForm((prevState) => ({
         ...prevState,
         file,
@@ -131,7 +134,11 @@ export function SignUpInput() {
   return (
     <S.SignUpInputContainer onSubmit={submitHandler}>
       <label htmlFor="file">
-        <S.Profile src="src/assets/svg/plusProfile.svg" />
+        {profilePreview ? (
+          <S.PreviewProfile src={profilePreview} />
+        ) : (
+          <S.Profile src="src/assets/svg/plusProfile.svg" />
+        )}
         <input
           id="file"
           type="file"
