@@ -17,6 +17,32 @@ export const BackImageContainer = styled.div`
   justify-content: end;
   align-items: end;
   background-color: #fffdf6;
+  .heejinBook {
+    position: absolute;
+    top: 1.3%;
+    left: 1.3%;
+    font-size: 22px;
+    font-weight: bold;
+    color: #503f15;
+    margin: 0;
+  }
+`;
+
+export const TextContainer = styled.div`
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  .oneDayOneReview {
+    font-size: 60px;
+    font-weight: bold;
+    color: #503f15;
+    margin: 0 0 10px 0;
+  }
+  .friendlyWithReading {
+    font-size: 36px;
+    color: #503f15;
+    margin: 0;
+  }
 `;
 
 export const BackImage = styled.img`

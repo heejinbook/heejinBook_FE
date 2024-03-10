@@ -14,6 +14,11 @@ export function FirstPage() {
   return (
     <S.FirstPageContainer>
       <S.BackImageContainer>
+        <p className="heejinBook">HeejinBook</p>
+        <S.TextContainer>
+          <p className="oneDayOneReview">1일 1리뷰</p>
+          <p className="friendlyWithReading">독서와 친해지기</p>
+        </S.TextContainer>
         <S.BackImage src={backgroundImage} />
       </S.BackImageContainer>
       <S.FirstPage>
