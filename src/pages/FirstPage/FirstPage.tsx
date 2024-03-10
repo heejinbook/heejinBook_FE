@@ -11,6 +11,11 @@ export function FirstPage() {
     setStartButton(!startButton);
   };
 
+  const REST_API_KEY: string = import.meta.env.VITE_REST_API_KEY;
+  const REDIRECT_URI: string = 'http://localhost:5173/kakao';
+
+  const redirectUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+
   return (
     <S.FirstPageContainer>
       <S.BackImageContainer>
@@ -48,7 +53,14 @@ export function FirstPage() {
               이메일로 가입하기
             </button>
             <S.KakaoBtn>
-              <button className="KaKaoBtn">카카오톡으로 가입하기</button>
+              <button
+                className="KaKaoBtn"
+                onClick={() => {
+                  window.location.href = redirectUrl;
+                }}
+              >
+                카카오톡으로 가입하기
+              </button>
             </S.KakaoBtn>
           </S.SignUpBtn>
         )}
