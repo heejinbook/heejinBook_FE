@@ -14,8 +14,10 @@ export function Kakao() {
     kakaoLogin({ code })
       .then((result) => {
         if (result.status === 200) {
+          const userId: number = result.data.data.userId;
           const token = result.data.data.accessToken;
           setItem(localStorageKey.accessToken, token);
+          setItem(localStorageKey.userId, userId);
           navigate('/main');
         }
       })
