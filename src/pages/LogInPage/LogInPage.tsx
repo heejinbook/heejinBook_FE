@@ -70,7 +70,7 @@ export function LogInPage() {
           name="email"
           variant="outline"
           type="text"
-          placeholder="heejin@heejin.com"
+          placeholder="heejin0857@naver.com"
           topSlot="이메일"
           value={data.email}
           onChange={changeHandler}
@@ -79,7 +79,7 @@ export function LogInPage() {
           name="password"
           variant="outline"
           type="password"
-          placeholder="비밀번호 입력"
+          placeholder="heejin1234"
           topSlot="비밀번호"
           value={data.password}
           onChange={changeHandler}
