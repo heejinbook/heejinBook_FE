@@ -8,7 +8,7 @@ const loginError = () => {
   Toast.error('로그인 후 이용해주세요');
   localStorage.clear();
   setTimeout(() => {
-    window.location.href = 'login';
+    window.location.href = '/login';
   }, 1500);
 };
 

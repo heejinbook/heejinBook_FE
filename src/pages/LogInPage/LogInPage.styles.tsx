@@ -24,6 +24,17 @@ export const BackImageWrapper = styled.div`
   display: flex;
   justify-content: end;
   align-items: end;
+  position: relative;
+  .heejinBook {
+    position: absolute;
+    top: 1.3%;
+    left: 1.9%;
+    font-size: 22px;
+    font-weight: bold;
+    color: #503f15;
+    margin: 0;
+    cursor: pointer;
+  }
 `;
 
 export const BackImage = styled.img`

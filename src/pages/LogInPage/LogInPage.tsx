@@ -62,6 +62,9 @@ export function LogInPage() {
   return (
     <S.LoginPageContainer>
       <S.BackImageWrapper>
+        <p className="heejinBook" onClick={() => navigate('/')}>
+          HeejinBook
+        </p>
         <S.BackImage src={backgroundImage} />
       </S.BackImageWrapper>
       <S.LoginPage>
